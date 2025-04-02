@@ -60,7 +60,7 @@ export const Navbar = () => {
                       `rounded-md px-3 py-2 text-sm font-medium ${
                         isActive
                           ? 'bg-primary-light/10 text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                          : 'text-text-light hover:bg-gray-100 hover:text-primary-light dark:text-text-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                          : 'text-primary-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
                       }`
                     }
                   >
@@ -108,11 +108,7 @@ export const Navbar = () => {
                   <MenuButton className='relative flex rounded-full bg-white text-sm focus:outline-none dark:bg-gray-800'>
                     <span className='absolute -inset-1.5' />
                     <span className='sr-only'>Open user menu</span>
-                    <img
-                      alt=''
-                      src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                      className='size-8 rounded-full'
-                    />
+                    <img alt='' src='/user.webp' className='size-8 rounded-full' />
                   </MenuButton>
                 </div>
                 <MenuItems
@@ -158,11 +154,7 @@ export const Navbar = () => {
         <div className='border-t border-gray-200 pt-4 pb-3 dark:border-gray-700'>
           <div className='flex items-center px-5'>
             <div className='shrink-0'>
-              <img
-                alt=''
-                src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                className='size-10 rounded-full'
-              />
+              <img alt='' src='/user.webp' className='size-10 rounded-full' />
             </div>
             <div className='ml-3'>
               <div className='text-base font-medium text-text-light dark:text-text-dark'>

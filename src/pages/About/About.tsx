@@ -183,7 +183,7 @@ export const About = () => {
           <dl className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base/7 text-secondary-light dark:text-secondary-dark sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-16'>
             {values.map((value) => (
               <div key={value.name} className='relative pl-9'>
-                <dt className='inline font-semibold text-text-light dark:text-text-dark'>
+                <dt className='inline font-semibold text-primary-light dark:text-primary-dark'>
                   <value.icon
                     aria-hidden='true'
                     className='absolute left-1 top-1 size-5 text-primary-light dark:text-primary-dark'
