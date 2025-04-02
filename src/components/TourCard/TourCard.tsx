@@ -1,0 +1,46 @@
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../shared';
+
+type TourCardProps = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+  duration: string;
+};
+
+export const TourCard = ({ id, title, description, imageUrl, price, duration }: TourCardProps) => {
+  return (
+    <div className='relative flex flex-col rounded-xl bg-background-light dark:bg-background-dark shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-transform hover:scale-[1.02] hover:shadow-lg'>
+      {/* Image with price tag */}
+      <div className='relative h-48 overflow-hidden'>
+        <img src={imageUrl} alt={title} className='w-full h-full object-cover' />
+        <div className='absolute top-4 right-4 bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full font-bold text-sm shadow-md'>
+          ${price.toLocaleString()}
+        </div>
+        <div className='absolute bottom-4 left-4 bg-white dark:bg-gray-800 text-text-light dark:text-text-dark px-2 py-1 rounded text-xs font-medium'>
+          ⏱️ {duration}
+        </div>
+      </div>
+
+      <div className='p-4 flex flex-col flex-grow'>
+        <h3 className='text-lg font-semibold text-text-light dark:text-text-dark mb-2 line-clamp-2'>
+          {title}
+        </h3>
+        <p className='text-sm text-secondary-light dark:text-secondary-dark mb-4 line-clamp-3'>
+          {description}
+        </p>
+
+        <div className='mt-auto'>
+          <Link
+            to={`${ROUTES.TOURS}/${id}`}
+            className='w-full inline-flex justify-center rounded-md bg-primary-light dark:bg-primary-dark px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 transition-colors'
+          >
+            View Tour
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
