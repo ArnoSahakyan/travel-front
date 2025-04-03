@@ -1,1 +1,1 @@
-export * from './FAQ.tsx';
+export * from './FaqPage.tsx';

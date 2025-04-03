@@ -10,7 +10,7 @@ const navigation = [
 
 export const Footer = () => {
   return (
-    <footer className='bg-primary-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-700 mt-20'>
+    <footer className='bg-primary-light dark:bg-background-dark border-t border-background-light dark:border-secondary-dark'>
       <div className='mx-auto max-w-7xl overflow-hidden px-6 py-12 sm:py-16 lg:px-8'>
         {/* Navigation Links */}
         <nav

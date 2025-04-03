@@ -1,6 +1,6 @@
 import { stats, team, values } from '../../assets';
 
-export const About = () => {
+export const AboutPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark'>
       <main className='relative isolate'>

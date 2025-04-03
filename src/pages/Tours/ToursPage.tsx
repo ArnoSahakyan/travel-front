@@ -45,7 +45,7 @@ const TOURS_DATA = [
   },
 ];
 
-export const Tours = () => {
+export const ToursPage = () => {
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
       <div className='container mx-auto px-4'>

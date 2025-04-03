@@ -1,5 +1,14 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { About, FAQ, Home, Layout, LegalPage, NotFoundPage, Tours } from '../pages';
+import {
+  AboutPage,
+  ContactPage,
+  FaqPage,
+  HomePage,
+  Layout,
+  LegalPage,
+  NotFoundPage,
+  ToursPage,
+} from '../pages';
 import { ROUTES } from '../shared';
 
 const routes: RouteObject[] = [
@@ -7,10 +16,11 @@ const routes: RouteObject[] = [
     path: ROUTES.HOME,
     element: <Layout />,
     children: [
-      { path: ROUTES.HOME, element: <Home /> },
-      { path: ROUTES.TOURS, element: <Tours /> },
-      { path: ROUTES.ABOUT, element: <About /> },
-      { path: ROUTES.FAQ, element: <FAQ /> },
+      { path: ROUTES.HOME, element: <HomePage /> },
+      { path: ROUTES.TOURS, element: <ToursPage /> },
+      { path: ROUTES.ABOUT, element: <AboutPage /> },
+      { path: ROUTES.CONTACT, element: <ContactPage /> },
+      { path: ROUTES.FAQ, element: <FaqPage /> },
       { path: ROUTES.LEGAL, element: <LegalPage /> },
     ],
   },

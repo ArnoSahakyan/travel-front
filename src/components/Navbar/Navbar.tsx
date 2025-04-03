@@ -52,8 +52,8 @@ export const Navbar = () => {
                     className={({ isActive }) =>
                       `rounded-md px-3 py-2 text-sm font-medium ${
                         isActive
-                          ? 'bg-background-light text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                          : 'text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                          ? 'bg-background-light text-primary-light dark:bg-primary-dark/20 dark:text-primary-dark'
+                          : 'text-background-light hover:bg-background-light hover:text-primary-light dark:text-primary-dark dark:hover:bg-secondary-light dark:hover:text-primary-dark'
                       }`
                     }
                   >
