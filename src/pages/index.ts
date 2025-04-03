@@ -3,3 +3,5 @@ export * from './Home';
 export * from './Tours';
 export * from './NotFound';
 export * from './About';
+export * from './FAQ';
+export * from './Legal';

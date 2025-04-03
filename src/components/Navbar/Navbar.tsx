@@ -9,19 +9,10 @@ import {
 } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ThemeToggle } from '../ThemeToggle';
 import { ROUTES } from '../../shared';
-
-type NavItem = {
-  name: string;
-  href: string;
-};
-
-type UserNavigationItem = {
-  name: string;
-  href: string;
-};
+import { NavItem } from '../../shared/types';
 
 export const Navbar = () => {
   const navigation: NavItem[] = [
@@ -31,7 +22,7 @@ export const Navbar = () => {
     { name: 'About', href: ROUTES.ABOUT },
   ];
 
-  const userNavigation: UserNavigationItem[] = [
+  const userNavigation: NavItem[] = [
     { name: 'Your Profile', href: '#' },
     { name: 'Sign out', href: '#' },
   ];
@@ -39,16 +30,18 @@ export const Navbar = () => {
   return (
     <Disclosure
       as='nav'
-      className='bg-background-light dark:bg-background-dark shadow-sm border-b border-gray-200 dark:border-gray-700'
+      className='fixed top-0 z-10 w-full bg-primary-light dark:bg-background-dark shadow-sm dark:border-b dark:border-secondary-dark'
     >
       <div className='mx-auto max-w-7xl px-2 sm:px-4 lg:px-8'>
         <div className='relative flex h-16 items-center justify-between'>
           {/* Left side - Logo and navigation */}
           <div className='flex items-center px-2 lg:px-0'>
             <div className='shrink-0'>
-              <div className='h-8 w-8 rounded-md bg-primary-light dark:bg-primary-dark flex items-center justify-center'>
-                <span className='text-white font-bold text-sm'>TA</span>
-              </div>
+              <Link to={ROUTES.HOME} className='flex items-center justify-center'>
+                <span className='text-text-light dark:text-text-dark text-xl font-bold '>
+                  WanderLuxe
+                </span>
+              </Link>
             </div>
             <div className='hidden lg:ml-6 lg:block'>
               <div className='flex space-x-4'>
@@ -59,8 +52,8 @@ export const Navbar = () => {
                     className={({ isActive }) =>
                       `rounded-md px-3 py-2 text-sm font-medium ${
                         isActive
-                          ? 'bg-primary-light/10 text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                          : 'text-primary-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                          ? 'bg-background-light text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
+                          : 'text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
                       }`
                     }
                   >
@@ -143,7 +136,7 @@ export const Navbar = () => {
                 `rounded-md px-3 py-2 text-sm font-medium ${
                   isActive
                     ? 'bg-primary-light/10 text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                    : 'text-text-light hover:bg-gray-100 hover:text-primary-light dark:text-text-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                    : 'text-primary-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
                 }`
               }
             >

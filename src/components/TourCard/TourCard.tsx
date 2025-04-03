@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
+import { FC } from 'react';
+import { ITourCardProps } from '../../shared/types';
 
-type TourCardProps = {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  price: number;
-  duration: string;
-};
-
-export const TourCard = ({ id, title, description, imageUrl, price, duration }: TourCardProps) => {
+export const TourCard: FC<ITourCardProps> = ({
+  id,
+  title,
+  description,
+  imageUrl,
+  price,
+  duration,
+}) => {
   return (
     <div className='relative flex flex-col rounded-xl bg-background-light dark:bg-background-dark shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-transform hover:scale-[1.02] hover:shadow-lg'>
       {/* Image with price tag */}
