@@ -8,7 +8,7 @@ import {
   MenuItems,
 } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeToggle } from '../ThemeToggle';
 import { ROUTES } from '../../shared';
@@ -98,10 +98,11 @@ export const Navbar = () => {
               {/* Profile dropdown */}
               <Menu as='div' className='relative shrink-0'>
                 <div>
-                  <MenuButton className='relative flex rounded-full bg-white text-sm focus:outline-none dark:bg-gray-800'>
+                  <MenuButton className='p-2 relative flex rounded-lg text-sm focus:outline-none text-background-light hover:text-primary-light hover:bg-background-light dark:text-background-light dark:hover:bg-secondary-light'>
                     <span className='absolute -inset-1.5' />
                     <span className='sr-only'>Open user menu</span>
-                    <img alt='' src='/user.webp' className='size-8 rounded-full' />
+                    <UserIcon className='block size-6 ' />
+                    {/*<img alt='' src='/user.webp' className='size-8 rounded-full' />*/}
                   </MenuButton>
                 </div>
                 <MenuItems
@@ -135,8 +136,8 @@ export const Navbar = () => {
               className={({ isActive }) =>
                 `rounded-md px-3 py-2 text-sm font-medium ${
                   isActive
-                    ? 'bg-primary-light/10 text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                    : 'text-primary-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                    ? 'bg-background-light text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
+                    : 'text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
                 }`
               }
             >
@@ -146,14 +147,11 @@ export const Navbar = () => {
         </div>
         <div className='border-t border-gray-200 pt-4 pb-3 dark:border-gray-700'>
           <div className='flex items-center px-5'>
-            <div className='shrink-0'>
-              <img alt='' src='/user.webp' className='size-10 rounded-full' />
-            </div>
-            <div className='ml-3'>
-              <div className='text-base font-medium text-text-light dark:text-text-dark'>
+            <div>
+              <div className='text-base font-medium text-background-light dark:text-text-dark'>
                 Tom Cook
               </div>
-              <div className='text-sm font-medium text-secondary-light dark:text-secondary-dark'>
+              <div className='text-sm font-medium text-background-light dark:text-secondary-dark'>
                 tom@example.com
               </div>
             </div>
@@ -167,7 +165,7 @@ export const Navbar = () => {
                 key={item.name}
                 as='a'
                 href={item.href}
-                className='block rounded-md px-3 py-2 text-base font-medium text-secondary-light hover:bg-gray-100 hover:text-primary-light dark:text-secondary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
+                className='block rounded-md px-3 py-2 text-base font-medium text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-secondary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
               >
                 {item.name}
               </DisclosureButton>
