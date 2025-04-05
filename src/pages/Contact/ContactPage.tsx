@@ -67,7 +67,7 @@ export const ContactPage = () => {
               </svg>
             </div>
 
-            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
               Start Your Next Adventure
             </h2>
             <p className='mt-6 text-lg/8 text-secondary-light dark:text-secondary-dark'>
@@ -140,7 +140,7 @@ export const ContactPage = () => {
               <div>
                 <label
                   htmlFor='first-name'
-                  className='block text-sm/6 font-semibold text-text-light dark:text-text-dark'
+                  className='block text-sm/6 font-semibold text-primary-light dark:text-text-dark'
                 >
                   First name
                 </label>
@@ -150,7 +150,7 @@ export const ContactPage = () => {
                     name='first-name'
                     type='text'
                     autoComplete='given-name'
-                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-text-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
+                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-primary-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
                   />
                 </div>
               </div>
@@ -158,7 +158,7 @@ export const ContactPage = () => {
               <div>
                 <label
                   htmlFor='last-name'
-                  className='block text-sm/6 font-semibold text-text-light dark:text-text-dark'
+                  className='block text-sm/6 font-semibold text-primary-light dark:text-text-dark'
                 >
                   Last name
                 </label>
@@ -168,7 +168,7 @@ export const ContactPage = () => {
                     name='last-name'
                     type='text'
                     autoComplete='family-name'
-                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-text-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
+                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-primary-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
                   />
                 </div>
               </div>
@@ -176,7 +176,7 @@ export const ContactPage = () => {
               <div className='sm:col-span-2'>
                 <label
                   htmlFor='email'
-                  className='block text-sm/6 font-semibold text-text-light dark:text-text-dark'
+                  className='block text-sm/6 font-semibold text-primary-light dark:text-text-dark'
                 >
                   Email
                 </label>
@@ -186,7 +186,7 @@ export const ContactPage = () => {
                     name='email'
                     type='email'
                     autoComplete='email'
-                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-text-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
+                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-primary-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
                   />
                 </div>
               </div>
@@ -194,7 +194,7 @@ export const ContactPage = () => {
               <div className='sm:col-span-2'>
                 <label
                   htmlFor='phone-number'
-                  className='block text-sm/6 font-semibold text-text-light dark:text-text-dark'
+                  className='block text-sm/6 font-semibold text-primary-light dark:text-text-dark'
                 >
                   Phone number
                 </label>
@@ -204,7 +204,7 @@ export const ContactPage = () => {
                     name='phone-number'
                     type='tel'
                     autoComplete='tel'
-                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-text-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
+                    className='block w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-primary-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
                   />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export const ContactPage = () => {
               <div className='sm:col-span-2'>
                 <label
                   htmlFor='message'
-                  className='block text-sm/6 font-semibold text-text-light dark:text-text-dark'
+                  className='block text-sm/6 font-semibold text-primary-light dark:text-text-dark'
                 >
                   Message
                 </label>
@@ -221,7 +221,7 @@ export const ContactPage = () => {
                     id='message'
                     name='message'
                     rows={4}
-                    className='block resize-none w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-text-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
+                    className='block resize-none w-full rounded-md bg-white dark:bg-gray-800 px-3.5 py-2 text-base text-primary-light dark:text-text-dark outline outline-1 -outline-offset-1 outline-gray-300 dark:outline-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-light dark:focus:outline-primary-dark'
                     placeholder='Tell us about your travel plans...'
                   />
                 </div>

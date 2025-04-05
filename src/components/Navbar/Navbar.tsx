@@ -17,6 +17,7 @@ import { NavItem } from '../../shared/types';
 export const Navbar = () => {
   const navigation: NavItem[] = [
     { name: 'Home', href: ROUTES.HOME },
+    { name: 'Destinations', href: ROUTES.DESTINATIONS },
     { name: 'Tours', href: ROUTES.TOURS },
     { name: 'Contact', href: ROUTES.CONTACT },
     { name: 'About', href: ROUTES.ABOUT },
@@ -38,7 +39,7 @@ export const Navbar = () => {
           <div className='flex items-center px-2 lg:px-0'>
             <div className='shrink-0'>
               <Link to={ROUTES.HOME} className='flex items-center justify-center'>
-                <span className='text-text-light dark:text-text-dark text-xl font-bold '>
+                <span className='text-background-light dark:text-text-dark text-xl font-bold '>
                   WanderLuxe
                 </span>
               </Link>
@@ -72,7 +73,7 @@ export const Navbar = () => {
                 type='search'
                 placeholder='Search'
                 aria-label='Search'
-                className='col-start-1 row-start-1 block w-full rounded-md bg-gray-100 py-1.5 pr-3 pl-10 text-base text-text-light outline-none placeholder:text-secondary-light focus:bg-white focus:text-text-light focus:placeholder:text-secondary-light dark:bg-gray-700 dark:text-text-dark dark:placeholder-secondary-dark dark:focus:bg-gray-600 sm:text-sm/6'
+                className='col-start-1 row-start-1 block w-full rounded-md bg-gray-100 py-1.5 pr-3 pl-10 text-base text-text-light outline-none placeholder:text-secondary-light focus:bg-background-light focus:text-text-light focus:placeholder:text-secondary-light dark:bg-gray-700 dark:text-text-dark dark:placeholder-secondary-dark dark:focus:bg-gray-600 sm:text-sm/6'
               />
               <MagnifyingGlassIcon
                 aria-hidden='true'
@@ -107,7 +108,7 @@ export const Navbar = () => {
                 </div>
                 <MenuItems
                   transition
-                  className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-700'
+                  className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-background-light py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-700'
                 >
                   {userNavigation.map((item) => (
                     <MenuItem key={item.name}>

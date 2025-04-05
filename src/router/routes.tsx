@@ -2,6 +2,7 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import {
   AboutPage,
   ContactPage,
+  DestinationsPage,
   FaqPage,
   HomePage,
   Layout,
@@ -18,6 +19,7 @@ const routes: RouteObject[] = [
     children: [
       { path: ROUTES.HOME, element: <HomePage /> },
       { path: ROUTES.TOURS, element: <ToursPage /> },
+      { path: ROUTES.DESTINATIONS, element: <DestinationsPage /> },
       { path: ROUTES.ABOUT, element: <AboutPage /> },
       { path: ROUTES.CONTACT, element: <ContactPage /> },
       { path: ROUTES.FAQ, element: <FaqPage /> },

@@ -1,8 +1,7 @@
 import { ROUTES } from '../../shared';
 
 const navigation = [
-  { name: 'About', href: ROUTES.ABOUT },
-  { name: 'Tours', href: ROUTES.TOURS },
+  { name: 'About Us', href: ROUTES.ABOUT },
   { name: 'Contact', href: ROUTES.CONTACT },
   { name: 'FAQ', href: ROUTES.FAQ },
   { name: 'Terms and Conditions', href: ROUTES.LEGAL },

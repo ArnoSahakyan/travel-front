@@ -1,6 +1,7 @@
 export * from './Layout';
 export * from './Home';
 export * from './Tours';
+export * from './Destinations';
 export * from './NotFound';
 export * from './About';
 export * from './FAQ';
