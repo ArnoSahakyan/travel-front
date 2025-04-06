@@ -45,7 +45,7 @@ export const tours = [
     description:
       "Trek to Machu Picchu, explore the Sacred Valley, and experience Lima's vibrant culture on this 9-day adventure.",
     imageUrl:
-      'https://images.unsplash.com/photo-1551524559-8af4e6624178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1589087575290-519f528dfe5e?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnV8ZW58MHwwfDB8fHwy',
     price: 1699,
     duration: '9 days',
   },

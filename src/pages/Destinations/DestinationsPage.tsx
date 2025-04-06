@@ -6,7 +6,7 @@ import { destinations } from '../../assets';
 export const DestinationsPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark py-12'>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+      <div className='container mx-auto px-4 lg:px-8'>
         {/* Page Header */}
         <div className='mx-auto max-w-2xl text-center mb-12'>
           <h1 className='text-4xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>

@@ -1,0 +1,25 @@
+import { reviews } from '../../../../assets';
+import { ReviewCard } from '../../../../components';
+
+export const ReviewsSection = () => {
+  return (
+    <div className='bg-background-light dark:bg-background-dark py-16 sm:py-24'>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+        <div className='mx-auto max-w-2xl text-center'>
+          <h2 className='text-balance text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+            Travelers Love WanderLuxe
+          </h2>
+          <p className='mt-4 text-lg/8 text-secondary-light dark:text-secondary-dark'>
+            Hear from adventurers who've explored with us
+          </p>
+        </div>
+
+        <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+          {reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};

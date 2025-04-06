@@ -1,5 +1,6 @@
-import { DestinationCard, Hero, TourCard } from '../../components';
+import { DestinationCard, TourCard } from '../../components';
 import { destinations, tours } from '../../assets';
+import { BlogSection, Hero, ReviewsSection, WhyChooseUs } from './components';
 
 export const HomePage = () => {
   return (
@@ -34,6 +35,12 @@ export const HomePage = () => {
           ))}
         </div>
       </section>
+
+      <WhyChooseUs />
+
+      <ReviewsSection />
+
+      <BlogSection />
     </>
   );
 };

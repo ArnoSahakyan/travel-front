@@ -31,7 +31,7 @@ export const Hero = () => {
               href='#'
               className='rounded-md px-6 py-3.5 text-lg font-semibold text-background-light ring-1 ring-background-light hover:bg-background-light/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
             >
-              Custom Trip <span aria-hidden='true'>→</span>
+              View Destinations <span aria-hidden='true'>→</span>
             </a>
           </div>
         </div>
