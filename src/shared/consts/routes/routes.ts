@@ -7,5 +7,7 @@ export const ROUTES = {
   CONTACT: '/contact',
   FAQ: '/faq',
   LEGAL: '/terms-and-conditions',
+  SIGNIN: '/sign-in',
+  SIGNUP: '/sign-up',
   NOT_FOUND: '*',
 };

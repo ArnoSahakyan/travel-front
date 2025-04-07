@@ -10,6 +10,8 @@ import {
   LegalPage,
   NotFoundPage,
   ToursPage,
+  SingInPage,
+  SignUpPage,
 } from '../pages';
 import { ROUTES } from '../shared';
 
@@ -28,6 +30,8 @@ const routes: RouteObject[] = [
       { path: ROUTES.LEGAL, element: <LegalPage /> },
     ],
   },
+  { path: ROUTES.SIGNIN, element: <SingInPage /> },
+  { path: ROUTES.SIGNUP, element: <SignUpPage /> },
   { path: ROUTES.NOT_FOUND, element: <NotFoundPage /> },
 ];
 export const router = createBrowserRouter(routes);
