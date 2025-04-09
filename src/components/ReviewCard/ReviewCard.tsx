@@ -14,7 +14,7 @@ export const ReviewCard = ({ review }: { review: Review }) => {
   return (
     <div className='flex flex-col rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-md transition-all h-full'>
       <div className='flex-1'>
-        <h3 className='text-base font-semibold text-text-light dark:text-text-dark'>
+        <h3 className='text-base font-semibold text-primary-light dark:text-text-dark'>
           {review.author}
         </h3>
         <p className='text-sm text-secondary-light dark:text-secondary-dark'>{review.tour}</p>

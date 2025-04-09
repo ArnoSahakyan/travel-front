@@ -9,7 +9,7 @@ export const DestinationsPage = () => {
       <div className='container mx-auto px-4 lg:px-8'>
         {/* Page Header */}
         <div className='mx-auto max-w-2xl text-center mb-12'>
-          <h1 className='text-4xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+          <h1 className='text-4xl font-bold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             Discover Our Destinations
           </h1>
           <p className='mt-4 text-lg text-secondary-light dark:text-secondary-dark'>
@@ -26,7 +26,7 @@ export const DestinationsPage = () => {
 
         {/* Call to Action */}
         <div className='mt-16 text-center'>
-          <h2 className='text-2xl font-semibold text-text-light dark:text-text-dark'>
+          <h2 className='text-2xl font-semibold text-primary-light dark:text-text-dark'>
             Can't find what you're looking for?
           </h2>
           <p className='mt-4 text-secondary-light dark:text-secondary-dark'>

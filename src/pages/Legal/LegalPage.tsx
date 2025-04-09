@@ -26,7 +26,7 @@ export const LegalPage = () => {
     <div className='bg-background-light dark:bg-background-dark'>
       <div className='mx-auto max-w-7xl px-6 pt-16 sm:pt-24 lg:px-8 lg:pt-32'>
         <div className='mx-auto max-w-4xl'>
-          <h1 className='text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+          <h1 className='text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             Terms & Conditions / Privacy Policy
           </h1>
           <p className='mt-6 text-lg text-secondary-light dark:text-secondary-dark'>

@@ -8,7 +8,7 @@ export const ToursPage = () => {
     <section className='py-12 bg-background-light dark:bg-background-dark'>
       <div className='container mx-auto px-4 lg:px-8'>
         <div className='text-center mb-12'>
-          <h2 className='text-3xl font-bold text-text-light dark:text-text-dark mb-4'>
+          <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark mb-4'>
             Featured Tours
           </h2>
           <p className='text-secondary-light dark:text-secondary-dark max-w-2xl mx-auto'>

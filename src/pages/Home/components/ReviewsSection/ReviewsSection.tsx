@@ -6,7 +6,7 @@ export const ReviewsSection = () => {
     <div className='bg-background-light dark:bg-background-dark py-16 sm:py-24'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-balance text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+          <h2 className='text-balance text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             Travelers Love WanderLuxe
           </h2>
           <p className='mt-4 text-lg/8 text-secondary-light dark:text-secondary-dark'>

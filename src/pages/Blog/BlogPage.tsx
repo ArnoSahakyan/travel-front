@@ -6,7 +6,7 @@ export const BlogPage = () => {
     <div className='bg-background-light dark:bg-background-dark py-12 sm:py-16'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center mb-16'>
-          <h1 className='text-balance text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+          <h1 className='text-balance text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             WanderLuxe Journal
           </h1>
           <p className='mt-4 text-lg text-secondary-light dark:text-secondary-dark'>

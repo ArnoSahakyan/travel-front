@@ -1,4 +1,4 @@
-import { DestinationCard, TourCard } from '../../components';
+import { DestinationCard, Newsletter, TourCard } from '../../components';
 import { destinations, tours } from '../../assets';
 import { BlogSection, Hero, ReviewsSection, WhyChooseUs } from './components';
 
@@ -8,7 +8,7 @@ export const HomePage = () => {
       <Hero />
       <section className='container mt-10 mx-auto px-4'>
         <div className='mb-8 text-center'>
-          <h2 className='text-3xl font-bold text-text-light dark:text-text-dark'>
+          <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark'>
             Explore Our Destinations
           </h2>
           <p className='text-secondary-light dark:text-secondary-dark mt-2'>
@@ -24,7 +24,9 @@ export const HomePage = () => {
 
       <section className='container mt-10 mx-auto px-4'>
         <div className='mb-8 text-center'>
-          <h2 className='text-3xl font-bold text-text-light dark:text-text-dark'>Popular Tours</h2>
+          <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark'>
+            Popular Tours
+          </h2>
           <p className='text-secondary-light dark:text-secondary-dark mt-2'>
             Our most booked experiences
           </p>
@@ -41,6 +43,8 @@ export const HomePage = () => {
       <ReviewsSection />
 
       <BlogSection />
+
+      <Newsletter />
     </>
   );
 };

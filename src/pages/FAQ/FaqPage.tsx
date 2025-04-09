@@ -7,14 +7,14 @@ export const FaqPage = () => {
     <div className='bg-background-light dark:bg-background-dark'>
       <div className='mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40'>
         <div className='mx-auto max-w-4xl'>
-          <h2 className='text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+          <h2 className='text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             Travel Questions Answered
           </h2>
           <dl className='mt-16 divide-y divide-primary-light/20 dark:divide-primary-dark/20'>
             {faqs.map((faq) => (
               <Disclosure key={faq.question} as='div' className='py-6 first:pt-0 last:pb-0'>
                 <dt>
-                  <DisclosureButton className='group flex w-full items-start justify-between text-left text-text-light dark:text-text-dark'>
+                  <DisclosureButton className='group flex w-full items-start justify-between text-left text-primary-light dark:text-text-dark'>
                     <span className='text-primary-light dark:text-primary-dark text-lg font-semibold'>
                       {faq.question}
                     </span>

@@ -21,7 +21,7 @@ export const AboutPage = () => {
         {/* Header section */}
         <div className='px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl pt-24 text-center sm:pt-40'>
-            <h1 className='text-5xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-7xl'>
+            <h1 className='text-5xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-7xl'>
               Our Story
             </h1>
             <p className='mt-8 text-pretty text-lg font-medium text-secondary-light dark:text-secondary-dark sm:text-xl/8'>
@@ -95,7 +95,7 @@ export const AboutPage = () => {
         {/* Values section */}
         <div className='mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8'>
           <div className='mx-auto max-w-2xl lg:mx-0'>
-            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
               Our Travel Philosophy
             </h2>
             <p className='mt-6 text-lg/8 text-secondary-light dark:text-secondary-dark'>
@@ -121,7 +121,7 @@ export const AboutPage = () => {
         {/* Team section */}
         <div className='mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8'>
           <div className='mx-auto max-w-2xl lg:mx-0'>
-            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-5xl'>
+            <h2 className='text-pretty text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
               Meet Our Guides
             </h2>
             <p className='mt-6 text-lg/8 text-secondary-light dark:text-secondary-dark'>
@@ -139,7 +139,7 @@ export const AboutPage = () => {
                   src={person.imageUrl}
                   className='aspect-[14/13] w-full rounded-2xl object-cover'
                 />
-                <h3 className='mt-6 text-lg/8 font-semibold tracking-tight text-text-light dark:text-text-dark'>
+                <h3 className='mt-6 text-lg/8 font-semibold tracking-tight text-primary-light dark:text-text-dark'>
                   {person.name}
                 </h3>
                 <p className='text-base/7 text-primary-light dark:text-primary-dark'>

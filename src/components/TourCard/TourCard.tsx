@@ -20,13 +20,13 @@ export const TourCard: FC<ITourCardProps> = ({
         <div className='absolute top-4 right-4 bg-primary-light dark:bg-primary-dark text-background-light px-3 py-1 rounded-full font-bold text-sm shadow-md'>
           ${price.toLocaleString()}
         </div>
-        <div className='absolute flex items-center gap-1 bottom-4 left-4 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark px-2 py-1 rounded text-xs font-medium'>
+        <div className='absolute flex items-center gap-1 bottom-4 left-4 bg-background-light dark:bg-background-dark text-primary-light dark:text-text-dark px-2 py-1 rounded text-xs font-medium'>
           <ClockIcon className='block size-4' /> {duration}
         </div>
       </div>
 
       <div className='p-4 flex flex-col flex-grow'>
-        <h3 className='text-lg font-semibold text-text-light dark:text-text-dark mb-2 line-clamp-2'>
+        <h3 className='text-lg font-semibold text-primary-light dark:text-text-dark mb-2 line-clamp-2'>
           {title}
         </h3>
         <p className='text-sm text-secondary-light dark:text-secondary-dark mb-4 line-clamp-3'>

@@ -6,7 +6,7 @@ export const NotFoundPage = () => {
     <main className='grid min-h-screen place-items-center bg-background-light dark:bg-background-dark px-6 py-24 sm:py-32 lg:px-8'>
       <div className='text-center'>
         <p className='text-base font-semibold text-primary-light dark:text-primary-dark'>404</p>
-        <h1 className='mt-4 text-balance text-5xl font-semibold tracking-tight text-text-light dark:text-text-dark sm:text-7xl'>
+        <h1 className='mt-4 text-balance text-5xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-7xl'>
           Page not found
         </h1>
         <p className='mt-6 text-pretty text-lg font-medium text-secondary-light dark:text-secondary-dark sm:text-xl/8'>
@@ -21,7 +21,7 @@ export const NotFoundPage = () => {
           </Link>
           <Link
             to={ROUTES.CONTACT}
-            className='text-sm font-semibold text-text-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors'
+            className='text-sm font-semibold text-primary-light dark:text-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors'
           >
             Contact support <span aria-hidden='true'>&rarr;</span>
           </Link>

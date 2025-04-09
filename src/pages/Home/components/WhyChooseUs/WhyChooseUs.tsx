@@ -29,7 +29,7 @@ const features = [
     name: 'Best Value Guarantee',
     description: 'We negotiate directly with providers to offer premium experiences at fair prices',
     icon: ShieldCheckIcon,
-    color: 'text-text-light dark:text-text-dark',
+    color: 'text-primary-light dark:text-text-dark',
   },
 ];
 
@@ -38,7 +38,7 @@ export const WhyChooseUs = () => {
     <section className='relative bg-background-light dark:bg-background-dark py-16 sm:py-24'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl text-center'>
-          <h2 className='text-3xl font-bold tracking-tight text-text-light dark:text-text-dark sm:text-4xl'>
+          <h2 className='text-3xl font-bold tracking-tight text-primary-light dark:text-text-dark sm:text-4xl'>
             Why Choose WanderLuxe
           </h2>
           <p className='mt-4 text-lg text-secondary-light dark:text-secondary-dark'>
@@ -57,7 +57,7 @@ export const WhyChooseUs = () => {
               >
                 <feature.icon className='h-8 w-8' aria-hidden='true' />
               </div>
-              <h3 className='text-lg font-semibold leading-7 text-text-light dark:text-text-dark'>
+              <h3 className='text-lg font-semibold leading-7 text-primary-light dark:text-text-dark'>
                 {feature.name}
               </h3>
               <p className='mt-2 text-base leading-6 text-secondary-light dark:text-secondary-dark'>
@@ -83,7 +83,7 @@ export const WhyChooseUs = () => {
               </p>
             </div>
             <div className='text-center'>
-              <p className='text-4xl font-bold text-text-light dark:text-text-dark'>98%</p>
+              <p className='text-4xl font-bold text-primary-light dark:text-text-dark'>98%</p>
               <p className='mt-2 text-sm font-medium text-secondary-light dark:text-secondary-dark'>
                 Satisfaction Rate
               </p>
