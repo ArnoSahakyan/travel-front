@@ -7,6 +7,7 @@ export * from './Home';
 export * from './Layout';
 export * from './Legal';
 export * from './NotFound';
+export * from './Profile';
 export * from './SignIn';
 export * from './SignUp';
 export * from './Tours';

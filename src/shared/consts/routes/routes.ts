@@ -9,5 +9,9 @@ export const ROUTES = {
   LEGAL: '/terms-and-conditions',
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',
+  PROFILE: '/profile',
+  PROFILE_WISHLISTS: '/profile/wishlists',
+  PROFILE_BOOKINGS: '/profile/bookings',
+  PROFILE_INFO: '/profile/info',
   NOT_FOUND: '*',
 };

@@ -12,6 +12,8 @@ import {
   ToursPage,
   SingInPage,
   SignUpPage,
+  ProfileLayout,
+  Account,
 } from '../pages';
 import { ROUTES } from '../shared';
 
@@ -28,6 +30,15 @@ const routes: RouteObject[] = [
       { path: ROUTES.CONTACT, element: <ContactPage /> },
       { path: ROUTES.FAQ, element: <FaqPage /> },
       { path: ROUTES.LEGAL, element: <LegalPage /> },
+    ],
+  },
+  {
+    path: ROUTES.PROFILE,
+    element: <ProfileLayout />,
+    children: [
+      { path: ROUTES.PROFILE_BOOKINGS, element: <Account /> },
+      { path: ROUTES.PROFILE_WISHLISTS, element: <Account /> },
+      { path: ROUTES.PROFILE_INFO, element: <Account /> },
     ],
   },
   { path: ROUTES.SIGNIN, element: <SingInPage /> },

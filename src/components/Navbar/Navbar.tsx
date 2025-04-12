@@ -25,7 +25,7 @@ export const Navbar = () => {
   ];
 
   const userNavigation: NavItem[] = [
-    { name: 'Your Profile', href: ROUTES.HOME },
+    { name: 'Your Profile', href: ROUTES.PROFILE },
     { name: 'Sign out', href: ROUTES.HOME },
   ];
 
@@ -109,13 +109,13 @@ export const Navbar = () => {
                   </div>
                   <MenuItems
                     transition
-                    className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-background-light py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-700'
+                    className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-primary-light py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-background-dark'
                   >
                     {userNavigation.map((item) => (
                       <MenuItem key={item.name}>
                         <Link
                           to={item.href}
-                          className='block px-4 py-2 text-sm text-text-light data-focus:bg-gray-100 data-focus:outline-none dark:text-text-dark dark:data-focus:bg-gray-600'
+                          className='block px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light data-focus:bg-gray-100 data-focus:outline-none dark:text-primary-dark dark:data-focus:bg-gray-600 '
                         >
                           {item.name}
                         </Link>
