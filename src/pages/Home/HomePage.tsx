@@ -6,7 +6,7 @@ export const HomePage = () => {
   return (
     <>
       <Hero />
-      <section className='container mt-10 mx-auto px-4'>
+      <section className='mx-auto mt-10 lg:mt-20 max-w-7xl px-6 lg:px-8'>
         <div className='mb-8 text-center'>
           <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark'>
             Explore Our Destinations
@@ -22,7 +22,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className='container mt-10 mx-auto px-4'>
+      <section className='mx-auto mt-10 lg:mt-20 max-w-7xl px-6 lg:px-8'>
         <div className='mb-8 text-center'>
           <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark'>
             Popular Tours
