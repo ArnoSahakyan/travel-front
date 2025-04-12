@@ -1,4 +1,5 @@
 export * from './About';
+export * from './Auth';
 export * from './Blog';
 export * from './Contact';
 export * from './Destinations';
@@ -8,6 +9,4 @@ export * from './Layout';
 export * from './Legal';
 export * from './NotFound';
 export * from './Profile';
-export * from './SignIn';
-export * from './SignUp';
 export * from './Tours';

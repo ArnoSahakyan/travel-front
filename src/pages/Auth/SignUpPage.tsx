@@ -108,7 +108,7 @@ export const SignUpPage = () => {
           <p>
             Already have an account?{' '}
             <Link
-              to={ROUTES.SIGNIN}
+              to={ROUTES.AUTH + ROUTES.SIGNIN}
               className='font-semibold text-primary-light dark:text-primary-dark hover:text-opacity-80 transition-colors'
             >
               Sign in

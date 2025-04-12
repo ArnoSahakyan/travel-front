@@ -10,10 +10,11 @@ import {
   LegalPage,
   NotFoundPage,
   ToursPage,
-  SingInPage,
+  SignInPage,
   SignUpPage,
+  ForgotPasswordPage,
   ProfileLayout,
-  Account,
+  Account, AuthLayout,
 } from '../pages';
 import { ROUTES } from '../shared';
 
@@ -41,8 +42,15 @@ const routes: RouteObject[] = [
       { path: ROUTES.PROFILE_INFO, element: <Account /> },
     ],
   },
-  { path: ROUTES.SIGNIN, element: <SingInPage /> },
-  { path: ROUTES.SIGNUP, element: <SignUpPage /> },
+  {
+    path: ROUTES.AUTH,
+    element: <AuthLayout />,
+    children: [
+      { path: ROUTES.SIGNIN.slice(1), element: <SignInPage /> },
+      { path: ROUTES.SIGNUP.slice(1), element: <SignUpPage /> },
+      { path: ROUTES.FORGOT_PASSWORD.slice(1), element: <ForgotPasswordPage /> },
+    ],
+  },
   { path: ROUTES.NOT_FOUND, element: <NotFoundPage /> },
 ];
 export const router = createBrowserRouter(routes);
