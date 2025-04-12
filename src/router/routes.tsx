@@ -14,7 +14,8 @@ import {
   SignUpPage,
   ForgotPasswordPage,
   ProfileLayout,
-  Account, AuthLayout,
+  Account,
+  AuthLayout,
 } from '../pages';
 import { ROUTES } from '../shared';
 
