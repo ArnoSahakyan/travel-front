@@ -17,6 +17,7 @@ import {
   Account,
   AuthLayout,
 } from '../pages';
+import { ProtectedRoute, UnprotectedRoute } from '../components';
 import { ROUTES } from '../shared';
 
 const routes: RouteObject[] = [
@@ -35,23 +36,34 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: ROUTES.PROFILE,
-    element: <ProfileLayout />,
+    element: <ProtectedRoute />,
     children: [
-      { path: ROUTES.PROFILE_BOOKINGS, element: <Account /> },
-      { path: ROUTES.PROFILE_WISHLISTS, element: <Account /> },
-      { path: ROUTES.PROFILE_INFO, element: <Account /> },
+      {
+        path: ROUTES.PROFILE,
+        element: <ProfileLayout />,
+        children: [
+          { path: ROUTES.PROFILE_BOOKINGS, element: <Account /> },
+          { path: ROUTES.PROFILE_WISHLISTS, element: <Account /> },
+          { path: ROUTES.PROFILE_INFO, element: <Account /> },
+        ],
+      },
     ],
   },
   {
-    path: ROUTES.AUTH,
-    element: <AuthLayout />,
+    element: <UnprotectedRoute />,
     children: [
-      { path: ROUTES.SIGNIN.slice(1), element: <SignInPage /> },
-      { path: ROUTES.SIGNUP.slice(1), element: <SignUpPage /> },
-      { path: ROUTES.FORGOT_PASSWORD.slice(1), element: <ForgotPasswordPage /> },
+      {
+        path: ROUTES.AUTH,
+        element: <AuthLayout />,
+        children: [
+          { path: ROUTES.SIGNIN.slice(1), element: <SignInPage /> },
+          { path: ROUTES.SIGNUP.slice(1), element: <SignUpPage /> },
+          { path: ROUTES.FORGOT_PASSWORD.slice(1), element: <ForgotPasswordPage /> },
+        ],
+      },
     ],
   },
   { path: ROUTES.NOT_FOUND, element: <NotFoundPage /> },
 ];
+
 export const router = createBrowserRouter(routes);

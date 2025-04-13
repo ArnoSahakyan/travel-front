@@ -11,8 +11,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeToggle } from '../ThemeToggle';
-import { ROUTES } from '../../shared';
-import { NavItem } from '../../shared/types';
+import { ROUTES, NavItem } from '../../shared';
 
 export const Navbar = () => {
   const navigation: NavItem[] = [
@@ -25,7 +24,7 @@ export const Navbar = () => {
   ];
 
   const userNavigation: NavItem[] = [
-    { name: 'Your Profile', href: ROUTES.PROFILE },
+    { name: 'Your Profile', href: ROUTES.PROFILE_INFO },
     { name: 'Sign out', href: ROUTES.HOME },
   ];
 

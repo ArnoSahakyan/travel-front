@@ -1,25 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
-// Personal Info Schema
-const personalInfoSchema = z.object({
-  fullName: z.string().min(1, 'Full name is required'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().optional(),
-});
-
-// Password Change Schema
-const passwordChangeSchema = z
-  .object({
-    currentPassword: z.string().min(8, 'Current password is required'),
-    newPassword: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Password must be at least 8 characters'),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  });
+import {
+  PasswordChangeFormData,
+  passwordChangeSchema,
+  PersonalFormData,
+  personalInfoSchema,
+} from '../../shared';
 
 export const Account = () => {
   // Personal Info Form
@@ -55,14 +41,12 @@ export const Account = () => {
   const showPasswordFields =
     watch('currentPassword') || watch('newPassword') || watch('confirmPassword');
 
-  const onPersonalInfoSubmit = (data) => {
+  const onPersonalInfoSubmit = (data: PersonalFormData) => {
     console.log('Personal info submitted:', data);
-    // API call for personal info update
   };
 
-  const onPasswordSubmit = (data) => {
+  const onPasswordSubmit = (data: PasswordChangeFormData) => {
     console.log('Password change submitted:', data);
-    // API call for password change
     resetPasswordForm();
   };
 

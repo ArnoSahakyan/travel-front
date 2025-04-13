@@ -32,7 +32,7 @@ html {
 
   /* Label Styles */
   .form-label {
-    @apply block text-sm font-medium text-primary-light dark:text-text-dark;
+    @apply block text-sm font-medium text-secondary-light dark:text-text-dark;
   }
 
   /* Disabled Label State */

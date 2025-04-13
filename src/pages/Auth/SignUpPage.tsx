@@ -1,120 +1,145 @@
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
+import { SignUpFormData, signUpSchema } from '../../shared';
 
 export const SignUpPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+  });
+
+  const onSubmit = (data: SignUpFormData) => {
+    console.log('Form submitted:', data);
+    // TODO: Add your sign-up logic here
+  };
+
   return (
-    <div className='flex min-h-screen items-center justify-center bg-background-light dark:bg-background-dark px-4 py-12 sm:px-6 lg:px-8'>
-      <div className='w-full max-w-md space-y-8 rounded-xl bg-white dark:bg-gray-800/50 p-8 shadow-lg'>
-        <div className='text-center'>
-          <h2 className='text-3xl font-bold tracking-tight text-primary-light dark:text-text-dark'>
-            Start your adventure
-          </h2>
-          <p className='mt-2 text-sm text-secondary-light dark:text-secondary-dark'>
-            Create your WanderLuxe account to book your next journey
-          </p>
-        </div>
+    <div className='w-full max-w-md space-y-8 rounded-xl bg-white dark:bg-gray-800/50 p-8 shadow-lg'>
+      <div className='text-center'>
+        <h2 className='text-3xl font-bold tracking-tight text-primary-light dark:text-text-dark'>
+          Start your adventure
+        </h2>
+        <p className='mt-2 text-sm text-secondary-light dark:text-secondary-dark'>
+          Create your WanderLuxe account to book your next journey
+        </p>
+      </div>
 
-        <form className='mt-8 space-y-6'>
-          <div className='space-y-4'>
-            <div>
-              <label htmlFor='fullName' className='form-label'>
-                Full name
-              </label>
-              <div className='mt-1'>
-                <input
-                  id='fullName'
-                  name='fullName'
-                  type='text'
-                  autoComplete='name'
-                  required
-                  className='form-input'
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor='email' className='form-label'>
-                Email address
-              </label>
-              <div className='mt-1'>
-                <input
-                  id='email'
-                  name='email'
-                  type='email'
-                  autoComplete='email'
-                  required
-                  className='form-input'
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor='password' className='form-label'>
-                Password
-              </label>
-              <div className='mt-1'>
-                <input
-                  id='password'
-                  name='password'
-                  type='password'
-                  autoComplete='new-password'
-                  required
-                  className='form-input'
-                />
-              </div>
-              <p className='mt-1 text-xs text-secondary-light dark:text-secondary-dark'>
-                Password must be at least 8 characters
-              </p>
-            </div>
-
-            <div>
-              <label htmlFor='confirmPassword' className='form-label'>
-                Confirm password
-              </label>
-              <div className='mt-1'>
-                <input
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  type='password'
-                  autoComplete='new-password'
-                  required
-                  className='form-input'
-                />
-              </div>
-            </div>
-
-            <div className='flex items-center gap-2'>
-              <input id='terms' name='terms' type='checkbox' required className='form-checkbox' />
-              <label htmlFor='terms' className='form-label'>
-                I agree to the{' '}
-                <Link
-                  to={ROUTES.LEGAL}
-                  className='font-medium text-primary-light dark:text-primary-dark hover:text-opacity-80'
-                >
-                  Terms of Service & Privacy Policy
-                </Link>
-              </label>
+      <form onSubmit={handleSubmit(onSubmit)} className='mt-8 space-y-6'>
+        <div className='space-y-4'>
+          <div>
+            <label htmlFor='fullName' className='form-label'>
+              Full name
+            </label>
+            <div className='mt-1'>
+              <input
+                id='fullName'
+                type='text'
+                autoComplete='name'
+                className='form-input'
+                {...register('fullName')}
+              />
+              {errors.fullName && <p className='form-error'>{errors.fullName.message}</p>}
             </div>
           </div>
 
           <div>
-            <button type='submit' className='form-button w-full'>
-              Create account
-            </button>
+            <label htmlFor='email' className='form-label'>
+              Email address
+            </label>
+            <div className='mt-1'>
+              <input
+                id='email'
+                type='email'
+                autoComplete='email'
+                className='form-input'
+                {...register('email')}
+              />
+              {errors.email && <p className='form-error'>{errors.email.message}</p>}
+            </div>
           </div>
-        </form>
 
-        <div className='text-center text-sm text-secondary-light dark:text-secondary-dark'>
-          <p>
-            Already have an account?{' '}
-            <Link
-              to={ROUTES.AUTH + ROUTES.SIGNIN}
-              className='font-semibold text-primary-light dark:text-primary-dark hover:text-opacity-80 transition-colors'
-            >
-              Sign in
-            </Link>
-          </p>
+          <div>
+            <label htmlFor='password' className='form-label'>
+              Password
+            </label>
+            <div className='mt-1'>
+              <input
+                id='password'
+                type='password'
+                autoComplete='new-password'
+                className='form-input'
+                {...register('password')}
+              />
+              {errors.password ? (
+                <p className='form-error'>{errors.password.message}</p>
+              ) : (
+                <p className='mt-1 text-xs text-secondary-light dark:text-secondary-dark'>
+                  Password must be at least 8 characters
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor='confirmPassword' className='form-label'>
+              Confirm password
+            </label>
+            <div className='mt-1'>
+              <input
+                id='confirmPassword'
+                type='password'
+                autoComplete='new-password'
+                className='form-input'
+                {...register('confirmPassword')}
+              />
+              {errors.confirmPassword && (
+                <p className='form-error'>{errors.confirmPassword.message}</p>
+              )}
+            </div>
+          </div>
+
+          <div className='flex items-start gap-2'>
+            <input
+              id='terms'
+              type='checkbox'
+              className='form-checkbox mt-1'
+              {...register('terms')}
+            />
+            <label htmlFor='terms' className='form-label'>
+              I agree to the{' '}
+              <Link
+                to={ROUTES.LEGAL}
+                className='font-medium text-primary-light dark:text-primary-dark hover:text-opacity-80'
+              >
+                Terms of Service & Privacy Policy
+              </Link>
+            </label>
+          </div>
+          {errors.terms && <p className='form-error'>{errors.terms.message}</p>}
         </div>
+
+        <div>
+          <button type='submit' className='form-button w-full' disabled={isSubmitting}>
+            {isSubmitting ? 'Creating account...' : 'Create account'}
+          </button>
+        </div>
+      </form>
+
+      <div className='text-center text-sm text-secondary-light dark:text-secondary-dark'>
+        <p>
+          Already have an account?{' '}
+          <Link
+            to={ROUTES.AUTH + ROUTES.SIGNIN}
+            className='font-semibold text-primary-light dark:text-primary-dark hover:text-opacity-80 transition-colors'
+          >
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
