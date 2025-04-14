@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { SignInFormData, signInSchema } from '../../shared';
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const {
     register,
     handleSubmit,
@@ -93,3 +93,5 @@ export const SignInPage = () => {
     </div>
   );
 };
+
+export default SignInPage;

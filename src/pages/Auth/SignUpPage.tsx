@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { SignUpFormData, signUpSchema } from '../../shared';
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const {
     register,
     handleSubmit,
@@ -144,3 +144,5 @@ export const SignUpPage = () => {
     </div>
   );
 };
+
+export default SignUpPage;

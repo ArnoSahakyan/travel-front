@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared'; // Make sure to import your ROUTES
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <main className='grid min-h-screen place-items-center bg-background-light dark:bg-background-dark px-6 py-24 sm:py-32 lg:px-8'>
       <div className='text-center'>
@@ -30,3 +30,5 @@ export const NotFoundPage = () => {
     </main>
   );
 };
+
+export default NotFoundPage;

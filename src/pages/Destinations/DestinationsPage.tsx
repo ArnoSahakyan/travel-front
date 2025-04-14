@@ -3,7 +3,7 @@ import { ROUTES } from '../../shared';
 import { DestinationCard } from '../../components';
 import { destinations } from '../../assets';
 
-export const DestinationsPage = () => {
+const DestinationsPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark py-12'>
       <div className='container mx-auto px-4 lg:px-8'>
@@ -45,3 +45,5 @@ export const DestinationsPage = () => {
     </div>
   );
 };
+
+export default DestinationsPage;

@@ -1,8 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
-import { faqs } from '../../assets/data/faq.ts';
+import { faqs } from '../../assets';
 
-export const FaqPage = () => {
+const FaqPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark'>
       <div className='mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40'>
@@ -43,3 +43,5 @@ export const FaqPage = () => {
     </div>
   );
 };
+
+export default FaqPage;

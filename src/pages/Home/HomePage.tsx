@@ -2,7 +2,7 @@ import { DestinationCard, Newsletter, TourCard } from '../../components';
 import { destinations, tours } from '../../assets';
 import { BlogSection, Hero, ReviewsSection, WhyChooseUs } from './components';
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <>
       <Hero />
@@ -48,3 +48,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;

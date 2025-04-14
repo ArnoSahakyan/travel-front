@@ -7,7 +7,7 @@ import {
   personalInfoSchema,
 } from '../../shared';
 
-export const Account = () => {
+const Account = () => {
   // Personal Info Form
   const {
     register: registerPersonalInfo,
@@ -191,3 +191,5 @@ export const Account = () => {
     </div>
   );
 };
+
+export default Account;
