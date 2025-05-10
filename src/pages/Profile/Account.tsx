@@ -6,14 +6,19 @@ import {
   PersonalFormData,
   personalInfoSchema,
 } from '../../shared';
+import { useAuthStore } from '../../store';
+import { useEffect } from 'react';
 
 export const Account = () => {
+  const user = useAuthStore((state) => state.user);
+
   // Personal Info Form
   const {
     register: registerPersonalInfo,
     handleSubmit: handlePersonalInfoSubmit,
     formState: { errors: personalInfoErrors, isDirty: isPersonalInfoDirty },
-  } = useForm({
+    reset: resetPersonalInfoForm,
+  } = useForm<PersonalFormData>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
       fullName: '',
@@ -21,6 +26,16 @@ export const Account = () => {
       phone: '',
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      resetPersonalInfoForm({
+        fullName: user.full_name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+      });
+    }
+  }, [user, resetPersonalInfoForm]);
 
   // Password Change Form
   const {

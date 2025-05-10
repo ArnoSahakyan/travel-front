@@ -1,21 +1,41 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../../shared';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthErrorResponse, ROUTES } from '../../shared';
 import { SignUpFormData, signUpSchema } from '../../shared';
+import { useSignUp } from '../../hooks/useAuth.ts';
+import { toast } from 'react-toastify';
+import { isAxiosError } from 'axios';
 
 export const SignUpPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
   });
 
+  const navigate = useNavigate();
+
+  const { mutate: signUp, isPending } = useSignUp();
+
   const onSubmit = (data: SignUpFormData) => {
-    console.log('Form submitted:', data);
-    // TODO: Add your sign-up logic here
+    signUp(data, {
+      onSuccess: () => {
+        toast.success('Successfully signed in!');
+        navigate(ROUTES.AUTH + ROUTES.SIGNIN);
+      },
+      onError: (error: unknown) => {
+        let message = 'Invalid credentials. Please try again.';
+
+        if (isAxiosError<AuthErrorResponse>(error)) {
+          message = error.response?.data?.message ?? message;
+        }
+
+        toast.error(message);
+      },
+    });
   };
 
   return (
@@ -41,9 +61,9 @@ export const SignUpPage = () => {
                 type='text'
                 autoComplete='name'
                 className='form-input'
-                {...register('fullName')}
+                {...register('full_name')}
               />
-              {errors.fullName && <p className='form-error'>{errors.fullName.message}</p>}
+              {errors.full_name && <p className='form-error'>{errors.full_name.message}</p>}
             </div>
           </div>
 
@@ -95,10 +115,10 @@ export const SignUpPage = () => {
                 type='password'
                 autoComplete='new-password'
                 className='form-input'
-                {...register('confirmPassword')}
+                {...register('confirm_password')}
               />
-              {errors.confirmPassword && (
-                <p className='form-error'>{errors.confirmPassword.message}</p>
+              {errors.confirm_password && (
+                <p className='form-error'>{errors.confirm_password.message}</p>
               )}
             </div>
           </div>
@@ -124,8 +144,8 @@ export const SignUpPage = () => {
         </div>
 
         <div>
-          <button type='submit' className='form-button w-full' disabled={isSubmitting}>
-            {isSubmitting ? 'Creating account...' : 'Create account'}
+          <button type='submit' className='form-button w-full' disabled={isPending}>
+            {isPending ? 'Creating account...' : 'Create account'}
           </button>
         </div>
       </form>

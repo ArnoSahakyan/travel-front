@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../shared';
+import { DESTINATIONS_LIMIT, ROUTES } from '../../shared';
 import { DestinationCard } from '../../components';
-import { destinations } from '../../assets';
+import { useDestinations, usePagination } from '../../hooks';
 
 export const DestinationsPage = () => {
+  const { page, goToNextPage, goToPrevPage } = usePagination();
+  const { data, isLoading, isError, error } = useDestinations(page, DESTINATIONS_LIMIT);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
+
   return (
     <div className='bg-background-light dark:bg-background-dark py-12'>
       <div className='container mx-auto px-4 lg:px-8'>
@@ -17,12 +25,44 @@ export const DestinationsPage = () => {
           </p>
         </div>
 
-        {/* Destination Cards Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
-          {destinations.map((destination) => (
-            <DestinationCard key={destination.id} {...destination} />
-          ))}
-        </div>
+        {/* Loading/Error */}
+        {isLoading ? (
+          <div className='text-center text-secondary-light dark:text-secondary-dark'>
+            Loading destinations...
+          </div>
+        ) : isError ? (
+          <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+        ) : (
+          <>
+            {/* Destination Cards Grid */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
+              {data?.destinations.map((destination) => (
+                <DestinationCard key={destination.destination_id} {...destination} />
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <div className='flex justify-center items-center gap-4 mt-10'>
+              <button
+                onClick={() => goToPrevPage()}
+                disabled={page === 1}
+                className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
+              >
+                Previous
+              </button>
+              <span className='text-secondary-light dark:text-secondary-dark'>
+                Page {page} of {data?.totalPages}
+              </span>
+              <button
+                onClick={() => goToNextPage(data?.totalPages || 1)}
+                disabled={page === data?.totalPages}
+                className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
 
         {/* Call to Action */}
         <div className='mt-16 text-center'>

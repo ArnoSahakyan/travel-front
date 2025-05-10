@@ -1,21 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../shared';
+import { IDestination, ROUTES } from '../../shared';
 import { FC } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 
-interface IDestinationCardProps {
-  id: string;
-  name: string;
-  imageUrl: string;
-  tourCount: number;
-  description: string;
-  startingPrice?: number;
-}
-
-export const DestinationCard: FC<IDestinationCardProps> = ({
-  id,
+export const DestinationCard: FC<IDestination> = ({
+  destination_id,
   name,
-  imageUrl,
+  image,
   tourCount,
   description,
   startingPrice,
@@ -25,7 +16,7 @@ export const DestinationCard: FC<IDestinationCardProps> = ({
       {/* Image with overlay */}
       <div className='relative h-60 overflow-hidden'>
         <img
-          src={imageUrl}
+          src={image}
           alt={name}
           className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
         />
@@ -55,7 +46,7 @@ export const DestinationCard: FC<IDestinationCardProps> = ({
             <MapPinIcon className='block size-6' /> {tourCount}+ Tours Available
           </span>
           <Link
-            to={`${ROUTES.DESTINATIONS}/${id}`}
+            to={`${ROUTES.DESTINATIONS}/${destination_id}`}
             className='flex items-center text-primary-light dark:text-primary-dark font-medium hover:underline'
           >
             Explore <span className='ml-1'>→</span>
