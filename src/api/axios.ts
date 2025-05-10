@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { logoutUser, refreshToken } from './auth';
 import { useAuthStore } from '../store';
-import { BACK_URL } from '../shared'; // use raw API functions
+import { BACK_URL } from '../shared';
 
 export const api = axios.create({
   baseURL: BACK_URL,
@@ -13,10 +13,11 @@ export const api = axios.create({
 
 // Request Interceptor
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const auth = useAuthStore.getState();
+  const { accessToken } = useAuthStore.getState();
 
-  if (auth.accessToken) {
-    config.headers['Authorization'] = `Bearer ${auth.accessToken}`;
+  if (accessToken) {
+    config.headers = config.headers || {};
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
 
   return config;
@@ -29,22 +30,31 @@ api.interceptors.response.use(
     const auth = useAuthStore.getState();
     const prevRequest = error?.config;
 
-    if (error?.response?.status === 401 && !prevRequest?.sent && auth.refreshToken) {
-      prevRequest.sent = true;
-      try {
-        const { accessToken } = await refreshToken(auth.refreshToken);
+    if (error?.response?.status === 401 && !prevRequest?._retry && auth.refreshToken) {
+      prevRequest._retry = true;
 
+      try {
+        const {
+          token: newAccessToken,
+          refreshToken: newRefreshToken,
+          user,
+        } = await refreshToken(auth.refreshToken);
+
+        // Update token(s) in Zustand
         useAuthStore.setState(() => ({
-          accessToken,
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken,
+          user, // if returned from refresh endpoint
           isAuthenticated: true,
         }));
 
-        prevRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+
         return api(prevRequest);
       } catch (err) {
-        console.error(err);
-        useAuthStore.getState().logout(); // logout from Zustand directly
-        await logoutUser(); // call backend logout if needed
+        console.error('Refresh token failed:', err);
+        useAuthStore.getState().logout();
+        await logoutUser();
       }
     }
 

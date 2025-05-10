@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react';
@@ -13,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { ROUTES } from '../../shared';
 import { ThemeToggle } from '../../components';
+import { useAuthStore } from '../../store';
 
 const navigation = [
   { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
@@ -26,6 +25,7 @@ function classNames(...classes: string[]) {
 
 const ProfileLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { logout } = useAuthStore();
 
   return (
     <>
@@ -136,7 +136,9 @@ const ProfileLayout = () => {
                       <ArrowLeftStartOnRectangleIcon className='size-6' />
                     </div>
                     <span className='sr-only'>Your profile</span>
-                    <span aria-hidden='true'>Sign Out</span>
+                    <span onClick={logout} aria-hidden='true'>
+                      Sign Out
+                    </span>
                   </button>
                 </li>
               </ul>

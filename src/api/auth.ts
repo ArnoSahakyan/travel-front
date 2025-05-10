@@ -13,11 +13,21 @@ export const signUp = async (payload: SignUpFormData) => {
 
 export const refreshToken = async (refreshToken: string) => {
   const response = await api.post(
-    `${import.meta.env.VITE_BACK_BASE_URL}/api/auth/refresh`,
+    `${import.meta.env.VITE_BACK_BASE_URL}/auth/refresh`,
     { refreshToken },
     { withCredentials: true },
   );
   return response.data;
+};
+
+export const fetchCurrentUser = async () => {
+  try {
+    const response = await api.get('/auth/me'); // Replace with your actual endpoint
+    return response.data.user;
+  } catch (error) {
+    console.error('Fetching User Data Error:', error);
+    throw new Error('Failed to fetch current user');
+  }
 };
 
 export const logoutUser = async () => {

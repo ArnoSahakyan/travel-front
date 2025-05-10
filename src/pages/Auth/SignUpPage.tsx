@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthErrorResponse, ROUTES } from '../../shared';
-import { SignUpFormData, signUpSchema } from '../../shared';
-import { useSignUp } from '../../hooks/useAuth.ts';
+import { AuthErrorResponse, ROUTES, SignUpFormData, signUpSchema } from '../../shared';
+import { useSignUp } from '../../hooks';
 import { toast } from 'react-toastify';
 import { isAxiosError } from 'axios';
 
@@ -52,12 +51,12 @@ const SignUpPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='mt-8 space-y-6'>
         <div className='space-y-4'>
           <div>
-            <label htmlFor='fullName' className='form-label'>
+            <label htmlFor='full_name' className='form-label'>
               Full name
             </label>
             <div className='mt-1'>
               <input
-                id='fullName'
+                id='full_name'
                 type='text'
                 autoComplete='name'
                 className='form-input'

@@ -26,18 +26,18 @@ export const ContactForm = () => {
       <div className='mx-auto max-w-xl lg:mr-0 lg:max-w-lg'>
         <div className='flex flex-col gap-y-6'>
           <div>
-            <label htmlFor='fullName' className='form-label'>
+            <label htmlFor='full_name' className='form-label'>
               Full name
             </label>
             <div className='mt-2.5'>
               <input
-                id='fullName'
+                id='full_name'
                 type='text'
                 autoComplete='given-name'
                 className='form-input'
-                {...register('fullName')}
+                {...register('full_name')}
               />
-              {errors.fullName && <p className='form-error'>{errors.fullName.message}</p>}
+              {errors.full_name && <p className='form-error'>{errors.full_name.message}</p>}
             </div>
           </div>
 

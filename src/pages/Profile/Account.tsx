@@ -21,7 +21,7 @@ const Account = () => {
   } = useForm<PersonalFormData>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      fullName: '',
+      full_name: '',
       email: '',
       phone: '',
     },
@@ -30,7 +30,7 @@ const Account = () => {
   useEffect(() => {
     if (user) {
       resetPersonalInfoForm({
-        fullName: user.full_name || '',
+        full_name: user.full_name || '',
         email: user.email || '',
         phone: user.phone || '',
       });
@@ -47,14 +47,14 @@ const Account = () => {
   } = useForm({
     resolver: zodResolver(passwordChangeSchema),
     defaultValues: {
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
+      current_password: '',
+      new_password: '',
+      confirm_password: '',
     },
   });
 
   const showPasswordFields =
-    watch('currentPassword') || watch('newPassword') || watch('confirmPassword');
+    watch('current_password') || watch('new_password') || watch('confirm_password');
 
   const onPersonalInfoSubmit = (data: PersonalFormData) => {
     console.log('Personal info submitted:', data);
@@ -79,16 +79,16 @@ const Account = () => {
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <div>
-            <label htmlFor='fullName' className='form-label mb-2'>
+            <label htmlFor='full_name' className='form-label mb-2'>
               Full Name
             </label>
             <input
-              {...registerPersonalInfo('fullName')}
+              {...registerPersonalInfo('full_name')}
               className='form-input'
               placeholder='Enter your full name'
             />
-            {personalInfoErrors.fullName && (
-              <p className='form-error'>{personalInfoErrors.fullName.message}</p>
+            {personalInfoErrors.full_name && (
+              <p className='form-error'>{personalInfoErrors.full_name.message}</p>
             )}
           </div>
 
@@ -141,48 +141,48 @@ const Account = () => {
 
         <div className='space-y-6'>
           <div>
-            <label htmlFor='currentPassword' className='form-label mb-2'>
+            <label htmlFor='current_password' className='form-label mb-2'>
               Current Password
             </label>
             <input
-              {...registerPassword('currentPassword')}
+              {...registerPassword('current_password')}
               type='password'
               className='form-input'
               placeholder='Enter current password'
             />
-            {passwordErrors.currentPassword && (
-              <p className='form-error'>{passwordErrors.currentPassword.message}</p>
+            {passwordErrors.current_password && (
+              <p className='form-error'>{passwordErrors.current_password.message}</p>
             )}
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div>
-              <label htmlFor='newPassword' className='form-label mb-2'>
+              <label htmlFor='new_password' className='form-label mb-2'>
                 New Password
               </label>
               <input
-                {...registerPassword('newPassword')}
+                {...registerPassword('new_password')}
                 type='password'
                 className='form-input'
                 placeholder='Enter new password'
               />
-              {passwordErrors.newPassword && (
-                <p className='form-error'>{passwordErrors.newPassword.message}</p>
+              {passwordErrors.new_password && (
+                <p className='form-error'>{passwordErrors.new_password.message}</p>
               )}
             </div>
 
             <div>
-              <label htmlFor='confirmPassword' className='form-label mb-2'>
+              <label htmlFor='confirm_password' className='form-label mb-2'>
                 Confirm New Password
               </label>
               <input
-                {...registerPassword('confirmPassword')}
+                {...registerPassword('confirm_password')}
                 type='password'
                 className='form-input'
                 placeholder='Confirm new password'
               />
-              {passwordErrors.confirmPassword && (
-                <p className='form-error'>{passwordErrors.confirmPassword.message}</p>
+              {passwordErrors.confirm_password && (
+                <p className='form-error'>{passwordErrors.confirm_password.message}</p>
               )}
             </div>
           </div>
