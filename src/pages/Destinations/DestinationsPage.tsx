@@ -4,7 +4,7 @@ import { DESTINATIONS_LIMIT, ROUTES } from '../../shared';
 import { DestinationCard } from '../../components';
 import { useDestinations, usePagination } from '../../hooks';
 
-export const DestinationsPage = () => {
+const DestinationsPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
   const { data, isLoading, isError, error } = useDestinations(page, DESTINATIONS_LIMIT);
 
@@ -85,3 +85,5 @@ export const DestinationsPage = () => {
     </div>
   );
 };
+
+export default DestinationsPage;

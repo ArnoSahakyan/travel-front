@@ -9,7 +9,7 @@ import {
 import { useAuthStore } from '../../store';
 import { useEffect } from 'react';
 
-export const Account = () => {
+const Account = () => {
   const user = useAuthStore((state) => state.user);
 
   // Personal Info Form
@@ -206,3 +206,5 @@ export const Account = () => {
     </div>
   );
 };
+
+export default Account;

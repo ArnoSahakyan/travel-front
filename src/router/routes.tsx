@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { Loader, ProtectedRoute, UnprotectedRoute } from '../components';
 import { ROUTES } from '../shared';
-import { lazy, Suspense } from 'react';
+import { lazy, ReactNode, Suspense } from 'react';
 
 const HomePage = lazy(() => import('../pages/Home/HomePage.tsx'));
 const BlogPage = lazy(() => import('../pages/Blog/BlogPage.tsx'));
@@ -20,7 +20,7 @@ const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
 const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
 
-const withSuspense = (component: React.ReactNode) => (
+const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
 );
 

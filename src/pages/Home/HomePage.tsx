@@ -1,8 +1,11 @@
 import { DestinationCard, Newsletter, TourCard } from '../../components';
-import { destinations, tours } from '../../assets';
+import { tours } from '../../assets';
 import { BlogSection, Hero, ReviewsSection, WhyChooseUs } from './components';
+import { useDestinations } from '../../hooks';
 
 const HomePage = () => {
+  const { data: destinationsData, isLoading, isError, error } = useDestinations(1, 4);
+
   return (
     <>
       <Hero />
@@ -16,9 +19,17 @@ const HomePage = () => {
           </p>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-          {destinations.slice(0, 4).map((destination) => (
-            <DestinationCard key={destination.id} {...destination} />
-          ))}
+          {isLoading ? (
+            <div className='text-center text-secondary-light dark:text-secondary-dark'>
+              Loading destinations...
+            </div>
+          ) : isError ? (
+            <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+          ) : (
+            destinationsData?.destinations.map((destination) => (
+              <DestinationCard key={destination.destination_id} {...destination} />
+            ))
+          )}
         </div>
       </section>
 

@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthErrorResponse, ROUTES } from '../../shared';
 import { SignInFormData, signInSchema } from '../../shared';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
-import { useSignIn } from '../../hooks/useAuth';
+import { useSignIn } from '../../hooks';
 import { isAxiosError } from 'axios';
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
 
   const {
@@ -128,3 +128,5 @@ export const SignInPage = () => {
     </>
   );
 };
+
+export default SignInPage;
