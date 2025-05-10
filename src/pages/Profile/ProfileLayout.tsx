@@ -24,7 +24,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export const ProfileLayout = () => {
+const ProfileLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -169,3 +169,5 @@ export const ProfileLayout = () => {
     </>
   );
 };
+
+export default ProfileLayout;

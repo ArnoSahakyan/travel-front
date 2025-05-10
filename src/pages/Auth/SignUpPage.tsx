@@ -7,7 +7,7 @@ import { useSignUp } from '../../hooks/useAuth.ts';
 import { toast } from 'react-toastify';
 import { isAxiosError } from 'axios';
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const {
     register,
     handleSubmit,
@@ -164,3 +164,5 @@ export const SignUpPage = () => {
     </div>
   );
 };
+
+export default SignUpPage;

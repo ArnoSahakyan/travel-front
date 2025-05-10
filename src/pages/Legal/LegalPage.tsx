@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../shared';
-import { LegalSection } from '../../shared/types';
+import { ROUTES, LegalSection } from '../../shared';
 import { termsAndConditions } from '../../assets';
 
-export const LegalPage = () => {
+const LegalPage = () => {
   const renderSection = (section: LegalSection) => (
     <div className='mt-8' key={section.title}>
       <h2 className='text-2xl font-semibold text-primary-light dark:text-primary-dark'>
@@ -61,3 +60,5 @@ export const LegalPage = () => {
     </div>
   );
 };
+
+export default LegalPage;

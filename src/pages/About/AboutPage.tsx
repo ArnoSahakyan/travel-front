@@ -1,6 +1,6 @@
 import { stats, team, values } from '../../assets';
 
-export const AboutPage = () => {
+const AboutPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark'>
       <main className='relative isolate'>
@@ -156,3 +156,5 @@ export const AboutPage = () => {
     </div>
   );
 };
+
+export default AboutPage;

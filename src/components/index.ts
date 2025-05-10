@@ -1,6 +1,7 @@
 export * from './BlogCard';
 export * from './DestinationCard';
 export * from './Footer';
+export * from './Loader';
 export * from './Newsletter';
 export * from './ProtectedRoute';
 export * from './Navbar';

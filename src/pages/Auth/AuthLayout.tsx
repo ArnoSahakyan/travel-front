@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { AuthNavbar } from './components';
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   return (
     <div className='flex flex-col min-h-screen'>
       <AuthNavbar />
@@ -11,3 +11,5 @@ export const AuthLayout = () => {
     </div>
   );
 };
+
+export default AuthLayout;

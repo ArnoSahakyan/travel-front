@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
 import { ForgotPasswordFormData, forgotPasswordSchema, ROUTES } from '../../shared';
 
-export const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
   const {
     register,
     handleSubmit,
@@ -68,3 +68,5 @@ export const ForgotPasswordPage = () => {
     </div>
   );
 };
+
+export default ForgotPasswordPage;

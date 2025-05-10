@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { tours } from '../../assets';
 
-export const ToursPage = () => {
+const ToursPage = () => {
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
       <div className='container mx-auto px-4 lg:px-8'>
@@ -42,3 +42,5 @@ export const ToursPage = () => {
     </section>
   );
 };
+
+export default ToursPage;

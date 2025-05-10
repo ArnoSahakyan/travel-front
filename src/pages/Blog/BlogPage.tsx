@@ -1,7 +1,7 @@
 import { BlogCard } from '../../components';
 import { blogs } from '../../assets';
 
-export const BlogPage = () => {
+const BlogPage = () => {
   return (
     <div className='bg-background-light dark:bg-background-dark py-12 sm:py-16'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -34,3 +34,5 @@ export const BlogPage = () => {
     </div>
   );
 };
+
+export default BlogPage;
