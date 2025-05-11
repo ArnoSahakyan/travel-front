@@ -1,5 +1,4 @@
-import { TourCard } from '../../components';
-import { DESTINATIONS_LIMIT } from '../../shared';
+import { Pagination, TourCard } from '../../components';
 import { usePagination } from '../../hooks';
 import { useEffect } from 'react';
 import { useTours } from '../../hooks';
@@ -7,7 +6,7 @@ import { getDuration } from '../../utils';
 
 const ToursPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
-  const { data, isLoading, isError, error } = useTours(page, DESTINATIONS_LIMIT);
+  const { data, isLoading, isError, error } = useTours();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,25 +45,12 @@ const ToursPage = () => {
               ))}
             </div>
 
-            <div className='flex justify-center items-center gap-4 mt-10'>
-              <button
-                onClick={() => goToPrevPage()}
-                disabled={page === 1}
-                className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
-              >
-                Previous
-              </button>
-              <span className='text-secondary-light dark:text-secondary-dark'>
-                Page {page} of {data?.totalPages}
-              </span>
-              <button
-                onClick={() => goToNextPage(data?.totalPages || 1)}
-                disabled={page === data?.totalPages}
-                className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
-              >
-                Next
-              </button>
-            </div>
+            <Pagination
+              page={page}
+              totalPages={data?.totalPages || 1}
+              goToPrevPage={goToPrevPage}
+              goToNextPage={goToNextPage}
+            />
           </>
         )}
       </div>

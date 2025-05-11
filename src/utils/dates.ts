@@ -7,3 +7,10 @@ export const getDuration = (startDate: string, endDate: string): number => {
 
   return Math.ceil(durationInDays);
 };
+
+export const formatDate = (dateStr: string): string =>
+  new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });

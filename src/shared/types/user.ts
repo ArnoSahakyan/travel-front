@@ -11,6 +11,6 @@ export interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
-  login: (payload: { user: User; token: string; refreshToken: string }) => void;
+  login: (payload: { user: User; token: string | null; refreshToken: string | null }) => void;
   logout: () => void;
 }

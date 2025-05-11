@@ -1,4 +1,4 @@
-interface ITour {
+export interface ITour {
   tour_id: string;
   name: string;
   description: string;
@@ -16,4 +16,40 @@ export interface ITourResponse {
   currentPage: number;
   totalPages: number;
   total: number;
+}
+
+export interface ITourFilters {
+  page?: number;
+  limit?: number;
+  category_id?: number;
+  destination_id?: number;
+  sort?: string;
+  search?: string;
+}
+export interface ISingleTour {
+  tour_id: string;
+  name: string;
+  description: string;
+  price: number;
+  start_date: string;
+  end_date: string;
+  available_spots: number;
+  category_id: number;
+  destination_id: number;
+  TourImages: {
+    image_id: string;
+    image_url: string;
+    is_cover: boolean;
+    tour_id: string;
+  }[];
+  Destination: {
+    destination_id: string;
+    description: string;
+    name: string;
+    image: string;
+  };
+  TourCategory: {
+    category_id: string;
+    name: string;
+  };
 }

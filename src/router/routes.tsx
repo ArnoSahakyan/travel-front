@@ -6,7 +6,11 @@ import { lazy, ReactNode, Suspense } from 'react';
 const HomePage = lazy(() => import('../pages/Home/HomePage.tsx'));
 const BlogPage = lazy(() => import('../pages/Blog/BlogPage.tsx'));
 const ToursPage = lazy(() => import('../pages/Tours/ToursPage.tsx'));
+const TourDetailsPage = lazy(() => import('../pages/Tours/TourDetailsPage.tsx'));
 const DestinationsPage = lazy(() => import('../pages/Destinations/DestinationsPage.tsx'));
+const DestinationDetailsPage = lazy(
+  () => import('../pages/Destinations/DestinationDetailsPage.tsx'),
+);
 const AboutPage = lazy(() => import('../pages/About/AboutPage.tsx'));
 const ContactPage = lazy(() => import('../pages/Contact/ContactPage.tsx'));
 const FaqPage = lazy(() => import('../pages/FAQ/FaqPage.tsx'));
@@ -32,7 +36,15 @@ const routes: RouteObject[] = [
       { path: ROUTES.HOME, element: withSuspense(<HomePage />) },
       { path: ROUTES.BLOG, element: withSuspense(<BlogPage />) },
       { path: ROUTES.TOURS, element: withSuspense(<ToursPage />) },
+      {
+        path: `${ROUTES.TOURS}/:tourId`,
+        element: withSuspense(<TourDetailsPage />),
+      },
       { path: ROUTES.DESTINATIONS, element: withSuspense(<DestinationsPage />) },
+      {
+        path: `${ROUTES.DESTINATIONS}/:destinationId`,
+        element: withSuspense(<DestinationDetailsPage />),
+      },
       { path: ROUTES.ABOUT, element: withSuspense(<AboutPage />) },
       { path: ROUTES.CONTACT, element: withSuspense(<ContactPage />) },
       { path: ROUTES.FAQ, element: withSuspense(<FaqPage />) },

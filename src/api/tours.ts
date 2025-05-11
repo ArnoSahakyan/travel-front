@@ -1,20 +1,27 @@
 import { public_api } from './axios.ts';
-import { images } from '../utils';
-import { IDestination } from '../shared';
+import { addSupabaseUrl } from '../utils';
+import { ITourFilters, IDestination, ISingleTour } from '../shared';
 
-export const fetchTours = async (page = 1, limit = 8) => {
+export const fetchTours = async (filters: ITourFilters) => {
   const response = await public_api.get('/tours', {
-    params: { page, limit },
+    params: filters,
   });
 
   const modifiedTours = response.data.tours.map((tour: IDestination) => {
     return {
       ...tour,
-      image: images(tour.image, 'tour-images'),
+      image: addSupabaseUrl(tour.image, 'tour-images'),
     };
   });
+
   return {
     ...response.data,
     tours: modifiedTours,
   };
+};
+
+export const fetchTour = async (id: number) => {
+  const response = await public_api.get(`/tours/${id}`);
+  const tour: ISingleTour = response.data;
+  return tour;
 };

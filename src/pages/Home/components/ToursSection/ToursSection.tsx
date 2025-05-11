@@ -3,7 +3,7 @@ import { TourCard } from '../../../../components';
 import { getDuration } from '../../../../utils';
 
 export const ToursSection = () => {
-  const { data, isLoading, isError, error } = useTours(1, 6);
+  const { data, isLoading, isError, error } = useTours({ page: 1, limit: 3 });
   return (
     <section className='mx-auto py-10 lg:mt-20 max-w-7xl px-6 lg:px-8'>
       <div className='mb-8 text-center'>

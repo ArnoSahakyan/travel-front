@@ -8,9 +8,11 @@ import {
 } from '../../shared';
 import { useAuthStore } from '../../store';
 import { useEffect } from 'react';
+import { useAccount } from '../../hooks';
 
 const Account = () => {
   const user = useAuthStore((state) => state.user);
+  const { updatePersonalInfo, changePassword } = useAccount();
 
   // Personal Info Form
   const {
@@ -57,11 +59,12 @@ const Account = () => {
     watch('current_password') || watch('new_password') || watch('confirm_password');
 
   const onPersonalInfoSubmit = (data: PersonalFormData) => {
-    console.log('Personal info submitted:', data);
+    updatePersonalInfo(data);
   };
 
   const onPasswordSubmit = (data: PasswordChangeFormData) => {
-    console.log('Password change submitted:', data);
+    const { current_password, new_password } = data;
+    changePassword({ current_password, new_password });
     resetPasswordForm();
   };
 

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ThemeState } from '../shared/types';
+import { ThemeState } from '../shared';
 
 export const useThemeStore = create<ThemeState>((set) => {
   const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
