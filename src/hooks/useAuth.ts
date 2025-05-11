@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { signIn, signUp, logoutUser } from '../api';
+import { useMutation } from '@tanstack/react-query';
+import { signIn, signUp } from '../api';
 import { useAuthStore } from '../store';
 
 export const useSignIn = () => {
@@ -20,18 +20,5 @@ export const useSignIn = () => {
 export const useSignUp = () => {
   return useMutation({
     mutationFn: signUp,
-  });
-};
-
-export const useLogout = () => {
-  const logout = useAuthStore((state) => state.logout);
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: logoutUser,
-    onSuccess: () => {
-      logout();
-      queryClient.clear(); // clear any cached queries
-    },
   });
 };

@@ -87,6 +87,17 @@ const ProfileLayout = () => {
                         ))}
                       </ul>
                     </li>
+                    <li className='-mx-6 mt-auto'>
+                      <button className='w-full flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-background-light dark:text-text-dark hover:bg-primary-dark/20 dark:hover:bg-primary-dark/5'>
+                        <div className='flex items-center justify-center size-8 rounded-full bg-primary-light/10 dark:bg-primary-dark/10 text-background-light dark:text-text-dark'>
+                          <ArrowLeftStartOnRectangleIcon className='size-6' />
+                        </div>
+                        <span className='sr-only'>Your profile</span>
+                        <span onClick={logout} aria-hidden='true'>
+                          Sign Out
+                        </span>
+                      </button>
+                    </li>
                   </ul>
                 </nav>
               </div>

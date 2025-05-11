@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAuthStore } from '../store';
 import { fetchCurrentUser } from '../api';
 
-const useRehydrateAuth = () => {
+export const useRehydrateAuth = () => {
   const { accessToken, isAuthenticated, login, logout } = useAuthStore();
 
   useEffect(() => {
@@ -25,5 +25,3 @@ const useRehydrateAuth = () => {
     initializeUser();
   }, [accessToken, isAuthenticated, login, logout]);
 };
-
-export default useRehydrateAuth;

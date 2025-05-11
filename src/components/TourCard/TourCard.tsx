@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { FC } from 'react';
-import { ITourCardProps } from '../../shared/types';
+import { ITourCardProps } from '../../shared';
 import { ClockIcon } from '@heroicons/react/24/solid';
 
 export const TourCard: FC<ITourCardProps> = ({
@@ -21,7 +21,7 @@ export const TourCard: FC<ITourCardProps> = ({
           ${price.toLocaleString()}
         </div>
         <div className='absolute flex items-center gap-1 bottom-4 left-4 bg-background-light dark:bg-background-dark text-primary-light dark:text-text-dark px-2 py-1 rounded text-xs font-medium'>
-          <ClockIcon className='block size-4' /> {duration}
+          <ClockIcon className='block size-4' /> {duration} Days
         </div>
       </div>
 

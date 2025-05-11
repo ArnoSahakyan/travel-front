@@ -4,5 +4,5 @@ export interface ITourCardProps {
   description: string;
   imageUrl: string;
   price: number;
-  duration: string;
+  duration: number;
 }

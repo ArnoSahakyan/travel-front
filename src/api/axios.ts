@@ -1,7 +1,15 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { logoutUser, refreshToken } from './auth';
+import { refreshToken } from './auth';
 import { useAuthStore } from '../store';
 import { BACK_URL } from '../shared';
+
+export const public_api = axios.create({
+  baseURL: BACK_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
+});
 
 export const api = axios.create({
   baseURL: BACK_URL,
@@ -14,7 +22,6 @@ export const api = axios.create({
 // Request Interceptor
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const { accessToken } = useAuthStore.getState();
-
   if (accessToken) {
     config.headers = config.headers || {};
     config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -34,17 +41,11 @@ api.interceptors.response.use(
       prevRequest._retry = true;
 
       try {
-        const {
-          token: newAccessToken,
-          refreshToken: newRefreshToken,
-          user,
-        } = await refreshToken(auth.refreshToken);
+        const { token: newAccessToken } = await refreshToken(auth.refreshToken);
 
         // Update token(s) in Zustand
         useAuthStore.setState(() => ({
           accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-          user, // if returned from refresh endpoint
           isAuthenticated: true,
         }));
 
@@ -54,7 +55,6 @@ api.interceptors.response.use(
       } catch (err) {
         console.error('Refresh token failed:', err);
         useAuthStore.getState().logout();
-        await logoutUser();
       }
     }
 
