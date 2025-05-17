@@ -1,5 +1,6 @@
 export * from './useAccount.ts';
 export * from './useAuth.ts';
+export * from './useBookings.ts';
 export * from './useDestinations.ts';
 export * from './usePagination.ts';
 export * from './useRehydrateAuth.ts';

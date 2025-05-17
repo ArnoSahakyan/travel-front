@@ -1,18 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
-import { ITourResponse, ITourFilters, DESTINATIONS_LIMIT, ISingleTour } from '../shared';
+import { ITourResponse, ITourFilters, TOURS_LIMIT, ISingleTour } from '../shared';
 import { fetchTour, fetchTours } from '../api';
+import { tourKeys } from '../queries'; // new import
 
 export const useTours = (externalFilters?: Partial<ITourFilters>) => {
   const [searchParams] = useSearchParams();
 
-  // Default filters with fallbacks from search params or external filters
   const filters: ITourFilters = {
-    page:
-      externalFilters?.page ?? (searchParams.get('page') ? parseInt(searchParams.get('page')!) : 1),
-    limit:
-      externalFilters?.limit ??
-      (searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : DESTINATIONS_LIMIT),
+    page: externalFilters?.page ?? Number(searchParams.get('page') ?? 1),
+    limit: externalFilters?.limit ?? Number(searchParams.get('limit') ?? TOURS_LIMIT),
     category_id:
       externalFilters?.category_id ??
       (searchParams.get('category_id') ? parseInt(searchParams.get('category_id')!) : undefined),
@@ -26,7 +23,7 @@ export const useTours = (externalFilters?: Partial<ITourFilters>) => {
   };
 
   return useQuery<ITourResponse>({
-    queryKey: ['tours', filters],
+    queryKey: tourKeys.list(filters),
     queryFn: () => fetchTours(filters),
     placeholderData: (previousData) => previousData,
     staleTime: 1000 * 60 * 5,
@@ -35,7 +32,7 @@ export const useTours = (externalFilters?: Partial<ITourFilters>) => {
 
 export const useTour = (id: number) => {
   return useQuery<ISingleTour>({
-    queryKey: ['tour', id],
+    queryKey: tourKeys.detail(id),
     queryFn: () => fetchTour(id),
     enabled: !!id,
     staleTime: 1000 * 60 * 5,

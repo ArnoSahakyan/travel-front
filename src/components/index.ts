@@ -1,4 +1,5 @@
 export * from './BlogCard';
+export * from './BookingCard';
 export * from './DestinationCard';
 export * from './Footer';
 export * from './Loader';

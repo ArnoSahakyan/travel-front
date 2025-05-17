@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addToWishlist, fetchWishlistStatus, removeFromWishlist } from '../api';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../shared';
+import { addToWishlist, fetchWishlistStatus, getWishlists, removeFromWishlist } from '../api';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { IWishlistFilters, IWishlistResponse, ROUTES, WISHLISTS_LIMIT } from '../shared';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
+import { wishlistKeys } from '../queries';
 
 interface UseWishlistResult {
   inWishlist: boolean | undefined;
@@ -24,7 +25,7 @@ export const useWishlist = (tourId: number): UseWishlistResult => {
     isLoading,
     isError,
   } = useQuery<boolean, Error>({
-    queryKey: ['wishlist-status', tourId],
+    queryKey: wishlistKeys.status(tourId),
     queryFn: () => fetchWishlistStatus(tourId),
     enabled: !!tourId,
   });
@@ -37,7 +38,7 @@ export const useWishlist = (tourId: number): UseWishlistResult => {
     },
     onSuccess: () => {
       showSuccess('Added to wishlist');
-      queryClient.invalidateQueries({ queryKey: ['wishlist-status', tourId] });
+      queryClient.invalidateQueries({ queryKey: wishlistKeys.status(tourId) });
     },
   });
 
@@ -49,7 +50,7 @@ export const useWishlist = (tourId: number): UseWishlistResult => {
     },
     onSuccess: () => {
       showSuccess('Removed from wishlist');
-      queryClient.invalidateQueries({ queryKey: ['wishlist-status', tourId] });
+      queryClient.invalidateQueries({ queryKey: wishlistKeys.status(tourId) });
     },
   });
 
@@ -80,4 +81,22 @@ export const useWishlist = (tourId: number): UseWishlistResult => {
     handleAddToWishlist,
     handleRemoveFromWishlist,
   };
+};
+
+export const useWishlistList = (externalFilters?: Partial<IWishlistFilters>) => {
+  const [searchParams] = useSearchParams();
+
+  const filters: Partial<IWishlistFilters> = {
+    page: externalFilters?.page ?? Number(searchParams.get('page') ?? 1),
+    limit: externalFilters?.limit ?? Number(searchParams.get('limit') ?? WISHLISTS_LIMIT),
+    sort: externalFilters?.sort ?? searchParams.get('sort') ?? undefined,
+    search: externalFilters?.search ?? searchParams.get('search') ?? undefined,
+  };
+
+  return useQuery<IWishlistResponse>({
+    queryKey: wishlistKeys.list(filters),
+    queryFn: () => getWishlists(filters),
+    staleTime: 1000 * 60 * 5,
+    placeholderData: (prev) => prev,
+  });
 };

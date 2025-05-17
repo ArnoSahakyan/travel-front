@@ -7,7 +7,6 @@ import { usePagination } from '../../hooks';
 const DestinationDetailsPage = () => {
   const { destinationId } = useParams<{ destinationId: string }>();
   const id = parseInt(destinationId || '', 10);
-
   const { data: destination, isLoading: loadingDestination } = useDestination(id);
 
   // Use pagination hook for tours
@@ -19,6 +18,8 @@ const DestinationDetailsPage = () => {
     page,
     limit,
   });
+
+  const totalPages = tours?.totalPages || 1;
 
   if (loadingDestination || loadingTours) return <div>Loading...</div>;
   if (!destination) return <div>Destination not found</div>;
@@ -56,13 +57,14 @@ const DestinationDetailsPage = () => {
           ))}
         </div>
 
-        {/* Reusable Pagination Component */}
-        <Pagination
-          page={page}
-          totalPages={tours?.totalPages || 1}
-          goToPrevPage={goToPrevPage}
-          goToNextPage={goToNextPage}
-        />
+        {totalPages > 1 && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            goToPrevPage={goToPrevPage}
+            goToNextPage={goToNextPage}
+          />
+        )}
       </div>
     </section>
   );

@@ -5,6 +5,8 @@ import { lazy, ReactNode, Suspense } from 'react';
 
 const HomePage = lazy(() => import('../pages/Home/HomePage.tsx'));
 const BlogPage = lazy(() => import('../pages/Blog/BlogPage.tsx'));
+const BookingsPage = lazy(() => import('../pages/Bookings/BookingsPage.tsx'));
+const BookingDetailPage = lazy(() => import('../pages/Bookings/BookingDetailsPage.tsx'));
 const ToursPage = lazy(() => import('../pages/Tours/ToursPage.tsx'));
 const TourDetailsPage = lazy(() => import('../pages/Tours/TourDetailsPage.tsx'));
 const DestinationsPage = lazy(() => import('../pages/Destinations/DestinationsPage.tsx'));
@@ -23,6 +25,7 @@ const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
 const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
+const WishlistsPage = lazy(() => import('../pages/Profile/WishlistsPage.tsx'));
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -58,9 +61,13 @@ const routes: RouteObject[] = [
         path: ROUTES.PROFILE,
         element: withSuspense(<ProfileLayout />),
         children: [
-          { path: ROUTES.PROFILE_BOOKINGS, element: withSuspense(<Account />) },
-          { path: ROUTES.PROFILE_WISHLISTS, element: withSuspense(<Account />) },
           { path: ROUTES.PROFILE_INFO, element: withSuspense(<Account />) },
+          { path: ROUTES.PROFILE_BOOKINGS, element: withSuspense(<BookingsPage />) },
+          {
+            path: `${ROUTES.PROFILE_BOOKINGS}/:bookingId`,
+            element: withSuspense(<BookingDetailPage />),
+          },
+          { path: ROUTES.PROFILE_WISHLISTS, element: withSuspense(<WishlistsPage />) },
         ],
       },
     ],

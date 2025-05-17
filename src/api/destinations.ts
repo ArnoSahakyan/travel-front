@@ -1,29 +1,15 @@
-import { public_api } from './axios.ts';
-import { addSupabaseUrl } from '../utils';
-import { IDestination } from '../shared';
+import { public_api } from './axios';
+import { IDestinationFilters } from '../shared';
 
-export const fetchDestinations = async (page = 1, limit = 8) => {
+export const fetchDestinations = async (filters: Partial<IDestinationFilters>) => {
   const response = await public_api.get('/destinations', {
-    params: { page, limit },
+    params: filters,
   });
 
-  const modifiedDestinations = response.data.destinations.map((destination: IDestination) => ({
-    ...destination,
-    image: addSupabaseUrl(destination.image, 'destination-images'),
-  }));
-
-  return {
-    ...response.data,
-    destinations: modifiedDestinations,
-  };
+  return response.data;
 };
 
 export const fetchDestination = async (id: number) => {
   const response = await public_api.get(`/destinations/${id}`);
-  const destination: IDestination = response.data;
-
-  return {
-    ...destination,
-    image: addSupabaseUrl(destination.image, 'destination-images'),
-  };
+  return response.data;
 };

@@ -34,22 +34,11 @@ export interface ISingleTour {
   start_date: string;
   end_date: string;
   available_spots: number;
-  category_id: number;
-  destination_id: number;
-  TourImages: {
+  category_name: string;
+  destination_name: string;
+  images: {
     image_id: string;
-    image_url: string;
     is_cover: boolean;
-    tour_id: string;
+    image_url: string;
   }[];
-  Destination: {
-    destination_id: string;
-    description: string;
-    name: string;
-    image: string;
-  };
-  TourCategory: {
-    category_id: string;
-    name: string;
-  };
 }

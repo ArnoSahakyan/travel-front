@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { FreeMode, Thumbs } from 'swiper/modules';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import { useTour, useWishlist } from '../../hooks';
-import { getDuration, addSupabaseUrl } from '../../utils';
+import { useCreateBooking, useToast, useTour, useWishlist } from '../../hooks';
+import { getDuration } from '../../utils';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
@@ -14,7 +14,11 @@ const TourDetailsPage = () => {
   const id = parseInt(tourId || '', 10);
 
   const { data: tour, isLoading, isError } = useTour(id);
+  const { mutate: createBooking, isPending: bookingLoading } = useCreateBooking();
+  const { showSuccess, showError } = useToast();
+
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  const [guestCount, setGuestCount] = useState(1);
   const {
     inWishlist,
     isLoading: wishlistLoading,
@@ -25,7 +29,29 @@ const TourDetailsPage = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError || !tour) return <div>Tour not found</div>;
 
-  const images = tour.TourImages.map((img) => addSupabaseUrl(img.image_url, 'tour-images'));
+  const handleBooking = () => {
+    if (guestCount < 1) {
+      showError('Number of guests must be at least 1');
+      return;
+    }
+
+    if (guestCount > tour.available_spots) {
+      showError(`Only ${tour.available_spots} spot(s) available`);
+      return;
+    }
+
+    createBooking(
+      { tour_id: id, number_of_people: guestCount },
+      {
+        onSuccess: () => {
+          showSuccess('Booking successful!');
+        },
+        onError: () => {
+          showError('Booking failed. Please try again.');
+        },
+      },
+    );
+  };
 
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
@@ -39,12 +65,12 @@ const TourDetailsPage = () => {
               modules={[FreeMode, Thumbs]}
               className='mb-4 rounded-lg overflow-hidden'
             >
-              {images.map((src, index) => (
-                <SwiperSlide key={index}>
-                  <PhotoView src={src}>
+              {tour.images.map((image) => (
+                <SwiperSlide key={image.image_id}>
+                  <PhotoView src={image.image_url}>
                     <img
-                      src={src}
-                      alt={`Tour ${index + 1}`}
+                      src={image.image_url}
+                      alt={`Tour ${image.image_id}`}
                       className='h-[400px] w-full object-cover rounded-lg cursor-zoom-in'
                     />
                   </PhotoView>
@@ -61,11 +87,11 @@ const TourDetailsPage = () => {
               modules={[FreeMode, Thumbs]}
               className='rounded-lg'
             >
-              {images.map((src, index) => (
-                <SwiperSlide key={index}>
+              {tour.images.map((image) => (
+                <SwiperSlide key={image.image_id}>
                   <img
-                    src={src}
-                    alt={`Thumb ${index + 1}`}
+                    src={image.image_url}
+                    alt={`Thumb ${image.image_id}`}
                     className='h-20 w-full object-cover rounded-md cursor-pointer border'
                   />
                 </SwiperSlide>
@@ -105,11 +131,11 @@ const TourDetailsPage = () => {
               <span className='font-semibold text-text-light dark:text-text-dark'>
                 Destination:
               </span>{' '}
-              {tour.Destination?.name}
+              {tour.destination_name}
             </div>
             <div>
               <span className='font-semibold text-text-light dark:text-text-dark'>Category:</span>{' '}
-              {tour.TourCategory?.name || 'N/A'}
+              {tour.category_name || 'N/A'}
             </div>
           </div>
 
@@ -118,9 +144,33 @@ const TourDetailsPage = () => {
           </p>
 
           <div className='mt-6 flex flex-wrap justify-between items-center gap-4'>
-            <button className='px-6 py-3 bg-primary-light text-white rounded-md hover:bg-primary-dark transition'>
-              Book Now
-            </button>
+            <div className='flex flex-col sm:flex-row sm:items-center gap-4'>
+              <div className='flex items-center gap-2'>
+                <label
+                  htmlFor='guests'
+                  className='text-sm font-medium text-text-light dark:text-text-dark'
+                >
+                  Guests:
+                </label>
+                <input
+                  id='guests'
+                  type='number'
+                  min={1}
+                  max={tour.available_spots}
+                  value={guestCount}
+                  onChange={(e) => setGuestCount(Number(e.target.value))}
+                  className='w-20 border border-gray-300 rounded-md p-2'
+                />
+              </div>
+
+              <button
+                onClick={handleBooking}
+                disabled={bookingLoading || guestCount < 1}
+                className='px-6 py-3 bg-primary-light text-white rounded-md hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed'
+              >
+                {bookingLoading ? 'Booking...' : 'Book Now'}
+              </button>
+            </div>
 
             <button
               onClick={inWishlist ? handleRemoveFromWishlist : handleAddToWishlist}

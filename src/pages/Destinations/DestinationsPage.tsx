@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { DESTINATIONS_LIMIT, ROUTES } from '../../shared';
+import { IDestination, ROUTES } from '../../shared';
 import { DestinationCard, Pagination } from '../../components';
 import { useDestinations, usePagination } from '../../hooks';
 
 const DestinationsPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
-  const { data, isLoading, isError, error } = useDestinations(page, DESTINATIONS_LIMIT);
+  const { data, isLoading, isError, error } = useDestinations();
+
+  const totalPages = data?.totalPages || 1;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,18 +38,19 @@ const DestinationsPage = () => {
           <>
             {/* Destination Cards Grid */}
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
-              {data?.destinations?.map((destination) => (
+              {data?.destinations?.map((destination: IDestination) => (
                 <DestinationCard key={destination.destination_id} {...destination} />
               ))}
             </div>
 
-            {/* Pagination Controls */}
-            <Pagination
-              page={page}
-              totalPages={data?.totalPages || 1}
-              goToPrevPage={goToPrevPage}
-              goToNextPage={goToNextPage}
-            />
+            {totalPages > 1 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                goToPrevPage={goToPrevPage}
+                goToNextPage={goToNextPage}
+              />
+            )}
           </>
         )}
 

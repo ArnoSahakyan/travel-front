@@ -8,6 +8,8 @@ const ToursPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
   const { data, isLoading, isError, error } = useTours();
 
+  const totalPages = data?.totalPages || 1;
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [page]);
@@ -44,13 +46,14 @@ const ToursPage = () => {
                 />
               ))}
             </div>
-
-            <Pagination
-              page={page}
-              totalPages={data?.totalPages || 1}
-              goToPrevPage={goToPrevPage}
-              goToNextPage={goToNextPage}
-            />
+            {totalPages > 1 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                goToPrevPage={goToPrevPage}
+                goToNextPage={goToNextPage}
+              />
+            )}
           </>
         )}
       </div>
