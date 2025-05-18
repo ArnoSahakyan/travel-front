@@ -1,18 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
-import { BOOKINGS_LIMIT, IBookingFilters } from '../shared';
+import { BOOKINGS_LIMIT, IFetchFilters } from '../shared';
 import { bookingKeys } from '../queries';
 import { cancelBooking, createBooking, fetchBooking, fetchUserBookings } from '../api';
+import { useMergedFilters } from '../utils';
 
-export const useBookings = (externalFilters?: Partial<IBookingFilters>) => {
-  const [searchParams] = useSearchParams();
-
-  const filters: Partial<IBookingFilters> = {
-    page: externalFilters?.page ?? Number(searchParams.get('page') ?? 1),
-    limit: externalFilters?.limit ?? Number(searchParams.get('limit') ?? BOOKINGS_LIMIT),
-    sort: externalFilters?.sort ?? searchParams.get('sort') ?? undefined,
-    search: externalFilters?.search ?? searchParams.get('search') ?? undefined,
-  };
+export const useBookings = (externalFilters?: Partial<IFetchFilters>) => {
+  const filters = useMergedFilters(externalFilters, BOOKINGS_LIMIT);
 
   return useQuery({
     queryKey: bookingKeys.list(filters),

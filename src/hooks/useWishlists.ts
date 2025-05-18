@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addToWishlist, fetchWishlistStatus, getWishlists, removeFromWishlist } from '../api';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { IWishlistFilters, IWishlistResponse, ROUTES, WISHLISTS_LIMIT } from '../shared';
+import { useNavigate } from 'react-router-dom';
+import { IFetchFilters, IWishlistResponse, ROUTES, WISHLISTS_LIMIT } from '../shared';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
 import { wishlistKeys } from '../queries';
+import { useMergedFilters } from '../utils';
 
 interface UseWishlistResult {
   inWishlist: boolean | undefined;
@@ -83,15 +84,8 @@ export const useWishlist = (tourId: number): UseWishlistResult => {
   };
 };
 
-export const useWishlistList = (externalFilters?: Partial<IWishlistFilters>) => {
-  const [searchParams] = useSearchParams();
-
-  const filters: Partial<IWishlistFilters> = {
-    page: externalFilters?.page ?? Number(searchParams.get('page') ?? 1),
-    limit: externalFilters?.limit ?? Number(searchParams.get('limit') ?? WISHLISTS_LIMIT),
-    sort: externalFilters?.sort ?? searchParams.get('sort') ?? undefined,
-    search: externalFilters?.search ?? searchParams.get('search') ?? undefined,
-  };
+export const useWishlistList = (externalFilters?: Partial<IFetchFilters>) => {
+  const filters = useMergedFilters(externalFilters, WISHLISTS_LIMIT);
 
   return useQuery<IWishlistResponse>({
     queryKey: wishlistKeys.list(filters),

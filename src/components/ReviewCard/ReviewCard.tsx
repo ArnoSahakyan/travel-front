@@ -1,23 +1,20 @@
 import { StarIcon } from '@heroicons/react/20/solid';
+import { IReview } from '../../shared';
+import { FC } from 'react';
+import { formatDate } from '../../utils';
 
 interface Review {
-  id: number;
-  author: string;
-  role: string;
-  rating: number;
-  content: string;
-  date: string;
-  tour: string;
+  review: IReview;
 }
 
-export const ReviewCard = ({ review }: { review: Review }) => {
+export const ReviewCard: FC<Review> = ({ review }) => {
   return (
     <div className='flex flex-col rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-md transition-all h-full'>
       <div className='flex-1'>
         <h3 className='text-base font-semibold text-primary-light dark:text-text-dark'>
-          {review.author}
+          {review.full_name}
         </h3>
-        <p className='text-sm text-secondary-light dark:text-secondary-dark'>{review.tour}</p>
+        <p className='text-sm text-secondary-light dark:text-secondary-dark'>{review.tour_name}</p>
       </div>
 
       <div className='mt-4 flex items-center'>
@@ -31,11 +28,11 @@ export const ReviewCard = ({ review }: { review: Review }) => {
       </div>
 
       <p className='mt-4 text-pretty text-secondary-light dark:text-secondary-dark'>
-        "{review.content}"
+        "{review.comment}"
       </p>
 
       <div className='mt-4 text-sm text-gray-500 dark:text-gray-400'>
-        <time dateTime={review.date}>{review.date}</time>
+        {formatDate(review.createdAt)}
       </div>
     </div>
   );

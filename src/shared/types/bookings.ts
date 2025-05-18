@@ -1,10 +1,3 @@
-export interface IBookingFilters {
-  page: number;
-  limit: number;
-  sort?: string;
-  search?: string;
-}
-
 export interface IBooking {
   booking_id: number;
   booking_date: string;

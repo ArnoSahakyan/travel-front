@@ -4,6 +4,7 @@ export * from './useBookings.ts';
 export * from './useDestinations.ts';
 export * from './usePagination.ts';
 export * from './useRehydrateAuth.ts';
+export * from './useReviews.ts';
 export * from './useToast.ts';
 export * from './useTours.ts';
 export * from './useWishlists.ts';

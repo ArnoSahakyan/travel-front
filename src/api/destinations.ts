@@ -1,7 +1,7 @@
 import { public_api } from './axios';
-import { IDestinationFilters } from '../shared';
+import { IFetchFilters } from '../shared';
 
-export const fetchDestinations = async (filters: Partial<IDestinationFilters>) => {
+export const fetchDestinations = async (filters: Partial<IFetchFilters>) => {
   const response = await public_api.get('/destinations', {
     params: filters,
   });
