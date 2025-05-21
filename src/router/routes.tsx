@@ -17,6 +17,9 @@ const AboutPage = lazy(() => import('../pages/About/AboutPage.tsx'));
 const ContactPage = lazy(() => import('../pages/Contact/ContactPage.tsx'));
 const FaqPage = lazy(() => import('../pages/FAQ/FaqPage.tsx'));
 const LegalPage = lazy(() => import('../pages/Legal/LegalPage.tsx'));
+const NewsletterConfirmPage = lazy(
+  () => import('../pages/Newsletter/NewsletterConfirmationPage.tsx'),
+);
 const SignUpPage = lazy(() => import('../pages/Auth/SignUpPage'));
 const SignInPage = lazy(() => import('../pages/Auth/SignInPage'));
 const ForgotPasswordPage = lazy(() => import('../pages/Auth/ForgotPasswordPage'));
@@ -52,6 +55,7 @@ const routes: RouteObject[] = [
       { path: ROUTES.CONTACT, element: withSuspense(<ContactPage />) },
       { path: ROUTES.FAQ, element: withSuspense(<FaqPage />) },
       { path: ROUTES.LEGAL, element: withSuspense(<LegalPage />) },
+      { path: ROUTES.NEWSLETTER_CONFIRM, element: withSuspense(<NewsletterConfirmPage />) },
     ],
   },
   {

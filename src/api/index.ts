@@ -3,6 +3,7 @@ export * from './auth.ts';
 export * from './axios.ts';
 export * from './bookings.ts';
 export * from './destinations.ts';
+export * from './newsletter.ts';
 export * from './reviews.ts';
 export * from './tours.ts';
 export * from './wishlists.ts';

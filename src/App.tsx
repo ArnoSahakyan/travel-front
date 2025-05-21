@@ -19,7 +19,7 @@ export default function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme={theme === 'dark' ? 'dark' : 'light'}
+        theme={theme}
         transition={Bounce}
       />
       <RouterProvider router={router} />

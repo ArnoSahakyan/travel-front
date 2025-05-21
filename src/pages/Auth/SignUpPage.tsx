@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthErrorResponse, ROUTES, SignUpFormData, signUpSchema } from '../../shared';
+import { ROUTES, SignUpFormData, signUpSchema } from '../../shared';
 import { useSignUp } from '../../hooks';
 import { toast } from 'react-toastify';
-import { isAxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 const SignUpPage = () => {
   const {
@@ -25,13 +25,8 @@ const SignUpPage = () => {
         toast.success('Successfully signed in!');
         navigate(ROUTES.AUTH + ROUTES.SIGNIN);
       },
-      onError: (error: unknown) => {
-        let message = 'Invalid credentials. Please try again.';
-
-        if (isAxiosError<AuthErrorResponse>(error)) {
-          message = error.response?.data?.message ?? message;
-        }
-
+      onError: (error: Error) => {
+        const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
         toast.error(message);
       },
     });

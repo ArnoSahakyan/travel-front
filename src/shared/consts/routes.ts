@@ -7,6 +7,7 @@ export const ROUTES = {
   CONTACT: '/contact',
   FAQ: '/faq',
   LEGAL: '/terms-and-conditions',
+  NEWSLETTER_CONFIRM: '/newsletter/verify',
   AUTH: '/auth',
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',

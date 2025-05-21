@@ -3,11 +3,11 @@ import { useAuthStore } from '../store';
 import { fetchCurrentUser } from '../api';
 
 export const useRehydrateAuth = () => {
-  const { accessToken, isAuthenticated, login, logout } = useAuthStore();
-
+  const { accessToken, user, login, logout } = useAuthStore();
   useEffect(() => {
     const initializeUser = async () => {
-      if (accessToken && !isAuthenticated) {
+      if (accessToken && !user) {
+        console.log('Rehydrating Auth');
         try {
           const user = await fetchCurrentUser();
           login({
@@ -23,5 +23,5 @@ export const useRehydrateAuth = () => {
     };
 
     initializeUser();
-  }, [accessToken, isAuthenticated, login, logout]);
+  }, [accessToken, user, login, logout]);
 };
