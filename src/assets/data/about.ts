@@ -51,29 +51,28 @@ export const team = [
   {
     name: 'Sarah Johnson',
     role: 'Founder & CEO',
-    imageUrl:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/employee1.avif',
     location: 'Bali, Indonesia',
   },
   {
     name: 'Michael Chen',
     role: 'Head of Operations',
-    imageUrl:
-      'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/employee2.avif',
+
     location: 'Barcelona, Spain',
   },
   {
     name: 'Aisha Mohamed',
     role: 'Travel Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/employee3.avif',
+
     location: 'Marrakech, Morocco',
   },
   {
     name: 'Carlos Rivera',
     role: 'Customer Experience',
-    imageUrl:
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    imageUrl: '/employee4.avif',
+
     location: 'Rio de Janeiro, Brazil',
   },
 ];

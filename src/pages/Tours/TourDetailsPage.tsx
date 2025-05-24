@@ -67,7 +67,7 @@ const TourDetailsPage = () => {
 
   if (isError || !tour) {
     return (
-      <section className='py-12 bg-background-light dark:bg-background-dark min-h-screen'>
+      <div className='min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center'>
         <ErrorState
           title='Tour not found'
           description={error?.message || "We couldn't load this tour"}
@@ -78,7 +78,7 @@ const TourDetailsPage = () => {
           }
           fullPage
         />
-      </section>
+      </div>
     );
   }
 

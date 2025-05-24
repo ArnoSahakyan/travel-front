@@ -87,7 +87,7 @@ const AboutPage = () => {
         <div className='mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8'>
           <img
             alt='Travel team exploring a destination'
-            src='https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2894&q=80'
+            src='/about.avif'
             className='aspect-[9/4] w-full object-cover xl:rounded-3xl'
           />
         </div>

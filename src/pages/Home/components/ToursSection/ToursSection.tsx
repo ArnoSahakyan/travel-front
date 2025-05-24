@@ -14,23 +14,25 @@ export const ToursSection = () => {
           Our most booked experiences
         </p>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+      <div>
         {isLoading ? (
           <LoadingState message='Loading tours...' />
         ) : isError ? (
           <ErrorState description={error && (error as Error).message} />
         ) : (
-          data?.tours?.map((tour) => (
-            <TourCard
-              key={tour.tour_id}
-              id={tour.tour_id}
-              title={tour.name}
-              description={tour.description}
-              imageUrl={tour.image}
-              price={tour.price}
-              duration={getDuration(tour.start_date, tour.end_date)}
-            />
-          ))
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {data?.tours?.map((tour) => (
+              <TourCard
+                key={tour.tour_id}
+                id={tour.tour_id}
+                title={tour.name}
+                description={tour.description}
+                imageUrl={tour.image}
+                price={tour.price}
+                duration={getDuration(tour.start_date, tour.end_date)}
+              />
+            ))}
+          </div>
         )}
       </div>
     </section>

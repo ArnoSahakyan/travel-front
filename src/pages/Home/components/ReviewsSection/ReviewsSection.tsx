@@ -16,13 +16,17 @@ export const ReviewsSection = () => {
           </p>
         </div>
 
-        <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+        <div>
           {isLoading ? (
             <LoadingState message='Loading reviews...' />
           ) : isError ? (
             <ErrorState description={error && (error as Error).message} />
           ) : (
-            data?.reviews?.map((review) => <ReviewCard key={review.review_id} review={review} />)
+            <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+              {data?.reviews?.map((review) => (
+                <ReviewCard key={review.review_id} review={review} />
+              ))}
+            </div>
           )}
         </div>
       </div>

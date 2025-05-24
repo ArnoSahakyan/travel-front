@@ -1,9 +1,12 @@
-import { blogs } from '../../../../assets';
-import { BlogCard } from '../../../../components';
+import { BlogCard, ErrorState, LoadingState } from '../../../../components';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../../shared';
+import { useBlogs } from '../../../../hooks/useBlogs.ts';
 
 export const BlogSection = () => {
+  const { data, isLoading, isError, error } = useBlogs({ limit: 3 });
+
+  if (data?.posts.length === 0) return;
   return (
     <div className='bg-background-light dark:bg-background-dark py-10 sm:py-20'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -16,11 +19,15 @@ export const BlogSection = () => {
           </p>
         </div>
 
-        <div className='mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
-          {blogs.slice(0, 3).map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        {isLoading ? (
+          <LoadingState message='Loading blog posts...' />
+        ) : isError ? (
+          <ErrorState description={error && (error as Error).message} />
+        ) : (
+          <div className='mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+            {data?.posts.map((post) => <BlogCard key={post.post_id} post={post} />)}
+          </div>
+        )}
 
         <div className='mt-12 text-center'>
           <Link

@@ -1,12 +1,23 @@
-import { BlogCard } from '../../components';
-import { blogs } from '../../assets';
+import { useEffect } from 'react';
+import { BlogCard, EmptyState, ErrorState, LoadingState, Pagination } from '../../components';
+import { usePagination } from '../../hooks';
+import { useBlogs } from '../../hooks/useBlogs.ts';
 
 const BlogPage = () => {
+  const { page, goToNextPage, goToPrevPage } = usePagination();
+  const { data, isLoading, isError, error } = useBlogs();
+  const totalPages = data?.totalPages || 1;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
+
   return (
-    <div className='bg-background-light dark:bg-background-dark py-12 sm:py-16'>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mx-auto max-w-2xl text-center mb-16'>
-          <h1 className='text-balance text-4xl font-semibold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
+    <div className='bg-background-light dark:bg-background-dark py-12'>
+      <div className='container mx-auto px-4 lg:px-8'>
+        {/* Page Header */}
+        <div className='mx-auto max-w-2xl text-center mb-12'>
+          <h1 className='text-4xl font-bold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             WanderLuxe Journal
           </h1>
           <p className='mt-4 text-lg text-secondary-light dark:text-secondary-dark'>
@@ -14,22 +25,33 @@ const BlogPage = () => {
           </p>
         </div>
 
-        <div className='mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:gap-10 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
-          {blogs.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        {/* Loading/Error/Empty States */}
+        {isLoading ? (
+          <LoadingState message='Loading blog posts...' />
+        ) : isError ? (
+          <ErrorState description={error && (error as Error).message} />
+        ) : data?.posts?.length === 0 ? (
+          <EmptyState
+            title='No blog posts found'
+            description='Check back later for more travel stories and insights.'
+          />
+        ) : (
+          <>
+            {/* Blog Cards */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
+              {data?.posts.map((post) => <BlogCard key={post.post_id} post={post} />)}
+            </div>
 
-        <div className='mt-16 flex justify-center'>
-          <nav className='flex gap-4'>
-            <button className='px-4 py-2 rounded-md bg-primary-light dark:bg-primary-dark text-white hover:bg-opacity-90 transition-colors'>
-              Previous
-            </button>
-            <button className='px-4 py-2 rounded-md bg-primary-light dark:bg-primary-dark text-white hover:bg-opacity-90 transition-colors'>
-              Next
-            </button>
-          </nav>
-        </div>
+            {totalPages > 1 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                goToPrevPage={goToPrevPage}
+                goToNextPage={goToNextPage}
+              />
+            )}
+          </>
+        )}
       </div>
     </div>
   );

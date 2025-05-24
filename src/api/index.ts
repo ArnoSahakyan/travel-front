@@ -1,6 +1,7 @@
 export * from './account.ts';
 export * from './auth.ts';
 export * from './axios.ts';
+export * from './blogs.ts';
 export * from './bookings.ts';
 export * from './destinations.ts';
 export * from './newsletter.ts';

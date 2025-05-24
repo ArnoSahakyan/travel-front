@@ -5,6 +5,7 @@ import { lazy, ReactNode, Suspense } from 'react';
 
 const HomePage = lazy(() => import('../pages/Home/HomePage.tsx'));
 const BlogPage = lazy(() => import('../pages/Blog/BlogPage.tsx'));
+const BlogDetailsPage = lazy(() => import('../pages/Blog/BlogDetailsPage.tsx'));
 const BookingsPage = lazy(() => import('../pages/Bookings/BookingsPage.tsx'));
 const BookingDetailPage = lazy(() => import('../pages/Bookings/BookingDetailsPage.tsx'));
 const ToursPage = lazy(() => import('../pages/Tours/ToursPage.tsx'));
@@ -40,6 +41,7 @@ const routes: RouteObject[] = [
     element: withSuspense(<Layout />),
     children: [
       { path: ROUTES.HOME, element: withSuspense(<HomePage />) },
+      { path: `${ROUTES.BLOG}/:slug`, element: withSuspense(<BlogDetailsPage />) },
       { path: ROUTES.BLOG, element: withSuspense(<BlogPage />) },
       { path: ROUTES.TOURS, element: withSuspense(<ToursPage />) },
       {

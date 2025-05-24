@@ -1,3 +1,4 @@
+export * from './blog.ts';
 export * from './bookings.ts';
 export * from './destination.ts';
 export * from './error.ts';

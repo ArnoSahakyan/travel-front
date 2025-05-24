@@ -15,15 +15,17 @@ export const DestinationsSection = () => {
           Discover the world's most breathtaking places
         </p>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      <div>
         {isLoading ? (
           <LoadingState message='Loading destinations...' />
         ) : isError ? (
           <ErrorState description={error && (error as Error).message} />
         ) : (
-          data?.destinations?.map((destination) => (
-            <DestinationCard key={destination.destination_id} {...destination} />
-          ))
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+            {data?.destinations?.map((destination) => (
+              <DestinationCard key={destination.destination_id} {...destination} />
+            ))}
+          </div>
         )}
       </div>
     </section>

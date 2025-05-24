@@ -18,7 +18,6 @@ export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
 
   const navigation: NavItem[] = [
-    { name: 'Home', href: ROUTES.HOME },
     { name: 'Destinations', href: ROUTES.DESTINATIONS },
     { name: 'Tours', href: ROUTES.TOURS },
     { name: 'Blog', href: ROUTES.BLOG },
