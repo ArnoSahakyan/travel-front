@@ -1,9 +1,11 @@
 import { useTours } from '../../../../hooks';
-import { TourCard } from '../../../../components';
+import { ErrorState, LoadingState, TourCard } from '../../../../components';
 import { getDuration } from '../../../../utils';
 
 export const ToursSection = () => {
   const { data, isLoading, isError, error } = useTours({ page: 1, limit: 3 });
+
+  if (data?.tours.length === 0) return;
   return (
     <section className='mx-auto py-10 lg:mt-20 max-w-7xl px-6 lg:px-8'>
       <div className='mb-8 text-center'>
@@ -14,11 +16,9 @@ export const ToursSection = () => {
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
         {isLoading ? (
-          <div className='text-center text-secondary-light dark:text-secondary-dark'>
-            Loading destinations...
-          </div>
+          <LoadingState message='Loading tours...' />
         ) : isError ? (
-          <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+          <ErrorState description={error && (error as Error).message} />
         ) : (
           data?.tours?.map((tour) => (
             <TourCard

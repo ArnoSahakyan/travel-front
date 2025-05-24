@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { ITourResponse, ITourFilters, TOURS_LIMIT, ISingleTour } from '../shared';
 import { fetchTour, fetchTours } from '../api';
-import { tourKeys } from '../queries'; // new import
+import { tourKeys } from '../queries';
+import { useAuthStore } from '../store';
 
 export const useTours = (externalFilters?: Partial<ITourFilters>) => {
   const [searchParams] = useSearchParams();
@@ -31,9 +32,10 @@ export const useTours = (externalFilters?: Partial<ITourFilters>) => {
 };
 
 export const useTour = (id: number) => {
+  const user = useAuthStore((state) => state.user);
   return useQuery<ISingleTour>({
-    queryKey: tourKeys.detail(id),
-    queryFn: () => fetchTour(id),
+    queryKey: tourKeys.detail(id, user?.user_id),
+    queryFn: () => fetchTour(id, user?.user_id),
     enabled: !!id,
     staleTime: 1000 * 60 * 5,
   });

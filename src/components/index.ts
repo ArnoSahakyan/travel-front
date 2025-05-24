@@ -8,6 +8,7 @@ export * from './Newsletter';
 export * from './Pagination';
 export * from './ProtectedRoute';
 export * from './ReviewCard';
+export * from './States';
 export * from './ThemeToggle';
 export * from './TourCard';
 export * from './UnprotectedRoute';

@@ -36,6 +36,7 @@ export interface ISingleTour {
   available_spots: number;
   category_name: string;
   destination_name: string;
+  hasReviewed: boolean;
   images: {
     image_id: string;
     is_cover: boolean;

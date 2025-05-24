@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BookingCard, Pagination } from '../../components';
+import { BookingCard, EmptyState, ErrorState, LoadingState, Pagination } from '../../components';
 import { IBooking, ROUTES } from '../../shared';
 import { Link } from 'react-router-dom';
 import { useBookings, usePagination } from '../../hooks';
@@ -28,24 +28,23 @@ const BookingsPage = () => {
         </div>
 
         {isLoading ? (
-          <div className='text-center text-secondary-light dark:text-secondary-dark'>
-            Loading bookings...
-          </div>
+          <LoadingState message='Loading bookings...' />
         ) : isError ? (
-          <div className='text-center text-red-500'>
-            Error: {(error as Error).message || 'Something went wrong'}
-          </div>
+          <ErrorState description={error && (error as Error).message} />
         ) : bookings.length === 0 ? (
           <div className='text-center py-12'>
-            <p className='text-secondary-light dark:text-secondary-dark'>
-              You don't have any bookings yet. Start your next adventure!
-            </p>
-            <Link
-              to={ROUTES.TOURS}
-              className='mt-4 inline-block rounded-md bg-primary-light dark:bg-primary-dark px-6 py-3 text-sm font-medium text-white hover:bg-opacity-90 transition-colors'
-            >
-              Browse Tours
-            </Link>
+            <EmptyState
+              title='No bookings available'
+              description="You don't have any bookings yet. Start your next adventure!"
+              action={
+                <Link
+                  to={ROUTES.TOURS}
+                  className='mt-4 inline-block rounded-md bg-primary-light dark:bg-primary-dark px-6 py-3 text-sm font-medium text-white hover:bg-opacity-90 transition-colors'
+                >
+                  Browse Tours
+                </Link>
+              }
+            />
           </div>
         ) : (
           <>

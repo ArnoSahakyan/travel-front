@@ -30,11 +30,7 @@ export const useAuthStore = create<AuthState>()(
         accessToken: state.accessToken,
         refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
-        user: {
-          full_name: state.user?.full_name,
-          email: state.user?.email,
-          phone: state.user?.phone,
-        },
+        user: state.user,
       }),
     },
   ),

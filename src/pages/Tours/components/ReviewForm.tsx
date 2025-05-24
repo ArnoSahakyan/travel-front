@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useCreateReview, useToast } from '../../../hooks';
+import { useCreateReview } from '../../../hooks';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReviewFormData, reviewSchema } from '../../../shared';
@@ -11,7 +11,6 @@ interface ReviewFormProps {
 }
 
 export const ReviewForm: FC<ReviewFormProps> = ({ tourId, onReviewSubmitted }) => {
-  const { showSuccess, showError } = useToast();
   const {
     register,
     handleSubmit,
@@ -28,26 +27,19 @@ export const ReviewForm: FC<ReviewFormProps> = ({ tourId, onReviewSubmitted }) =
   });
 
   const ratingValue = watch('rating');
-  const { mutate: createReview, isPending } = useCreateReview();
+  const { mutate: createReview, isPending } = useCreateReview({
+    onSuccess: () => {
+      reset();
+      onReviewSubmitted();
+    },
+  });
 
   const handleRatingChange = (value: number) => {
     setValue('rating', value, { shouldValidate: true });
   };
 
   const onSubmit = (data: ReviewFormData) => {
-    createReview(
-      { ...data, tour_id: tourId },
-      {
-        onSuccess: () => {
-          showSuccess('Review submitted successfully!');
-          reset();
-          onReviewSubmitted();
-        },
-        onError: () => {
-          showError('Failed to submit review. Please try again.');
-        },
-      },
-    );
+    createReview({ ...data, tour_id: tourId });
   };
 
   return (

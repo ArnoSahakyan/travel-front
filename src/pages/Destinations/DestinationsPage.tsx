@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { IDestination, ROUTES } from '../../shared';
-import { DestinationCard, Pagination } from '../../components';
+import { ROUTES } from '../../shared';
+import {
+  DestinationCard,
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  Pagination,
+} from '../../components';
 import { useDestinations, usePagination } from '../../hooks';
 
 const DestinationsPage = () => {
@@ -29,16 +35,19 @@ const DestinationsPage = () => {
 
         {/* Loading/Error */}
         {isLoading ? (
-          <div className='text-center text-secondary-light dark:text-secondary-dark'>
-            Loading destinations...
-          </div>
+          <LoadingState message='Loading destinations...' />
         ) : isError ? (
-          <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+          <ErrorState description={error && (error as Error).message} />
+        ) : data?.destinations?.length === 0 ? (
+          <EmptyState
+            title='No destinations available'
+            description="We couldn't find any destinations matching your criteria."
+          />
         ) : (
           <>
             {/* Destination Cards Grid */}
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
-              {data?.destinations?.map((destination: IDestination) => (
+              {data?.destinations?.map((destination) => (
                 <DestinationCard key={destination.destination_id} {...destination} />
               ))}
             </div>

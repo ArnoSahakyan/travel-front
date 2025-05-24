@@ -1,28 +1,59 @@
-import { useParams } from 'react-router-dom';
-import { useDestination, useTours } from '../../hooks';
+import { useParams, Link } from 'react-router-dom';
+import { useDestination, useTours, usePagination } from '../../hooks';
 import { getDuration } from '../../utils';
-import { Pagination, TourCard } from '../../components';
-import { usePagination } from '../../hooks';
+import { Pagination, TourCard, LoadingState, ErrorState, EmptyState } from '../../components';
 
 const DestinationDetailsPage = () => {
   const { destinationId } = useParams<{ destinationId: string }>();
   const id = parseInt(destinationId || '', 10);
-  const { data: destination, isLoading: loadingDestination } = useDestination(id);
 
-  // Use pagination hook for tours
+  const {
+    data: destination,
+    isLoading: loadingDestination,
+    isError: errorDestination,
+  } = useDestination(id);
+
   const { page, limit, goToNextPage, goToPrevPage } = usePagination();
 
-  // Fetch tours with pagination using destination_id and pagination params
-  const { data: tours, isLoading: loadingTours } = useTours({
+  const {
+    data: tours,
+    isLoading: loadingTours,
+    isError: errorTours,
+    error,
+  } = useTours({
     destination_id: id,
     page,
     limit,
   });
 
+  const isLoading = loadingDestination || loadingTours;
+  const isError = errorDestination || errorTours;
   const totalPages = tours?.totalPages || 1;
 
-  if (loadingDestination || loadingTours) return <div>Loading...</div>;
-  if (!destination) return <div>Destination not found</div>;
+  if (isLoading) {
+    return (
+      <section className='py-12 bg-background-light dark:bg-background-dark min-h-screen'>
+        <LoadingState message='Loading destination details...' fullPage />
+      </section>
+    );
+  }
+
+  if (isError || !destination) {
+    return (
+      <div className='min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center'>
+        <ErrorState
+          title='Destination not found'
+          description={error?.message || "We couldn't load this destination"}
+          action={
+            <Link to='/destinations' className='form-button mt-4'>
+              Browse All Destinations
+            </Link>
+          }
+          fullPage
+        />
+      </div>
+    );
+  }
 
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
@@ -43,26 +74,34 @@ const DestinationDetailsPage = () => {
           Tours in {destination.name}
         </h2>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {tours?.tours?.map((tour) => (
-            <TourCard
-              key={tour.tour_id}
-              id={tour.tour_id}
-              title={tour.name}
-              description={tour.description}
-              imageUrl={tour.image}
-              price={tour.price}
-              duration={getDuration(tour.start_date, tour.end_date)}
-            />
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            goToPrevPage={goToPrevPage}
-            goToNextPage={goToNextPage}
+        {tours?.tours?.length ? (
+          <>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
+              {tours.tours.map((tour) => (
+                <TourCard
+                  key={tour.tour_id}
+                  id={tour.tour_id}
+                  title={tour.name}
+                  description={tour.description}
+                  imageUrl={tour.image}
+                  price={tour.price}
+                  duration={getDuration(tour.start_date, tour.end_date)}
+                />
+              ))}
+            </div>
+            {totalPages > 1 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                goToPrevPage={goToPrevPage}
+                goToNextPage={goToNextPage}
+              />
+            )}
+          </>
+        ) : (
+          <EmptyState
+            title='No tours found'
+            description='There are currently no tours available for this destination.'
           />
         )}
       </div>

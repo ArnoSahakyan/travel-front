@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBooking, useCancelBooking, useToast } from '../../hooks';
-import { getDuration } from '../../utils';
+import { formatDate, getDuration } from '../../utils';
 import { useEffect } from 'react';
 import { ROUTES } from '../../shared';
 import {
@@ -11,6 +11,7 @@ import {
   PhoneIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
+import { LoadingState, ErrorState } from '../../components';
 
 const BookingDetailsPage = () => {
   const { bookingId } = useParams<{ bookingId: string }>();
@@ -19,7 +20,7 @@ const BookingDetailsPage = () => {
   const navigate = useNavigate();
   const { showSuccess, showError } = useToast();
 
-  const { data: booking, isLoading, isError } = useBooking(id);
+  const { data: booking, isLoading, isError, error } = useBooking(id);
   const {
     mutate: cancelBooking,
     isPending: cancelling,
@@ -36,36 +37,55 @@ const BookingDetailsPage = () => {
     }
   }, [isSuccess, showSuccess, navigate, cancelError, showError]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
-      <div className='flex items-center justify-center min-h-screen bg-background-light dark:bg-background-dark'>
-        <div className='animate-pulse text-xl text-primary-light dark:text-primary-dark'>
-          Loading your booking details...
-        </div>
+      <div className='min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center'>
+        <LoadingState message='Loading booking details...' fullPage />
       </div>
     );
+  }
 
-  if (isError || !booking)
+  if (isError) {
     return (
-      <div className='flex items-center justify-center min-h-screen bg-background-light dark:bg-background-dark'>
-        <div className='text-xl text-red-500 dark:text-red-400'>Booking not found.</div>
+      <div className='min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center'>
+        <ErrorState
+          title='Booking not found'
+          description={error?.message || "We couldn't load this booking"}
+          action={
+            <Link to={ROUTES.PROFILE_BOOKINGS} className='form-button mt-4'>
+              Back to My Bookings
+            </Link>
+          }
+          fullPage
+        />
       </div>
     );
+  }
+
+  if (!booking) {
+    return (
+      <div className='min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center'>
+        <ErrorState
+          title='Booking not found'
+          description="The booking you're looking for doesn't exist"
+          action={
+            <Link to={ROUTES.PROFILE_BOOKINGS} className='form-button mt-4'>
+              Back to My Bookings
+            </Link>
+          }
+          fullPage
+        />
+      </div>
+    );
+  }
 
   const handleCancel = () => {
     cancelBooking(booking.booking_id);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  };
-
   return (
     <div className='min-h-screen bg-background-light dark:bg-background-dark'>
+      {/* Back button and hero section remain the same */}
       <div className='mb-8'>
         <Link
           to={ROUTES.PROFILE_BOOKINGS}
@@ -75,6 +95,7 @@ const BookingDetailsPage = () => {
           Back to My Bookings
         </Link>
       </div>
+
       {/* Hero Section */}
       <div className='relative h-80 overflow-hidden'>
         <img src={booking.image} alt={booking.tour_name} className='w-full h-full object-cover' />
@@ -95,7 +116,7 @@ const BookingDetailsPage = () => {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Rest of your booking details content remains the same */}
       <div className='container mx-auto px-4 lg:px-8 py-8 -mt-12 relative z-10'>
         <div className='flex flex-col gap-8'>
           {/* Booking Details Card */}

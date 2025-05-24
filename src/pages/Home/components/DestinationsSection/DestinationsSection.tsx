@@ -1,8 +1,10 @@
 import { useDestinations } from '../../../../hooks';
-import { DestinationCard } from '../../../../components';
+import { DestinationCard, ErrorState, LoadingState } from '../../../../components';
 
 export const DestinationsSection = () => {
-  const { data, isLoading, isError, error } = useDestinations(1, 4);
+  const { data, isLoading, isError, error } = useDestinations({ page: 1, limit: 4 });
+
+  if (data?.destinations.length === 0) return;
   return (
     <section className='mx-auto py-10 lg:mt-20 max-w-7xl px-6 lg:px-8'>
       <div className='mb-8 text-center'>
@@ -15,11 +17,9 @@ export const DestinationsSection = () => {
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {isLoading ? (
-          <div className='text-center text-secondary-light dark:text-secondary-dark'>
-            Loading destinations...
-          </div>
+          <LoadingState message='Loading destinations...' />
         ) : isError ? (
-          <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+          <ErrorState description={error && (error as Error).message} />
         ) : (
           data?.destinations?.map((destination) => (
             <DestinationCard key={destination.destination_id} {...destination} />

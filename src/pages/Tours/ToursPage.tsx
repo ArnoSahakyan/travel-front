@@ -1,4 +1,4 @@
-import { Pagination, TourCard } from '../../components';
+import { EmptyState, ErrorState, LoadingState, Pagination, TourCard } from '../../components';
 import { usePagination } from '../../hooks';
 import { useEffect } from 'react';
 import { useTours } from '../../hooks';
@@ -26,11 +26,14 @@ const ToursPage = () => {
           </p>
         </div>
         {isLoading ? (
-          <div className='text-center text-secondary-light dark:text-secondary-dark'>
-            Loading destinations...
-          </div>
+          <LoadingState message='Loading tours...' />
         ) : isError ? (
-          <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+          <ErrorState description={error && (error as Error).message} />
+        ) : data?.tours?.length === 0 ? (
+          <EmptyState
+            title='No tours available'
+            description="We couldn't find any tours matching your criteria."
+          />
         ) : (
           <>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>

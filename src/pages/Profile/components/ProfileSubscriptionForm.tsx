@@ -6,7 +6,7 @@ import {
 } from '../../../hooks';
 import { useAuthStore } from '../../../store';
 
-export const CancelSubscriptionForm = () => {
+export const ProfileSubscriptionForm = () => {
   const { data, isLoading: isNewsletterLoading } = useNewsletterStatus();
   const { mutate: unsubscribe, isPending: isUnsubscribing } = useUnsubscribeNewsletter();
   const { mutate: subscribe, isPending: isSubscribing } = useSubscribeNewsletter();
@@ -30,26 +30,26 @@ export const CancelSubscriptionForm = () => {
         <p className='text-gray-500 dark:text-gray-400'>Checking subscription status...</p>
       ) : data?.subscribed ? (
         <div className='flex flex-col justify-between sm:flex-row sm:items-center gap-4'>
-          <p className='text-text-light dark:text-text-dark'>
+          <p className='text-primary-light dark:text-text-dark'>
             You are subscribed to our newsletter.
           </p>
           <button
             onClick={() => unsubscribe()}
             disabled={isUnsubscribing}
-            className='form-button w-1/2 bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-800 dark:text-white dark:hover:bg-red-700'
+            className='form-button w-1/2 bg-red-500 text-white hover:bg-red-600 dark:bg-red-800 dark:text-white dark:hover:bg-red-700'
           >
             {isUnsubscribing ? 'Unsubscribing...' : 'Unsubscribe'}
           </button>
         </div>
       ) : (
         <div className='flex flex-col justify-between sm:flex-row sm:items-center gap-4'>
-          <p className='text-text-light dark:text-text-dark'>
+          <p className='text-primary-light dark:text-text-dark'>
             You are not subscribed to the newsletter.
           </p>
           <button
             onClick={handleSubscribe}
             disabled={isSubscribing}
-            className='form-button w-1/2 bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-white dark:hover:bg-green-700'
+            className='form-button w-1/2 bg-primary-light/80 text-white-700 hover:bg-primary-light dark:bg-primary-dark/80 dark:text-white dark:hover:bg-primary-dark'
           >
             {isSubscribing ? 'Subscribing...' : 'Subscribe'}
           </button>

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
@@ -10,16 +10,15 @@ import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { ReviewForm, ReviewModal } from './components';
 import { StarIcon } from '@heroicons/react/20/solid';
+import { LoadingState, ErrorState, EmptyState } from '../../components';
 
 const TourDetailsPage = () => {
   const { tourId } = useParams<{ tourId: string }>();
   const id = parseInt(tourId || '', 10);
-  const { data: tour, isLoading, isError } = useTour(id);
+
+  const { data: tour, isLoading, isError, error } = useTour(id);
   const { mutate: createBooking, isPending: bookingLoading } = useCreateBooking();
-  const { data: reviewsData, isLoading: reviewsLoading } = useReview(id, {
-    limit: 3,
-    page: 1,
-  });
+  const { data: reviewsData, isLoading: reviewsLoading } = useReview(id, { limit: 3 });
   const { showSuccess, showError } = useToast();
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
@@ -34,17 +33,14 @@ const TourDetailsPage = () => {
     handleRemoveFromWishlist,
   } = useWishlist(id);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !tour) return <div>Tour not found</div>;
-
   const handleBooking = () => {
     if (guestCount < 1) {
       showError('Number of guests must be at least 1');
       return;
     }
 
-    if (guestCount > tour.available_spots) {
-      showError(`Only ${tour.available_spots} spot(s) available`);
+    if (tour?.available_spots && guestCount > tour?.available_spots) {
+      showError(`Only ${tour?.available_spots} spot(s) available`);
       return;
     }
 
@@ -60,6 +56,31 @@ const TourDetailsPage = () => {
       },
     );
   };
+
+  if (isLoading) {
+    return (
+      <section className='py-12 bg-background-light dark:bg-background-dark min-h-screen'>
+        <LoadingState message='Loading tour details...' fullPage />
+      </section>
+    );
+  }
+
+  if (isError || !tour) {
+    return (
+      <section className='py-12 bg-background-light dark:bg-background-dark min-h-screen'>
+        <ErrorState
+          title='Tour not found'
+          description={error?.message || "We couldn't load this tour"}
+          action={
+            <Link to='/tours' className='form-button mt-4'>
+              Browse All Tours
+            </Link>
+          }
+          fullPage
+        />
+      </section>
+    );
+  }
 
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
@@ -230,12 +251,13 @@ const TourDetailsPage = () => {
               </div>
             </div>
 
+            {/* Reviews Section */}
             <div className='bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8'>
               <div className='flex justify-between items-center mb-6'>
                 <h2 className='text-xl font-bold text-primary-light dark:text-primary-dark'>
                   Customer Reviews
                 </h2>
-                {reviewsData?.total && reviewsData.total > 3 && (
+                {typeof reviewsData?.total === 'number' && reviewsData.total > 3 && (
                   <button
                     onClick={() => setIsReviewModalOpen(true)}
                     className='text-sm font-medium text-primary-light dark:text-primary-dark hover:underline'
@@ -246,9 +268,7 @@ const TourDetailsPage = () => {
               </div>
 
               {reviewsLoading ? (
-                <div className='flex justify-center py-8'>
-                  <p className='text-sm text-gray-500 dark:text-gray-400'>Loading reviews...</p>
-                </div>
+                <LoadingState message='Loading reviews...' />
               ) : reviewsData?.reviews.length ? (
                 <div className='space-y-6'>
                   {reviewsData.reviews.map((review) => (
@@ -285,25 +305,31 @@ const TourDetailsPage = () => {
                   ))}
                 </div>
               ) : (
-                <div className='text-center py-8'>
-                  <p className='text-sm text-gray-500 dark:text-gray-400'>
-                    No reviews yet. Be the first to review!
-                  </p>
-                </div>
+                <EmptyState
+                  title='No reviews yet'
+                  description='Be the first to review this tour!'
+                />
               )}
             </div>
 
             {/* Review Form Section */}
-            <ReviewForm tourId={id} onReviewSubmitted={() => setReviewsUpdated(!reviewsUpdated)} />
+            {!tour?.hasReviewed && (
+              <ReviewForm
+                tourId={id}
+                onReviewSubmitted={() => setReviewsUpdated(!reviewsUpdated)}
+              />
+            )}
           </div>
         </div>
       </div>
+
+      {/* Review Modal */}
       {reviewsData && (
         <ReviewModal
           tourId={id}
           isOpen={isReviewModalOpen}
           onClose={() => setIsReviewModalOpen(false)}
-          totalReviews={reviewsData?.total}
+          totalReviews={reviewsData.total}
         />
       )}
     </section>

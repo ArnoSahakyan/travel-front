@@ -1,4 +1,4 @@
-import { CancelSubscriptionForm, InfoForm, PasswordChangeForm } from './components';
+import { ProfileSubscriptionForm, InfoForm, PasswordChangeForm } from './components';
 
 const Account = () => {
   return (
@@ -9,7 +9,7 @@ const Account = () => {
 
       <InfoForm />
 
-      <CancelSubscriptionForm />
+      <ProfileSubscriptionForm />
 
       <PasswordChangeForm />
     </div>

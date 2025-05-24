@@ -9,7 +9,10 @@ export const fetchTours = async (filters: ITourFilters) => {
   return response.data;
 };
 
-export const fetchTour = async (id: number) => {
-  const response = await public_api.get(`/tours/${id}`);
+export const fetchTour = async (id: number, userId?: number) => {
+  const response = await public_api.get(`/tours/${id}`, {
+    params: userId ? { user_id: userId } : undefined,
+  });
+
   return response.data;
 };

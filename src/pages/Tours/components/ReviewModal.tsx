@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { usePagination, useReview } from '../../../hooks';
-import { Pagination, ReviewCard } from '../../../components';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { EmptyState, ErrorState, LoadingState, Pagination, ReviewCard } from '../../../components';
 import { REVIEWS_LIMIT } from '../../../shared';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface ReviewModalProps {
   tourId: number;
@@ -14,7 +14,12 @@ interface ReviewModalProps {
 
 export const ReviewModal: FC<ReviewModalProps> = ({ tourId, isOpen, onClose, totalReviews }) => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
-  const { data: reviewsData, isLoading } = useReview(tourId, {
+  const {
+    data: reviewsData,
+    isLoading,
+    isError,
+    error,
+  } = useReview(tourId, {
     limit: REVIEWS_LIMIT,
     page,
   });
@@ -40,9 +45,11 @@ export const ReviewModal: FC<ReviewModalProps> = ({ tourId, isOpen, onClose, tot
 
           <div className='grid grid-cols-1 gap-6'>
             {isLoading ? (
-              <div className='flex justify-center py-8'>
-                <p className='text-sm text-gray-500 dark:text-gray-400'>Loading reviews...</p>
-              </div>
+              <LoadingState message='Loading reviews...' />
+            ) : isError ? (
+              <ErrorState description={error && (error as Error).message} />
+            ) : reviewsData?.reviews?.length === 0 ? (
+              <EmptyState title='No reviews available' description="We couldn't find any reviews" />
             ) : (
               reviewsData?.reviews.map((review) => (
                 <ReviewCard key={review.review_id} review={review} />

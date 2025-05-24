@@ -1,9 +1,9 @@
-import { ReviewCard } from '../../../../components';
+import { ErrorState, LoadingState, ReviewCard } from '../../../../components';
 import { useAllReviews } from '../../../../hooks';
 
 export const ReviewsSection = () => {
   const { data, isLoading, isError, error } = useAllReviews();
-
+  if (data?.reviews.length === 0) return;
   return (
     <div className='bg-background-light dark:bg-background-dark py-10 sm:py-20'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -18,11 +18,9 @@ export const ReviewsSection = () => {
 
         <div className='mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
           {isLoading ? (
-            <div className='text-center text-secondary-light dark:text-secondary-dark'>
-              Loading destinations...
-            </div>
+            <LoadingState message='Loading reviews...' />
           ) : isError ? (
-            <div className='text-center text-red-500'>Error: {(error as Error).message}</div>
+            <ErrorState description={error && (error as Error).message} />
           ) : (
             data?.reviews?.map((review) => <ReviewCard key={review.review_id} review={review} />)
           )}

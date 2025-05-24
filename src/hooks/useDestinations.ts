@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { DESTINATIONS_LIMIT, IFetchFilters } from '../shared';
+import {
+  DESTINATIONS_LIMIT,
+  IDestinationResponse,
+  IFetchFilters,
+  ISingleDestination,
+} from '../shared';
 import { fetchDestination, fetchDestinations } from '../api';
 import { destinationKeys } from '../queries';
 import { useMergedFilters } from '../utils';
@@ -7,7 +12,7 @@ import { useMergedFilters } from '../utils';
 export const useDestinations = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, DESTINATIONS_LIMIT);
 
-  return useQuery({
+  return useQuery<IDestinationResponse>({
     queryKey: destinationKeys.list(filters),
     queryFn: () => fetchDestinations(filters),
     staleTime: 1000 * 60 * 5,
@@ -16,7 +21,7 @@ export const useDestinations = (externalFilters?: Partial<IFetchFilters>) => {
 };
 
 export const useDestination = (id: number) =>
-  useQuery({
+  useQuery<ISingleDestination>({
     queryKey: destinationKeys.detail(id),
     queryFn: () => fetchDestination(id),
     enabled: !!id,

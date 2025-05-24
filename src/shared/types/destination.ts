@@ -7,6 +7,8 @@ export interface IDestination {
   startingPrice?: number;
 }
 
+export type ISingleDestination = Omit<IDestination, 'tourCount, startingPrice'>;
+
 export interface IDestinationResponse {
   destinations: IDestination[];
   currentPage: number;
