@@ -9,7 +9,7 @@ Wanderluxe is a full-stack travel agency web application built with modern tools
 - 👤 Profile section for authenticated users, including:
     - Account Info (with React Hook Form + Zod for validation)
     - Bookings
-    - WishlistsPage
+    - Favorites
 - 🔄 State management using **Zustand**.
 - 📄 Protected and unprotected route handling with React Router DOM.
 - ⚙️ Modular layout structure with reusable layouts for public and profile pages.

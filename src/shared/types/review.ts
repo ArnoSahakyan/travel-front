@@ -6,8 +6,8 @@ export interface IReview {
   review_id: number;
   tour_id: number;
   user_id: number;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IReviewResponse {

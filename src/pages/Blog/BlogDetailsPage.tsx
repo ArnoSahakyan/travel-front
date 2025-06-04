@@ -75,7 +75,7 @@ const BlogDetailsPage = () => {
                 <div className='flex items-center space-x-4 text-sm'>
                   <span className='flex items-center'>
                     <CalendarIcon className='size-4 mr-1' />
-                    {formatDate(post.createdAt)}
+                    {formatDate(post.created_at)}
                   </span>
                 </div>
               </div>

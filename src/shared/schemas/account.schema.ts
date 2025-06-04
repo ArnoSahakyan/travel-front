@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const personalInfoSchema = z.object({
   full_name: z.string().min(1, 'Full name is required'),
   email: z.string().email('Invalid email address'),
-  phone: z.string().optional(),
+  phone_number: z.string().optional(),
 });
 
 export type PersonalFormData = z.infer<typeof personalInfoSchema>;

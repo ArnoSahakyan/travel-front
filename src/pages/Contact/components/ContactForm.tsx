@@ -58,18 +58,18 @@ export const ContactForm = () => {
           </div>
 
           <div className='sm:col-span-2'>
-            <label htmlFor='phone' className='form-label'>
+            <label htmlFor='phone_number' className='form-label'>
               Phone number
             </label>
             <div className='mt-2.5'>
               <input
-                id='phone'
+                id='phone_number'
                 type='tel'
                 autoComplete='tel'
                 className='form-input'
-                {...register('phone')}
+                {...register('phone_number')}
               />
-              {errors.phone && <p className='form-error'>{errors.phone.message}</p>}
+              {errors.phone_number && <p className='form-error'>{errors.phone_number.message}</p>}
             </div>
           </div>
 

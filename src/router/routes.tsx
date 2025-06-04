@@ -29,7 +29,7 @@ const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
 const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
-const WishlistsPage = lazy(() => import('../pages/Profile/WishlistsPage.tsx'));
+const FavoritesPage = lazy(() => import('../pages/Profile/FavoritesPage.tsx'));
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -73,7 +73,7 @@ const routes: RouteObject[] = [
             path: `${ROUTES.PROFILE_BOOKINGS}/:bookingId`,
             element: withSuspense(<BookingDetailPage />),
           },
-          { path: ROUTES.PROFILE_WISHLISTS, element: withSuspense(<WishlistsPage />) },
+          { path: ROUTES.PROFILE_FAVORITES, element: withSuspense(<FavoritesPage />) },
         ],
       },
     ],

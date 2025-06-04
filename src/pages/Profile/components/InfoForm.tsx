@@ -19,7 +19,7 @@ export const InfoForm = () => {
     defaultValues: {
       full_name: '',
       email: '',
-      phone: '',
+      phone_number: '',
     },
   });
 
@@ -32,7 +32,7 @@ export const InfoForm = () => {
       resetPersonalInfoForm({
         full_name: user.full_name || '',
         email: user.email || '',
-        phone: user.phone || '',
+        phone_number: user.phone_number || '',
       });
     }
   }, [user, resetPersonalInfoForm]);
@@ -74,17 +74,17 @@ export const InfoForm = () => {
         </div>
 
         <div>
-          <label htmlFor='phone' className='form-label mb-2'>
+          <label htmlFor='phone_number' className='form-label mb-2'>
             Phone Number (Optional)
           </label>
           <input
-            {...registerPersonalInfo('phone')}
+            {...registerPersonalInfo('phone_number')}
             type='tel'
             className='form-input'
-            placeholder='Enter your phone number'
+            placeholder='Enter your phone_number number'
           />
-          {personalInfoErrors.phone && (
-            <p className='form-error'>{personalInfoErrors.phone.message}</p>
+          {personalInfoErrors.phone_number && (
+            <p className='form-error'>{personalInfoErrors.phone_number.message}</p>
           )}
         </div>
       </div>

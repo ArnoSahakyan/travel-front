@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { EmptyState, ErrorState, LoadingState, Pagination, TourCard } from '../../components';
 import { getDuration } from '../../utils';
 import { ROUTES } from '../../shared';
-import { usePagination, useWishlistList } from '../../hooks';
+import { usePagination, useFavoritesList } from '../../hooks';
 
-const WishlistsPage = () => {
+const FavoritesPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
-  const { data, isLoading, isError, error } = useWishlistList({ page });
+  const { data, isLoading, isError, error } = useFavoritesList({ page });
 
-  const wishlists = data?.wishlists || [];
+  const favorites = data?.favorites || [];
   const totalPages = data?.totalPages || 1;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const WishlistsPage = () => {
       <div className='container mx-auto px-4 lg:px-8'>
         <div className='text-center mb-12'>
           <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark mb-4'>
-            Your Wishlist
+            Your Favorites
           </h2>
           <p className='text-secondary-light dark:text-secondary-dark max-w-2xl mx-auto'>
             All the tours you've saved for your next adventure
@@ -29,13 +29,13 @@ const WishlistsPage = () => {
         </div>
 
         {isLoading ? (
-          <LoadingState message='Loading wishlist...' />
+          <LoadingState message='Loading favorites...' />
         ) : isError ? (
           <ErrorState description={error && (error as Error).message} />
-        ) : wishlists.length === 0 ? (
+        ) : favorites.length === 0 ? (
           <div className='text-center py-12'>
             <EmptyState
-              title='No tours in wishlist'
+              title='No tours in favorites'
               description="You haven't saved any tours yet. Start planning your next adventure!"
               action={
                 <Link
@@ -50,7 +50,7 @@ const WishlistsPage = () => {
         ) : (
           <>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {wishlists.map((item) => (
+              {favorites.map((item) => (
                 <TourCard
                   key={item.tour.tour_id}
                   id={item.tour.tour_id}
@@ -78,4 +78,4 @@ const WishlistsPage = () => {
   );
 };
 
-export default WishlistsPage;
+export default FavoritesPage;

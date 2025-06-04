@@ -16,7 +16,7 @@ import { useAuthStore } from '../../store';
 const navigation = [
   { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
   { name: 'My Bookings', href: ROUTES.PROFILE_BOOKINGS, icon: TicketIcon },
-  { name: 'Wishlist', href: ROUTES.PROFILE_WISHLISTS, icon: HeartIcon },
+  { name: 'Favorites', href: ROUTES.PROFILE_FAVORITES, icon: HeartIcon },
 ];
 
 function classNames(...classes: string[]) {

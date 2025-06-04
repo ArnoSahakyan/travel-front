@@ -32,7 +32,7 @@ export const ReviewCard: FC<Review> = ({ review }) => {
       </p>
 
       <div className='mt-4 text-sm text-gray-500 dark:text-gray-400'>
-        {formatDate(review.createdAt)}
+        {formatDate(review.created_at)}
       </div>
     </div>
   );

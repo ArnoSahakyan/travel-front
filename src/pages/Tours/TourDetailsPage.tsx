@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperClass } from 'swiper/types';
 import { FreeMode, Thumbs } from 'swiper/modules';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import { useCreateBooking, useReview, useToast, useTour, useWishlist } from '../../hooks';
+import { useCreateBooking, useReview, useToast, useTour, useFavorite } from '../../hooks';
 import { getDuration } from '../../utils';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -27,11 +27,11 @@ const TourDetailsPage = () => {
   const [reviewsUpdated, setReviewsUpdated] = useState(false);
 
   const {
-    inWishlist,
-    isLoading: wishlistLoading,
-    handleAddToWishlist,
-    handleRemoveFromWishlist,
-  } = useWishlist(id);
+    inFavorites,
+    isLoading: favoriteLoading,
+    handleAddToFavorites,
+    handleRemoveFromFavorites,
+  } = useFavorite(id);
 
   const handleBooking = () => {
     if (guestCount < 1) {
@@ -141,20 +141,20 @@ const TourDetailsPage = () => {
                   {tour.name}
                 </h1>
                 <button
-                  onClick={inWishlist ? handleRemoveFromWishlist : handleAddToWishlist}
-                  disabled={wishlistLoading}
+                  onClick={inFavorites ? handleRemoveFromFavorites : handleAddToFavorites}
+                  disabled={favoriteLoading}
                   className={`flex items-center gap-1 px-3 py-1 text-sm rounded-md ${
-                    inWishlist
+                    inFavorites
                       ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
                       : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
                   }`}
                 >
-                  {inWishlist ? (
+                  {inFavorites ? (
                     <HeartIconSolid className='w-4 h-4' />
                   ) : (
                     <HeartIcon className='w-4 h-4' />
                   )}
-                  {inWishlist ? 'Saved' : 'Save'}
+                  {inFavorites ? 'Saved' : 'Save'}
                 </button>
               </div>
 
@@ -291,7 +291,7 @@ const TourDetailsPage = () => {
                           </div>
                         </div>
                         <span className='text-xs text-secondary-light dark:text-secondary-dark'>
-                          {new Date(review.createdAt).toLocaleDateString('en-US', {
+                          {new Date(review.created_at).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric',

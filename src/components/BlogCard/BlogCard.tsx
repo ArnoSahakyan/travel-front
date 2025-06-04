@@ -19,7 +19,7 @@ export const BlogCard: FC<BlogPost> = ({ post }) => {
       <div className='absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10' />
 
       <div className='flex flex-wrap items-center gap-y-1 overflow-hidden text-sm/6 text-gray-300'>
-        <p className='mr-8'>{formatDate(post.createdAt)}</p>
+        <p className='mr-8'>{formatDate(post.created_at)}</p>
       </div>
 
       <h3 className='mt-3 text-lg/6 font-semibold text-white'>

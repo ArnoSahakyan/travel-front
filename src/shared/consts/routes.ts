@@ -13,7 +13,7 @@ export const ROUTES = {
   SIGNUP: '/sign-up',
   FORGOT_PASSWORD: '/forgot-password',
   PROFILE: '/profile',
-  PROFILE_WISHLISTS: '/profile/wishlists',
+  PROFILE_FAVORITES: '/profile/favorites',
   PROFILE_BOOKINGS: '/profile/bookings',
   PROFILE_INFO: '/profile/info',
   NOT_FOUND: '*',

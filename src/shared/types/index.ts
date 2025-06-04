@@ -1,6 +1,7 @@
 export * from './blog.ts';
 export * from './bookings.ts';
 export * from './destination.ts';
+export * from './favorite.ts';
 export * from './error.ts';
 export * from './fetch.ts';
 export * from './legal.ts';
@@ -10,4 +11,3 @@ export * from './theme.ts';
 export * from './tour.ts';
 export * from './tour-card.ts';
 export * from './user.ts';
-export * from './wishlist.ts';
