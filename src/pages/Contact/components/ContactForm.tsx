@@ -1,24 +1,24 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ContactFormData, contactSchema } from '../../../shared';
+import { useSendContactMessage } from '../../../hooks';
 
 export const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      console.log('Form submitted:', data);
-      reset();
-    } catch (error) {
-      console.error('Submission error:', error);
-    }
+  const { mutate: sendMessage, isPending } = useSendContactMessage();
+
+  const onSubmit = (data: ContactFormData) => {
+    sendMessage(data, {
+      onSuccess: () => reset(),
+    });
   };
 
   return (
@@ -91,8 +91,8 @@ export const ContactForm = () => {
         </div>
 
         <div className='mt-8 flex justify-end'>
-          <button type='submit' className='form-button' disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+          <button type='submit' className='form-button' disabled={isPending}>
+            {isPending ? 'Sending...' : 'Send Message'}
           </button>
         </div>
       </div>

@@ -81,7 +81,7 @@ export const InfoForm = () => {
             {...registerPersonalInfo('phone_number')}
             type='tel'
             className='form-input'
-            placeholder='Enter your phone_number number'
+            placeholder='Enter your phone number'
           />
           {personalInfoErrors.phone_number && (
             <p className='form-error'>{personalInfoErrors.phone_number.message}</p>
