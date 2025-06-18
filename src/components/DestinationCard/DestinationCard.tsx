@@ -43,7 +43,7 @@ export const DestinationCard: FC<IDestination> = ({
       <div className='p-4'>
         <div className='flex justify-between items-center text-sm text-secondary-light dark:text-secondary-dark'>
           <span className='flex items-center gap-1'>
-            <MapPinIcon className='block size-6' /> {tourCount}+ Tours Available
+            <MapPinIcon className='block size-6' /> {tourCount} Tour(s) Available
           </span>
           <Link
             to={`${ROUTES.DESTINATIONS}/${destination_id}`}
