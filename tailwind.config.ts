@@ -3,27 +3,30 @@ export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'sans-serif'],
+    },
     extend: {
       colors: {
         primary: {
-          light: '#2D9CDB',
-          dark: '#1B6CA7',
+          light: '#2A7A7B',
+          dark: '#1BA098',
         },
         secondary: {
-          light: '#5e2eb1',
-          dark: '#8460C3',
+          light: '#4A5568',
+          dark: '#869BA9',
         },
         accent: {
-          light: '#27AE60',
-          dark: '#219150',
+          light: '#E07A5F',
+          dark: '#E07A5F',
         },
         background: {
-          light: '#F8FAFC',
-          dark: '#0D1B2A',
+          light: '#F5F7FA',
+          dark: '#081521',
         },
         text: {
-          light: '#1E293B',
-          dark: '#E5E7EB',
+          light: '#D4A96A',
+          dark: '#DEB992',
         },
       },
     },

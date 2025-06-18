@@ -1,9 +1,5 @@
 import { create } from 'zustand';
-
-type ThemeState = {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
-};
+import { ThemeState } from '../shared';
 
 export const useThemeStore = create<ThemeState>((set) => {
   const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;

@@ -7,12 +7,14 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className='p-2 cursor-pointer hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white rounded-xl'
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      className='p-2 cursor-pointer text-background-light hover:text-primary-light hover:bg-background-light dark:text-background-light dark:hover:bg-secondary-light rounded-xl'
     >
       {theme === 'light' ? (
-        <SunIcon className='block size-6 text-black' />
+        <SunIcon className='block size-6' />
       ) : (
-        <MoonIcon className='block size-6 text-white' />
+        <MoonIcon className='block size-6' />
       )}
     </button>
   );
