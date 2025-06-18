@@ -1,48 +1,139 @@
-# Wanderluxe
+# ✈️ Wanderluxe – Frontend
 
-Wanderluxe is a full-stack travel agency web application built with modern tools and best practices. The frontend is developed using **React 19** with **TypeScript** and styled using **Tailwind CSS**. The application is designed to provide a seamless experience for users to explore destinations, book tours, manage their accounts, and more.
+Wanderluxe is a modern full-stack travel agency application. This is the **frontend**, built with **React 19** + **TypeScript**, designed to provide a fast, elegant, and responsive user experience.
 
-## Features
+---
 
-- 🏠 Public pages including Home, Blog, Destinations, Tours, About, Contact, FAQ, and Legal.
-- 🔐 Authentication with Sign In, Sign Up, and Forgot Password pages.
-- 👤 Profile section for authenticated users, including:
-    - Account Info (with React Hook Form + Zod for validation)
-    - Bookings
-    - Favorites
-- 🔄 State management using **Zustand**.
-- 📄 Protected and unprotected route handling with React Router DOM.
-- ⚙️ Modular layout structure with reusable layouts for public and profile pages.
-- 🧪 Strongly typed with TypeScript and follows strict linting/formatting standards using ESLint and Prettier.
+## 🚀 Features
 
-## Stack
+* 🏖 Public pages: Home, Destinations, Tours, Blog, About, Contact, FAQ, Legal
+* 🔐 Auth system: Sign In / Sign Up / Forgot Password / Reset Password
+* 👤 Profile for authenticated users:
 
-- **React 19**
-- **TypeScript**
-- **React Router DOM 7**
-- **Tailwind CSS**
-- **Zustand** for state management
-- **React Hook Form** + **Zod** for form handling and validation
-- **Vite** for fast development and bundling
-- **ESLint** + **Prettier** for consistent code formatting and linting
+  * Update personal information
+  * Change password
+  * View bookings
+  * Manage favorites
+* 💬 Contact form with email delivery (via backend)
+* ⚙️ Dynamic routing with protected and unprotected route guards
+* 🧠 Global state management with Zustand
+* 🔄 API communication with React Query and Axios
+* 🧪 Full form validation using Zod + React Hook Form
+* 🌙 Dark mode support
 
-## Development
+---
 
-To start the project locally:
+## 🧰 Tech Stack
+
+| Layer              | Tool                      |
+|--------------------|---------------------------|
+| UI Library         | **React 19**              |
+| Language           | **TypeScript**            |
+| Styling            | **Tailwind CSS**          |
+| Forms & Validation | **React Hook Form + Zod** |
+| State Management   | **Zustand**               |
+| API Fetching       | **Axios + React Query**   |
+| Routing            | **React Router DOM v7**   |
+| Build Tool         | **Vite**                  |
+| Linting & Format   | **ESLint + Prettier**     |
+
+---
+
+## 🗂 Project Structure
+
+```
+src/
+├── assets/              # Static images & assets
+├── components/          # Reusable UI components
+├── constants/           # Global constants & enums
+├── hooks/               # Custom hooks
+├── layouts/             # Layout wrappers (public, profile)
+├── pages/               # Route pages
+├── routes/              # Route definitions
+├── shared/              # Shared types & schemas
+├── store/               # Zustand store
+├── utils/               # Helper functions
+├── api/                 # Axios instances & API calls
+└── main.tsx             # Entry point
+```
+
+---
+
+## 📦 Setup & Development
+
+### Install dependencies
 
 ```bash
 yarn install
+```
+
+### Run development server
+
+```bash
 yarn dev
 ```
 
-To build for production:
+### Build for production
 
 ```bash
 yarn build
 ```
 
-To run lint and format fixes:
+### Format & fix linting issues
 
 ```bash
 yarn fix
 ```
+
+---
+
+## 🌐 Environment Variables
+
+Create a `.env` file in the root with:
+
+```env
+VITE_BACK_BASE_URL=http://localhost:8080/api
+VITE_SUPABASE_STORAGE_URL=<your_supabase_storage_url>
+```
+
+You can point this to your backend API URL.
+
+---
+
+## 📜 Scripts
+
+| Command       | Description                        |
+|---------------|------------------------------------|
+| `yarn dev`    | Run development server             |
+| `yarn build`  | Build for production               |
+| `yarn fix`    | Lint + Format code with Prettier   |
+| `yarn lint`   | Run ESLint on all TypeScript files |
+| `yarn format` | Format files using Prettier        |
+
+---
+
+## 🛣 Example Routes
+
+| Path                    | Page                      |
+|-------------------------|---------------------------|
+| `/`                     | Home                      |
+| `/tours`                | Tour listing              |
+| `/destinations`         | Destination listing       |
+| `/contact`              | Contact form              |
+| `/auth/signin`          | Login                     |
+| `/auth/signup`          | Register                  |
+| `/auth/forgot-password` | Request password reset    |
+| `/auth/reset-password`  | Reset password with token |
+| `/profile/info`         | Account info (protected)  |
+
+---
+
+## 📬 API Integration
+
+This frontend uses Axios and React Query to call a RESTful API hosted on the backend (`/api/...`). You’ll need to have the [Wanderluxe Backend](https://github.com/your-backend-url) running locally or in production.
+
+---
+
+## 🙌 Contributing
+
+This is a solo/portfolio project for now. If you'd like to contribute or collaborate, feel free to fork or message me!
