@@ -24,6 +24,7 @@ const NewsletterConfirmPage = lazy(
 const SignUpPage = lazy(() => import('../pages/Auth/SignUpPage'));
 const SignInPage = lazy(() => import('../pages/Auth/SignInPage'));
 const ForgotPasswordPage = lazy(() => import('../pages/Auth/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('../pages/Auth/ResetPasswordPage.tsx'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFoundPage.tsx'));
 const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
@@ -88,6 +89,7 @@ const routes: RouteObject[] = [
           { path: ROUTES.SIGNIN.slice(1), element: withSuspense(<SignInPage />) },
           { path: ROUTES.SIGNUP.slice(1), element: withSuspense(<SignUpPage />) },
           { path: ROUTES.FORGOT_PASSWORD.slice(1), element: withSuspense(<ForgotPasswordPage />) },
+          { path: ROUTES.RESET_PASSWORD.slice(1), element: withSuspense(<ResetPasswordPage />) },
         ],
       },
     ],

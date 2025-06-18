@@ -2,19 +2,24 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
 import { ForgotPasswordFormData, forgotPasswordSchema, ROUTES } from '../../shared';
+import { useRequestPasswordReset } from '../../hooks';
 
 const ForgotPasswordPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors },
   } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
+  const { mutate: requestReset, isPending } = useRequestPasswordReset();
+
   const onSubmit = (data: ForgotPasswordFormData) => {
-    console.log('Password reset requested for:', data.email);
-    // TODO: Add your password reset logic here
+    requestReset(data, {
+      onSuccess: () => reset(),
+    });
   };
 
   return (
@@ -48,8 +53,8 @@ const ForgotPasswordPage = () => {
             </div>
 
             <div>
-              <button type='submit' className='form-button w-full' disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Reset Link'}
+              <button type='submit' className='form-button w-full' disabled={isPending}>
+                {isPending ? 'Sending...' : 'Send Reset Link'}
               </button>
             </div>
           </form>

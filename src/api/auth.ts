@@ -1,5 +1,10 @@
 import { api, public_api } from './axios.ts';
-import { SignInFormData, SignUpFormData } from '../shared';
+import { ForgotPasswordFormData, SignInFormData, SignUpFormData } from '../shared';
+
+interface ResetPasswordRequest {
+  new_password: string;
+  token: string;
+}
 
 export const signIn = async (credentials: SignInFormData) => {
   const response = await public_api.post('/auth/signin', credentials);
@@ -24,4 +29,16 @@ export const fetchCurrentUser = async () => {
     console.error('Fetching User Data Error:', error);
     throw new Error('Failed to fetch current user');
   }
+};
+
+export const requestPasswordReset = async (data: ForgotPasswordFormData) => {
+  const response = await public_api.post('/auth/request-password-reset', data);
+  return response.data;
+};
+
+export const resetPassword = async ({ new_password, token }: ResetPasswordRequest) => {
+  const response = await public_api.post(`/auth/reset-password?token=${token}`, {
+    new_password,
+  });
+  return response.data;
 };

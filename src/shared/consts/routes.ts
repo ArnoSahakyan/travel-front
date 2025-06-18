@@ -12,6 +12,7 @@ export const ROUTES = {
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',
   FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
   PROFILE: '/profile',
   PROFILE_FAVORITES: '/profile/favorites',
   PROFILE_BOOKINGS: '/profile/bookings',
