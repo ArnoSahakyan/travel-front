@@ -6,6 +6,12 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "lib": ["dom", "esnext"],
+    "jsx": "react-jsx",
+    "types": ["react"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
     "paths": {
       "@/*": ["src/*"]
     }
