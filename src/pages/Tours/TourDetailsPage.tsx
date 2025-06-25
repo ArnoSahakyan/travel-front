@@ -17,9 +17,9 @@ const TourDetailsPage = () => {
   const id = parseInt(tourId || '', 10);
 
   const { data: tour, isLoading, isError, error } = useTour(id);
-  const { mutate: createBooking, isPending: bookingLoading } = useCreateBooking();
+  const { handleCreateBooking, isPending: bookingLoading } = useCreateBooking();
   const { data: reviewsData, isLoading: reviewsLoading } = useReview(id, { limit: 3 });
-  const { showSuccess, showError } = useToast();
+  const { showError } = useToast();
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [guestCount, setGuestCount] = useState(1);
@@ -44,17 +44,7 @@ const TourDetailsPage = () => {
       return;
     }
 
-    createBooking(
-      { tour_id: id, number_of_people: guestCount },
-      {
-        onSuccess: () => {
-          showSuccess('Booking successful!');
-        },
-        onError: () => {
-          showError('Booking failed. Please try again.');
-        },
-      },
-    );
+    handleCreateBooking(id, guestCount);
   };
 
   if (isLoading) {
