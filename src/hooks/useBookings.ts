@@ -1,8 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { BOOKINGS_LIMIT, IFetchFilters } from '../shared';
+import { BOOKINGS_LIMIT, IFetchFilters, ROUTES } from '../shared';
 import { bookingKeys } from '../queries';
 import { cancelBooking, createBooking, fetchBooking, fetchUserBookings } from '../api';
 import { useMergedFilters } from '../utils';
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store';
+import { useToast } from './useToast.ts';
 
 export const useBookings = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, BOOKINGS_LIMIT);
@@ -25,15 +28,31 @@ export const useBooking = (id: number) =>
 
 export const useCreateBooking = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
+  const { showSuccess, showError } = useToast();
 
-  return useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ tour_id, number_of_people }: { tour_id: number; number_of_people: number }) =>
       createBooking(tour_id, number_of_people),
     onSuccess: () => {
-      // Invalidate list to show updated bookings
+      showSuccess('Booking successful!');
       queryClient.invalidateQueries({ queryKey: bookingKeys.all });
     },
+    onError: () => {
+      showError('Booking failed. Please try again.');
+    },
   });
+
+  const handleCreateBooking = (tour_id: number, number_of_people: number) => {
+    if (!isAuthenticated) {
+      navigate(ROUTES.AUTH + ROUTES.SIGNIN);
+      return;
+    }
+    mutate({ tour_id, number_of_people });
+  };
+
+  return { handleCreateBooking, isPending };
 };
 
 export const useCancelBooking = () => {

@@ -175,7 +175,7 @@ const BookingDetailsPage = () => {
                 </div>
               </div>
 
-              {booking.status === 'confirmed' && (
+              {(booking.status === 'confirmed' || booking.status === 'pending') && (
                 <div className='pt-6 border-t border-gray-200 dark:border-gray-700'>
                   <div className='flex flex-col md:flex-row md:items-center md:justify-between'>
                     <div className='mb-4 md:mb-0'>
