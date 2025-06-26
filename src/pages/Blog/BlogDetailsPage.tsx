@@ -4,9 +4,9 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { formatDate } from '../../utils';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { LoadingState, ErrorState } from '../../components';
-import { useBlog } from '../../hooks/useBlogs.ts';
-import { useTours } from '../../hooks';
-// import { MarkdownComponents } from './MarkdownComponents.tsx';
+import { useTours, useBlog } from '../../hooks';
+import ReactMarkdown from 'react-markdown';
+import { MarkdownComponents } from './MarkdownComponents.tsx';
 import { CalendarIcon, CurrencyDollarIcon, InformationCircleIcon } from '@heroicons/react/24/solid';
 
 const BlogDetailsPage = () => {
@@ -74,7 +74,7 @@ const BlogDetailsPage = () => {
                 <div className='flex items-center space-x-4 text-sm'>
                   <span className='flex items-center'>
                     <CalendarIcon className='size-4 mr-1' />
-                    {formatDate(post.created_at)}
+                    {formatDate(post.createdAt)}
                   </span>
                 </div>
               </div>
@@ -86,13 +86,12 @@ const BlogDetailsPage = () => {
       {/* Content Section */}
       <div className='container mx-auto px-4 lg:px-8 py-12'>
         <div className='flex flex-col lg:flex-row gap-12'>
-          {/* Main Content */}
-          {/*<article className='lg:w-2/3'>*/}
-          {/*  <div className='prose dark:prose-invert max-w-none'>*/}
-          {/*    <ReactMarkdown components={MarkdownComponents}>{post.content}</ReactMarkdown>*/}
-          {/*  </div>*/}
-          {/*</article>*/}
-
+          Main Content
+          <article className='lg:w-2/3'>
+            <div className='prose dark:prose-invert max-w-none'>
+              <ReactMarkdown components={MarkdownComponents}>{post.content}</ReactMarkdown>
+            </div>
+          </article>
           {/* Sidebar */}
           <aside className='lg:w-1/3 space-y-8'>
             {/* Travel Tips Card */}
