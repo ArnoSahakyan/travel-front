@@ -1,6 +1,7 @@
 export * from './useAccount.ts';
 export * from './useAuth.ts';
 export * from './useBookings.ts';
+export * from './useBlogs.ts';
 export * from './useDestinations.ts';
 export * from './useFavorites.ts';
 export * from './usePagination.ts';

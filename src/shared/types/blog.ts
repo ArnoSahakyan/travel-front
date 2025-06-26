@@ -6,8 +6,8 @@ export interface ISingleBlog {
   content: string;
   is_published: boolean;
   image: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type IBlog = Omit<ISingleBlog, 'content'>;
