@@ -158,10 +158,10 @@ export const Navbar = () => {
               </DisclosureButton>
             ))}
           </div>
-          <div className='border-t border-gray-200 pt-4 pb-3 dark:border-gray-700'>
+          <div className='flex items-end justify-between border-t border-gray-200 pt-4 pb-3 dark:border-gray-700'>
             {isAuthenticated ? (
-              <>
-                <div className='flex items-center px-5'>
+              <div className='grow'>
+                <div className='items-center px-5'>
                   <div className='ml-3'>
                     <div className='text-base font-medium text-background-light dark:text-text-dark'>
                       {user?.full_name}
@@ -170,11 +170,8 @@ export const Navbar = () => {
                       {user?.email}
                     </div>
                   </div>
-                  <div className='ml-auto'>
-                    <ThemeToggle />
-                  </div>
                 </div>
-                <div className='mt-3 space-y-1 px-2'>
+                <div className='grow mt-3 space-y-1 px-2'>
                   <DisclosureButton
                     as={Link}
                     to={ROUTES.PROFILE_INFO}
@@ -190,9 +187,9 @@ export const Navbar = () => {
                     Sign Out
                   </DisclosureButton>
                 </div>
-              </>
+              </div>
             ) : (
-              <div className='mt-3 space-y-1 px-2'>
+              <div className='grow space-y-1 px-2'>
                 <DisclosureButton
                   as={Link}
                   to={ROUTES.AUTH + ROUTES.SIGNIN}
@@ -202,6 +199,7 @@ export const Navbar = () => {
                 </DisclosureButton>
               </div>
             )}
+            <ThemeToggle />
           </div>
         </DisclosurePanel>
       </>
