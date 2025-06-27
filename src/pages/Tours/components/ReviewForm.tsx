@@ -27,7 +27,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({ tourId, onReviewSubmitted }) =
   });
 
   const ratingValue = watch('rating');
-  const { mutate: createReview, isPending } = useCreateReview({
+  const { handleCreateReview, isPending } = useCreateReview({
     onSuccess: () => {
       reset();
       onReviewSubmitted();
@@ -39,7 +39,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({ tourId, onReviewSubmitted }) =
   };
 
   const onSubmit = (data: ReviewFormData) => {
-    createReview({ ...data, tour_id: tourId });
+    handleCreateReview({ ...data, tour_id: tourId });
   };
 
   return (
