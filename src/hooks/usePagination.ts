@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
+import { useCallback } from 'react';
 
 interface PaginationParams {
   defaultPage?: number;
@@ -24,39 +25,61 @@ export const usePagination = ({
   const sort = searchParams.get('sort') || defaultSort;
   const search = searchParams.get('search') || defaultSearch;
 
-  const setPage = (newPage: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('page', String(newPage));
-    setSearchParams(newParams);
-  };
+  const setPage = useCallback(
+    (newPage: number) => {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set('page', String(newPage));
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams],
+  );
 
-  const setLimit = (newLimit: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('limit', String(newLimit));
-    newParams.set('page', '1'); // reset page when limit changes
-    setSearchParams(newParams);
-  };
+  const setLimit = useCallback(
+    (newLimit: number) => {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set('limit', String(newLimit));
+      newParams.set('page', '1');
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams],
+  );
 
-  const setSort = (newSort: string) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('sort', newSort);
-    setSearchParams(newParams);
-  };
+  const setSort = useCallback(
+    (newSort: string) => {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set('sort', newSort);
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams],
+  );
 
-  const setSearch = (newSearch: string) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('search', newSearch);
-    newParams.set('page', '1');
-    setSearchParams(newParams);
-  };
+  const setSearch = useCallback(
+    (newSearch: string) => {
+      const newParams = new URLSearchParams(searchParams);
 
-  const goToNextPage = (totalPages: number) => {
-    if (page < totalPages) setPage(page + 1);
-  };
+      if (newSearch.trim()) {
+        newParams.set('page', '1');
+        newParams.set('search', newSearch);
+      } else {
+        newParams.set('page', '1');
+        newParams.delete('search');
+      }
 
-  const goToPrevPage = () => {
+      setSearchParams(newParams);
+    },
+    [searchParams, setSearchParams],
+  );
+
+  const goToNextPage = useCallback(
+    (totalPages: number) => {
+      if (page < totalPages) setPage(page + 1);
+    },
+    [page, setPage],
+  );
+
+  const goToPrevPage = useCallback(() => {
     if (page > 1) setPage(page - 1);
-  };
+  }, [page, setPage]);
 
   return {
     page,
