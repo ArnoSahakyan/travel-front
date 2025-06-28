@@ -5,7 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Preload and load font CSS (for better rendering performance) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" media="all" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    </noscript>
+
+    <link rel="preload" as="image" href="/hero.avif" type="image/avif" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WanderLuxe</title>
     <script>
@@ -13,8 +21,6 @@
       const savedTheme = localStorage.getItem('theme');
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-
-      // Apply the theme immediately to prevent flash
       document.documentElement.classList.add(theme);
     </script>
   </head>
