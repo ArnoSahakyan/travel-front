@@ -7,6 +7,7 @@ export * from './fetch.ts';
 export * from './legal.ts';
 export * from './navbar.ts';
 export * from './review.ts';
+export * from './search.ts';
 export * from './theme.ts';
 export * from './tour.ts';
 export * from './tour-card.ts';

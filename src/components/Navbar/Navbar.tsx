@@ -7,23 +7,23 @@ import {
   MenuItem,
   MenuItems,
 } from '@headlessui/react';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeToggle } from '../ThemeToggle';
 import { ROUTES, NavItem } from '../../shared';
 import { useAuthStore } from '../../store';
+import { GlobalSearch } from './GlobalSearch.tsx';
+
+const navigation: NavItem[] = [
+  { name: 'Destinations', href: ROUTES.DESTINATIONS },
+  { name: 'Tours', href: ROUTES.TOURS },
+  { name: 'Blog', href: ROUTES.BLOG },
+  { name: 'Contact', href: ROUTES.CONTACT },
+  { name: 'About', href: ROUTES.ABOUT },
+];
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
-
-  const navigation: NavItem[] = [
-    { name: 'Destinations', href: ROUTES.DESTINATIONS },
-    { name: 'Tours', href: ROUTES.TOURS },
-    { name: 'Blog', href: ROUTES.BLOG },
-    { name: 'Contact', href: ROUTES.CONTACT },
-    { name: 'About', href: ROUTES.ABOUT },
-  ];
 
   return (
     <Disclosure
@@ -64,21 +64,7 @@ export const Navbar = () => {
             </div>
 
             {/* Center - Search */}
-            <div className='flex flex-1 justify-center px-2 lg:ml-6 lg:justify-end'>
-              <div className='grid w-full max-w-lg grid-cols-1 lg:max-w-xs'>
-                <input
-                  name='search'
-                  type='search'
-                  placeholder='Search'
-                  aria-label='Search'
-                  className='col-start-1 row-start-1 block w-full rounded-md bg-gray-100 py-1.5 pr-3 pl-10 text-base text-text-light outline-none placeholder:text-secondary-light focus:bg-background-light focus:text-text-light focus:placeholder:text-secondary-light dark:bg-gray-700 dark:text-text-dark dark:placeholder-secondary-dark dark:focus:bg-gray-600 sm:text-sm/6'
-                />
-                <MagnifyingGlassIcon
-                  aria-hidden='true'
-                  className='pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-secondary-light dark:text-secondary-dark'
-                />
-              </div>
-            </div>
+            <GlobalSearch />
 
             {/* Right side - Mobile menu button and user profile */}
             <div className='flex lg:hidden'>
