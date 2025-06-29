@@ -10,6 +10,7 @@ export const Hero = () => {
           src='/hero.avif'
           alt='Beautiful travel destination'
           className='h-full w-full object-cover'
+          loading='eager'
         />
         <div className='absolute inset-0 bg-gradient-to-t from-background-dark/80 via-background-dark/30 to-transparent dark:from-background-dark/90 dark:via-background-dark/40' />
       </div>

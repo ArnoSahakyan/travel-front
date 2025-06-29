@@ -1,10 +1,21 @@
 import { useEffect } from 'react';
-import { BlogCard, EmptyState, ErrorState, LoadingState, Pagination } from '../../components';
+import {
+  BlogCard,
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  Pagination,
+  SearchInput,
+} from '../../components';
 import { usePagination } from '../../hooks';
 import { useBlogs } from '../../hooks';
+import { useSearchParams } from 'react-router-dom';
 
 const BlogPage = () => {
-  const { page, goToNextPage, goToPrevPage } = usePagination();
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+
+  const { page, setSearch, goToNextPage, goToPrevPage } = usePagination();
   const { data, isLoading, isError, error } = useBlogs();
   const totalPages = data?.totalPages || 1;
 
@@ -24,7 +35,15 @@ const BlogPage = () => {
             Travel stories, tips, and inspiration from our team and community
           </p>
         </div>
-
+        {/* Search Input */}
+        <div className='mb-12 max-w-2xl mx-auto'>
+          <SearchInput
+            initialValue={initialSearch}
+            onSearch={setSearch}
+            placeholder='Search blog posts by name or description'
+            debounceDelay={400}
+          />
+        </div>
         {/* Loading/Error/Empty States */}
         {isLoading ? (
           <LoadingState message='Loading blog posts...' />

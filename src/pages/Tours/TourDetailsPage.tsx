@@ -80,24 +80,26 @@ const TourDetailsPage = () => {
           <div className='lg:w-1/2 lg:sticky lg:top-24 lg:h-[calc(100vh-2rem)] lg:overflow-y-auto'>
             <PhotoProvider>
               <div className='mb-4'>
-                <Swiper
-                  spaceBetween={10}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  modules={[FreeMode, Thumbs]}
-                  className='rounded-lg overflow-hidden'
-                >
-                  {tour.images.map((image) => (
-                    <SwiperSlide key={image.image_id}>
-                      <PhotoView src={image.image_url}>
-                        <img
-                          src={image.image_url}
-                          alt={`Tour ${image.image_id}`}
-                          className='w-full h-auto max-h-[70vh] object-cover rounded-lg cursor-zoom-in'
-                        />
-                      </PhotoView>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {thumbsSwiper && !thumbsSwiper.destroyed && (
+                  <Swiper
+                    spaceBetween={10}
+                    thumbs={{ swiper: thumbsSwiper }}
+                    modules={[FreeMode, Thumbs]}
+                    className='rounded-lg overflow-hidden'
+                  >
+                    {tour.images.map((image) => (
+                      <SwiperSlide key={image.image_id}>
+                        <PhotoView src={image.image_url}>
+                          <img
+                            src={image.image_url}
+                            alt={`Tour ${image.image_id}`}
+                            className='w-full h-auto max-h-[70vh] object-cover rounded-lg cursor-zoom-in'
+                          />
+                        </PhotoView>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
               </div>
 
               <Swiper
