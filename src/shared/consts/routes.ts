@@ -9,6 +9,7 @@ export const ROUTES = {
   LEGAL: '/terms-and-conditions',
   NEWSLETTER_CONFIRM: '/newsletter/verify',
   AUTH: '/auth',
+  SEARCH: '/search',
   SIGNIN: '/sign-in',
   SIGNUP: '/sign-up',
   FORGOT_PASSWORD: '/forgot-password',

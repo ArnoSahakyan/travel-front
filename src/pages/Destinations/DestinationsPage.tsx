@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import {
   DestinationCard,
@@ -7,11 +7,15 @@ import {
   ErrorState,
   LoadingState,
   Pagination,
+  SearchInput,
 } from '../../components';
 import { useDestinations, usePagination } from '../../hooks';
 
 const DestinationsPage = () => {
-  const { page, goToNextPage, goToPrevPage } = usePagination();
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+
+  const { page, setSearch, goToNextPage, goToPrevPage } = usePagination();
   const { data, isLoading, isError, error } = useDestinations();
 
   const totalPages = data?.totalPages || 1;
@@ -32,7 +36,15 @@ const DestinationsPage = () => {
             Explore the world's most breathtaking countries
           </p>
         </div>
-
+        {/* Search Input */}
+        <div className='mb-12 max-w-2xl mx-auto'>
+          <SearchInput
+            initialValue={initialSearch}
+            onSearch={setSearch}
+            placeholder='Search destinations by name or description'
+            debounceDelay={400}
+          />
+        </div>
         {/* Loading/Error */}
         {isLoading ? (
           <LoadingState message='Loading destinations...' />

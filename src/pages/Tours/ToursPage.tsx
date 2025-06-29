@@ -1,11 +1,22 @@
-import { EmptyState, ErrorState, LoadingState, Pagination, TourCard } from '../../components';
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState,
+  Pagination,
+  SearchInput,
+  TourCard,
+} from '../../components';
 import { usePagination } from '../../hooks';
 import { useEffect } from 'react';
 import { useTours } from '../../hooks';
 import { getDuration } from '../../utils';
+import { useSearchParams } from 'react-router-dom';
 
 const ToursPage = () => {
-  const { page, goToNextPage, goToPrevPage } = usePagination();
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+
+  const { page, setSearch, goToNextPage, goToPrevPage } = usePagination();
   const { data, isLoading, isError, error } = useTours();
 
   const totalPages = data?.totalPages || 1;
@@ -17,13 +28,22 @@ const ToursPage = () => {
   return (
     <section className='py-12 bg-background-light dark:bg-background-dark'>
       <div className='container mx-auto px-4 lg:px-8'>
-        <div className='text-center mb-12'>
-          <h2 className='text-3xl font-bold text-primary-light dark:text-text-dark mb-4'>
+        <div className='mx-auto max-w-2xl text-center mb-12'>
+          <h1 className='text-4xl font-bold tracking-tight text-primary-light dark:text-text-dark sm:text-5xl'>
             Featured Tours
-          </h2>
-          <p className='text-secondary-light dark:text-secondary-dark max-w-2xl mx-auto'>
+          </h1>
+          <p className='mt-4 text-lg text-secondary-light dark:text-secondary-dark'>
             Discover our most popular travel experiences curated just for you
           </p>
+        </div>
+        {/* Search Input */}
+        <div className='mb-12 max-w-2xl mx-auto'>
+          <SearchInput
+            initialValue={initialSearch}
+            onSearch={setSearch}
+            placeholder='Search tours by name or description'
+            debounceDelay={400}
+          />
         </div>
         {isLoading ? (
           <LoadingState message='Loading tours...' />
