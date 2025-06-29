@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { useDebounce } from '../../hooks'; // adjust the import path as needed
 
 interface SearchInputProps {
-  onSearch: (value: string) => void;
+  value?: string;
   initialValue?: string;
+  onChange?: (val: string) => void;
+  onSearch?: (value: string) => void;
   placeholder?: string;
   debounceDelay?: number;
   className?: string;
@@ -12,30 +14,42 @@ interface SearchInputProps {
 }
 
 export const SearchInput = ({
-  onSearch,
+  value,
   initialValue = '',
+  onChange,
+  onSearch,
   placeholder = 'Search...',
   debounceDelay = 500,
   className = '',
   onFocus,
 }: SearchInputProps) => {
-  const [value, setValue] = useState(initialValue);
-  const debouncedValue = useDebounce(value, debounceDelay);
+  const isControlled = value !== undefined;
+  const [internalValue, setInternalValue] = useState(initialValue);
 
-  // Trigger callback when debounced value changes
+  const effectiveValue = isControlled ? value! : internalValue;
+  const debouncedValue = useDebounce(effectiveValue, debounceDelay);
+
   useEffect(() => {
-    if (debouncedValue !== initialValue) {
+    if (onSearch) {
       onSearch(debouncedValue);
     }
-  }, [debouncedValue, initialValue, onSearch]);
+  }, [debouncedValue, onSearch]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.trimStart();
+    if (isControlled) {
+      onChange?.(val);
+    } else {
+      setInternalValue(val);
+    }
+  };
 
   return (
     <div className='relative w-full'>
-      <p className='text-white'>{value}</p>
       <input
         type='text'
-        value={value}
-        onChange={(e) => setValue(e.target.value.trimStart())}
+        value={effectiveValue}
+        onChange={handleChange}
         onFocus={onFocus}
         placeholder={placeholder}
         className={`form-input pl-10 pr-4 py-2 w-full rounded-lg ${className}`}

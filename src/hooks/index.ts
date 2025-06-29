@@ -5,7 +5,7 @@ export * from './useBookings.ts';
 export * from './useDebounce.ts';
 export * from './useDestinations.ts';
 export * from './useFavorites.ts';
-export * from './useGlobalSearch.tsx';
+export * from './useGlobalSearch.ts';
 export * from './usePagination.ts';
 export * from './useRehydrateAuth.ts';
 export * from './useReviews.ts';

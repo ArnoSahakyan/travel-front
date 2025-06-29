@@ -27,47 +27,51 @@ export const usePagination = ({
 
   const setPage = useCallback(
     (newPage: number) => {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('page', String(newPage));
-      setSearchParams(newParams);
+      const currentParams = new URLSearchParams(window.location.search); // ✅ latest values
+      currentParams.set('page', String(newPage));
+      setSearchParams(currentParams);
     },
-    [searchParams, setSearchParams],
+    [setSearchParams],
   );
 
   const setLimit = useCallback(
     (newLimit: number) => {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('limit', String(newLimit));
-      newParams.set('page', '1');
-      setSearchParams(newParams);
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set('limit', String(newLimit));
+      currentParams.set('page', '1'); // this is okay: changing limit should reset page
+      setSearchParams(currentParams);
     },
-    [searchParams, setSearchParams],
-  );
-
-  const setSort = useCallback(
-    (newSort: string) => {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set('sort', newSort);
-      setSearchParams(newParams);
-    },
-    [searchParams, setSearchParams],
+    [setSearchParams],
   );
 
   const setSearch = useCallback(
     (newSearch: string) => {
-      const newParams = new URLSearchParams(searchParams);
+      const currentParams = new URLSearchParams(window.location.search);
+      const currentSearch = currentParams.get('search') || '';
 
-      if (newSearch.trim()) {
-        newParams.set('page', '1');
-        newParams.set('search', newSearch);
-      } else {
-        newParams.set('page', '1');
-        newParams.delete('search');
+      // ❗ Only reset page if search actually changed
+      if (newSearch.trim() !== currentSearch.trim()) {
+        currentParams.set('page', '1');
       }
 
-      setSearchParams(newParams);
+      if (newSearch.trim()) {
+        currentParams.set('search', newSearch);
+      } else {
+        currentParams.delete('search');
+      }
+
+      setSearchParams(currentParams);
     },
-    [searchParams, setSearchParams],
+    [setSearchParams],
+  );
+
+  const setSort = useCallback(
+    (newSort: string) => {
+      const currentParams = new URLSearchParams(window.location.search);
+      currentParams.set('sort', newSort);
+      setSearchParams(currentParams);
+    },
+    [setSearchParams],
   );
 
   const goToNextPage = useCallback(

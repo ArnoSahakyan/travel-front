@@ -1,18 +1,13 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from '@headlessui/react';
-import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link, NavLink } from 'react-router-dom';
+import { Disclosure, DisclosureButton } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 import { ThemeToggle } from '../ThemeToggle';
 import { ROUTES, NavItem } from '../../shared';
 import { useAuthStore } from '../../store';
 import { GlobalSearch } from './GlobalSearch.tsx';
+import { NavbarDesktopLinks } from './NavbarDesktopLinks.tsx';
+import { NavbarMobileMenu } from './NavbarMenuMobile.tsx';
+import { UserProfileDropdown } from './UserProfileDropdown.tsx';
 
 const navigation: NavItem[] = [
   { name: 'Destinations', href: ROUTES.DESTINATIONS },
@@ -23,7 +18,7 @@ const navigation: NavItem[] = [
 ];
 
 export const Navbar = () => {
-  const { user, isAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   return (
     <Disclosure
@@ -42,25 +37,7 @@ export const Navbar = () => {
                   </span>
                 </Link>
               </div>
-              <div className='hidden lg:ml-6 lg:block'>
-                <div className='flex space-x-4'>
-                  {navigation.map((item) => (
-                    <NavLink
-                      key={item.name}
-                      to={item.href}
-                      className={({ isActive }) =>
-                        `rounded-md px-3 py-2 text-sm font-medium ${
-                          isActive
-                            ? 'bg-background-light text-primary-light dark:bg-primary-dark/20 dark:text-primary-dark'
-                            : 'text-background-light hover:bg-background-light hover:text-primary-light dark:text-primary-dark dark:hover:bg-secondary-light dark:hover:text-primary-dark'
-                        }`
-                      }
-                    >
-                      {item.name}
-                    </NavLink>
-                  ))}
-                </div>
-              </div>
+              <NavbarDesktopLinks items={navigation} />
             </div>
 
             {/* Center - Search */}
@@ -82,35 +59,7 @@ export const Navbar = () => {
 
                 {/* Profile dropdown */}
                 {isAuthenticated ? (
-                  <Menu as='div' className='relative shrink-0'>
-                    <div>
-                      <MenuButton className='p-2 relative flex rounded-lg text-sm focus:outline-none text-background-light hover:text-primary-light hover:bg-background-light dark:text-background-light dark:hover:bg-secondary-light'>
-                        <span className='sr-only'>Open user menu</span>
-                        <UserIcon className='block size-6' />
-                      </MenuButton>
-                    </div>
-                    <MenuItems
-                      transition
-                      className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-primary-light py-1 shadow-lg ring-1 ring-black/5 dark:bg-background-dark'
-                    >
-                      <MenuItem>
-                        <Link
-                          to={ROUTES.PROFILE_INFO}
-                          className='block px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light dark:text-primary-dark'
-                        >
-                          Your Profile
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <button
-                          onClick={logout}
-                          className='block w-full text-left px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light dark:text-primary-dark'
-                        >
-                          Sign Out
-                        </button>
-                      </MenuItem>
-                    </MenuItems>
-                  </Menu>
+                  <UserProfileDropdown />
                 ) : (
                   <Link
                     to={ROUTES.AUTH + ROUTES.SIGNIN}
@@ -125,69 +74,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile menu */}
-        <DisclosurePanel className='lg:hidden'>
-          <div className='space-y-1 px-2 pt-2 pb-3'>
-            {navigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as={NavLink}
-                to={item.href}
-                className={({ isActive }: { isActive: boolean }) =>
-                  `block w-full rounded-md px-3 py-2 text-base font-medium ${
-                    isActive
-                      ? 'bg-background-light text-primary-light dark:bg-primary-dark/10 dark:text-primary-dark'
-                      : 'text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-primary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
-                  }`
-                }
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
-          </div>
-          <div className='flex items-end justify-between border-t border-gray-200 pt-4 pb-3 dark:border-gray-700'>
-            {isAuthenticated ? (
-              <div className='grow'>
-                <div className='items-center px-5'>
-                  <div className='ml-3'>
-                    <div className='text-base font-medium text-background-light dark:text-text-dark'>
-                      {user?.full_name}
-                    </div>
-                    <div className='text-sm font-medium text-background-light/80 dark:text-secondary-dark'>
-                      {user?.email}
-                    </div>
-                  </div>
-                </div>
-                <div className='grow mt-3 space-y-1 px-2'>
-                  <DisclosureButton
-                    as={Link}
-                    to={ROUTES.PROFILE_INFO}
-                    className='block w-full rounded-md px-3 py-2 text-base font-medium text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-secondary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
-                  >
-                    Your Profile
-                  </DisclosureButton>
-                  <DisclosureButton
-                    as='button'
-                    onClick={logout}
-                    className='block w-full rounded-md px-3 py-2 text-base font-medium text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-secondary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
-                  >
-                    Sign Out
-                  </DisclosureButton>
-                </div>
-              </div>
-            ) : (
-              <div className='grow space-y-1 px-2'>
-                <DisclosureButton
-                  as={Link}
-                  to={ROUTES.AUTH + ROUTES.SIGNIN}
-                  className='block w-full rounded-md px-3 py-2 text-base font-medium text-background-light hover:bg-gray-100 hover:text-primary-light dark:text-secondary-dark dark:hover:bg-gray-700 dark:hover:text-primary-dark'
-                >
-                  Login
-                </DisclosureButton>
-              </div>
-            )}
-            <ThemeToggle />
-          </div>
-        </DisclosurePanel>
+        <NavbarMobileMenu navigation={navigation} />
       </>
     </Disclosure>
   );
