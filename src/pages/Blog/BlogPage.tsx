@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BlogCard, EmptyState, ErrorState, LoadingState, Pagination } from '../../components';
 import { usePagination } from '../../hooks';
-import { useBlogs } from '../../hooks/useBlogs.ts';
+import { useBlogs } from '../../hooks';
 
 const BlogPage = () => {
   const { page, goToNextPage, goToPrevPage } = usePagination();
