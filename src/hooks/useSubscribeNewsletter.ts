@@ -2,12 +2,24 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   checkNewsletterStatus,
   confirmNewsletterSubscription,
+  getAllNewsletterSubscribers,
   subscribeToNewsletter,
   unsubscribeNewsletter,
 } from '../api';
 import { useToast } from './useToast.ts';
 import { AxiosError } from 'axios';
 import { newsletterKeys } from '../queries';
+import { useMergedFilters } from '../utils';
+import { IFetchFilters } from '../shared';
+
+export const useNewsletterSubscribers = (externalFilters?: Partial<IFetchFilters>) => {
+  const filters = useMergedFilters(externalFilters, 20);
+
+  return useQuery({
+    queryKey: newsletterKeys.list(filters),
+    queryFn: () => getAllNewsletterSubscribers(filters),
+  });
+};
 
 export const useSubscribeNewsletter = () => {
   const queryClient = useQueryClient();
@@ -54,31 +66,38 @@ export const useUnsubscribeNewsletter = () => {
   const { showSuccess, showError } = useToast();
 
   return useMutation({
-    mutationFn: unsubscribeNewsletter,
+    mutationFn: (email?: string) => unsubscribeNewsletter(email),
 
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: newsletterKeys.status() });
-
-      const previous = queryClient.getQueryData(newsletterKeys.status());
-
-      queryClient.setQueryData(newsletterKeys.status(), { subscribed: false });
-
-      return { previous };
+    onMutate: async (email) => {
+      if (!email) {
+        await queryClient.cancelQueries({ queryKey: newsletterKeys.status() });
+        const previous = queryClient.getQueryData(newsletterKeys.status());
+        queryClient.setQueryData(newsletterKeys.status(), { subscribed: false });
+        return { previous };
+      }
+      return {};
     },
 
-    onSuccess: () => {
-      showSuccess('You have unsubscribed from the newsletter.');
+    onSuccess: (_data, email) => {
+      showSuccess(
+        email
+          ? `Unsubscribed ${email} from newsletter.`
+          : 'You have unsubscribed from the newsletter.',
+      );
     },
 
-    onError: (_err, _vars, context) => {
-      if (context?.previous) {
+    onError: (_error, email, context) => {
+      if (!email && context?.previous) {
         queryClient.setQueryData(newsletterKeys.status(), context.previous);
       }
       showError('Unsubscription failed. Please try again.');
     },
 
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: newsletterKeys.status() });
+    onSettled: (_data, _error, email) => {
+      if (!email) {
+        queryClient.invalidateQueries({ queryKey: newsletterKeys.status() });
+      }
+      queryClient.invalidateQueries({ queryKey: newsletterKeys.all });
     },
   });
 };

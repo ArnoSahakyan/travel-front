@@ -1,4 +1,14 @@
 import { api, public_api } from './axios.ts';
+import { IFetchFilters, INewsletterSubscribersResponse } from '../shared';
+
+export const getAllNewsletterSubscribers = async (
+  filters: IFetchFilters,
+): Promise<INewsletterSubscribersResponse> => {
+  const response = await api.get('/newsletter/all', {
+    params: filters,
+  });
+  return response.data;
+};
 
 export const subscribeToNewsletter = async (email: string) => {
   const response = await public_api.post('/newsletter/subscribe', { email });
@@ -17,7 +27,10 @@ export const checkNewsletterStatus = async (): Promise<{ subscribed: boolean }> 
   return response.data;
 };
 
-export const unsubscribeNewsletter = async (): Promise<{ message: string }> => {
-  const response = await api.post('/newsletter/unsubscribe');
+export const unsubscribeNewsletter = async (email?: string): Promise<{ message: string }> => {
+  const url = email
+    ? `/newsletter/unsubscribe?email=${encodeURIComponent(email)}`
+    : '/newsletter/unsubscribe';
+  const response = await api.post(url);
   return response.data;
 };
