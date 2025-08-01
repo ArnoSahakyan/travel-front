@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { Loader, ProtectedRoute, UnprotectedRoute } from '../components';
+import { AdminRoute } from '../admin/components';
 import { ROUTES } from '../shared';
 import { lazy, ReactNode, Suspense } from 'react';
 
@@ -27,11 +28,14 @@ const SignInPage = lazy(() => import('../pages/Auth/SignInPage'));
 const ForgotPasswordPage = lazy(() => import('../pages/Auth/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('../pages/Auth/ResetPasswordPage.tsx'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFoundPage.tsx'));
-const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
-const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
 const FavoritesPage = lazy(() => import('../pages/Profile/FavoritesPage.tsx'));
+const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
+const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
+const AdminLayout = lazy(() => import('../admin/pages/AdminLayout.tsx'));
+
+const CategoriesPage = lazy(() => import('../admin/pages/Categories/CategoriesPage.tsx'));
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -77,6 +81,26 @@ const routes: RouteObject[] = [
             element: withSuspense(<BookingDetailPage />),
           },
           { path: ROUTES.PROFILE_FAVORITES, element: withSuspense(<FavoritesPage />) },
+        ],
+      },
+    ],
+  },
+  {
+    element: <AdminRoute />,
+    children: [
+      {
+        path: ROUTES.ADMIN,
+        element: withSuspense(<AdminLayout />),
+        children: [
+          { path: ROUTES.ADMIN_DASHBOARD, element: withSuspense(<Account />) },
+          { path: ROUTES.ADMIN_USERS, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<CategoriesPage />) },
+          { path: ROUTES.ADMIN_DESTINATIONS, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_TOURS, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_NEWSLETTER, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_BLOG, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<BookingsPage />) },
         ],
       },
     ],

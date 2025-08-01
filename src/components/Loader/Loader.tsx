@@ -2,11 +2,11 @@ export const Loader = () => {
   return (
     <div
       role='status'
-      className='size-full min-h-screen flex items-center justify-center bg-primary-dark dark:bg-background-dark'
+      className='size-full min-h-screen flex items-center justify-center bg-background-light dark:bg-background-dark'
     >
       <svg
         aria-hidden='true'
-        className='w-20 h-20 animate-spin text-background-light dark:text-secondary-light fill-primary-light dark:fill-primary-dark'
+        className='w-20 h-20 animate-spin text-primary-light dark:text-secondary-light fill-text-light dark:fill-primary-dark'
         viewBox='0 0 100 101'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
