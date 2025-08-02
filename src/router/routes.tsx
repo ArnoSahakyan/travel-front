@@ -35,6 +35,7 @@ const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const AdminLayout = lazy(() => import('../admin/pages/AdminLayout.tsx'));
 
+const AdminHomePage = lazy(() => import('../admin/pages/AdminHome/AdminHomePage.tsx'));
 const CategoriesPage = lazy(() => import('../admin/pages/Categories/CategoriesPage.tsx'));
 const NewsletterPage = lazy(() => import('../admin/pages/Newsletter/NewsletterPage.tsx'));
 
@@ -93,6 +94,7 @@ const routes: RouteObject[] = [
         path: ROUTES.ADMIN,
         element: withSuspense(<AdminLayout />),
         children: [
+          { path: '', element: withSuspense(<AdminHomePage />) },
           { path: ROUTES.ADMIN_DASHBOARD, element: withSuspense(<Account />) },
           { path: ROUTES.ADMIN_USERS, element: withSuspense(<BookingsPage />) },
           { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<CategoriesPage />) },

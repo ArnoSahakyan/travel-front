@@ -61,6 +61,7 @@ const AdminLayout = () => {
               </div>
             </TransitionChild>
             <SidebarContent
+              homePage={ROUTES.ADMIN}
               logout={logout}
               navigation={adminNavigation}
               onLinkClick={() => setSidebarOpen(false)}
@@ -72,7 +73,12 @@ const AdminLayout = () => {
 
       {/* Desktop sidebar */}
       <div className='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
-        <SidebarContent logout={logout} navigation={adminNavigation} title='WanderLuxe Admin' />
+        <SidebarContent
+          homePage={ROUTES.ADMIN}
+          logout={logout}
+          navigation={adminNavigation}
+          title='WanderLuxe Admin'
+        />
       </div>
 
       {/* Top bar */}
@@ -85,7 +91,7 @@ const AdminLayout = () => {
         </button>
       </div>
 
-      <main className='py-10 lg:pl-72 bg-background-light dark:bg-background-dark min-h-screen'>
+      <main className=' lg:pl-72 bg-background-light dark:bg-background-dark min-h-screen'>
         <div className='px-4 sm:px-6 lg:px-8'>
           <Outlet />
         </div>

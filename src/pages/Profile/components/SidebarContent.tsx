@@ -11,6 +11,7 @@ interface NavigationItem {
 }
 
 interface SideBarProps {
+  homePage?: string;
   onLinkClick?: () => void;
   logout: () => void;
   navigation: NavigationItem[];
@@ -20,6 +21,7 @@ interface SideBarProps {
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
 export const SidebarContent: FC<SideBarProps> = ({
+  homePage = ROUTES.HOME,
   onLinkClick,
   logout,
   navigation,
@@ -28,7 +30,7 @@ export const SidebarContent: FC<SideBarProps> = ({
   <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-primary-light dark:bg-background-dark px-6 pb-2'>
     <div className='flex justify-between mt-4 h-16 shrink-0 items-start'>
       <Link
-        to={ROUTES.HOME}
+        to={homePage}
         onClick={onLinkClick}
         className='text-2xl font-bold text-background-light dark:text-text-dark'
       >

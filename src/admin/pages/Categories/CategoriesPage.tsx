@@ -6,6 +6,7 @@ import {
   useDeleteCategory,
   useUpdateCategory,
 } from '../../../hooks';
+import { EmptyState, ErrorState, LoadingState } from '../../../components';
 
 interface ICategory {
   category_id: number;
@@ -16,7 +17,7 @@ export default function CategoriesPage() {
   const [formName, setFormName] = useState('');
   const [editId, setEditId] = useState<number | null>(null);
 
-  const { data: categories = [], isLoading } = useCategories();
+  const { data: categories = [], isLoading, isError, error } = useCategories();
   const createCategory = useCreateCategory();
   const updateCategory = useUpdateCategory();
   const deleteCategory = useDeleteCategory();
@@ -45,7 +46,7 @@ export default function CategoriesPage() {
   };
 
   return (
-    <div className='bg-background-light dark:bg-background-dark'>
+    <div className='bg-background-light dark:bg-background-dark pt-10'>
       <h2 className='text-2xl font-bold text-primary-light dark:text-text-dark mb-6'>Categories</h2>
 
       <form
@@ -85,13 +86,11 @@ export default function CategoriesPage() {
       </form>
 
       {isLoading ? (
-        <div className='text-center py-8'>
-          <p className='text-secondary-light dark:text-secondary-dark'>Loading categories...</p>
-        </div>
-      ) : categories.length === 0 ? (
-        <div className='text-center py-8'>
-          <p className='text-secondary-light dark:text-secondary-dark'>No categories found.</p>
-        </div>
+        <LoadingState message='Loading categories...' />
+      ) : isError ? (
+        <ErrorState description={error && (error as Error).message} />
+      ) : categories?.length === 0 ? (
+        <EmptyState title='No categories available' description="We couldn't find any categories" />
       ) : (
         <div className='overflow-x-auto'>
           <table className='w-full'>

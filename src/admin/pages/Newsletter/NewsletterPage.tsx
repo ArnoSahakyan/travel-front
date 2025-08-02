@@ -15,7 +15,7 @@ export default function NewsletterPage() {
   };
 
   return (
-    <div className='bg-background-light dark:bg-background-dark'>
+    <div className='bg-background-light dark:bg-background-dark pt-10'>
       <h2 className='text-2xl font-bold text-primary-light dark:text-text-dark mb-6'>
         Newsletter Subscribers
       </h2>
