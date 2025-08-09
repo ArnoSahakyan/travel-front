@@ -24,6 +24,7 @@ export const ROUTES = {
   ADMIN_USERS: '/admin/users',
   ADMIN_CATEGORIES: '/admin/categories',
   ADMIN_DESTINATIONS: '/admin/destinations',
+  ADMIN_DESTINATIONS_NEW: '/admin/destinations/new',
   ADMIN_TOURS: '/admin/tours',
   ADMIN_NEWSLETTER: '/admin/newsletter',
   ADMIN_BLOG: '/admin/blog',

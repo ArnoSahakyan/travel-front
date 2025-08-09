@@ -36,8 +36,17 @@ const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const AdminLayout = lazy(() => import('../admin/pages/AdminLayout.tsx'));
 
 const AdminHomePage = lazy(() => import('../admin/pages/AdminHome/AdminHomePage.tsx'));
-const CategoriesPage = lazy(() => import('../admin/pages/Categories/CategoriesPage.tsx'));
-const NewsletterPage = lazy(() => import('../admin/pages/Newsletter/NewsletterPage.tsx'));
+const AdminCategoriesPage = lazy(() => import('../admin/pages/Categories/CategoriesPage.tsx'));
+const AdminNewsletterPage = lazy(() => import('../admin/pages/Newsletter/NewsletterPage.tsx'));
+const AdminDestinationsPage = lazy(
+  () => import('../admin/pages/Destinations/DestinationsPage.tsx'),
+);
+const AdminDestinationCreatePage = lazy(
+  () => import('../admin/pages/Destinations/DestinationCreatePage.tsx'),
+);
+const AdminDestinationUpdatePage = lazy(
+  () => import('../admin/pages/Destinations/DestinationUpdatePage.tsx'),
+);
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -96,14 +105,22 @@ const routes: RouteObject[] = [
         children: [
           { path: '', element: withSuspense(<AdminHomePage />) },
           { path: ROUTES.ADMIN_DASHBOARD, element: withSuspense(<Account />) },
-          { path: ROUTES.ADMIN_USERS, element: withSuspense(<BookingsPage />) },
-          { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<CategoriesPage />) },
-          { path: ROUTES.ADMIN_DESTINATIONS, element: withSuspense(<BookingsPage />) },
-          { path: ROUTES.ADMIN_TOURS, element: withSuspense(<BookingsPage />) },
-          { path: ROUTES.ADMIN_NEWSLETTER, element: withSuspense(<NewsletterPage />) },
-          { path: ROUTES.ADMIN_BLOG, element: withSuspense(<BookingsPage />) },
-          { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<BookingsPage />) },
-          { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<BookingsPage />) },
+          { path: ROUTES.ADMIN_USERS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<AdminCategoriesPage />) },
+          { path: ROUTES.ADMIN_DESTINATIONS, element: withSuspense(<AdminDestinationsPage />) },
+          {
+            path: `${ROUTES.ADMIN_DESTINATIONS}/:destinationId`,
+            element: withSuspense(<AdminDestinationUpdatePage />),
+          },
+          {
+            path: `${ROUTES.ADMIN_DESTINATIONS}/new`,
+            element: withSuspense(<AdminDestinationCreatePage />),
+          },
+          { path: ROUTES.ADMIN_TOURS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_NEWSLETTER, element: withSuspense(<AdminNewsletterPage />) },
+          { path: ROUTES.ADMIN_BLOG, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<AdminHomePage />) },
         ],
       },
     ],
