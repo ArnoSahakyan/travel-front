@@ -18,6 +18,7 @@ import {
 } from '../api';
 import { destinationKeys } from '../queries';
 import { useMergedFilters } from '../utils';
+import { AxiosError } from 'axios';
 
 export const useDestinations = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, DESTINATIONS_LIMIT);
@@ -50,7 +51,10 @@ export const useCreateDestination = () => {
       showSuccess('Destination created');
       navigate(ROUTES.ADMIN_DESTINATIONS);
     },
-    onError: () => showError('Failed to create destination'),
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to create destination');
+    },
   });
 };
 
@@ -65,7 +69,10 @@ export const useUpdateDestination = (id: number) => {
       queryClient.invalidateQueries({ queryKey: destinationKeys.detail(id) });
       showSuccess('Destination updated');
     },
-    onError: () => showError('Failed to update destination'),
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to update destination');
+    },
   });
 };
 
@@ -81,6 +88,9 @@ export const useDeleteDestination = () => {
       showSuccess('Destination deleted');
       navigate(ROUTES.ADMIN_DESTINATIONS);
     },
-    onError: () => showError('Failed to delete destination'),
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to delete destination');
+    },
   });
 };

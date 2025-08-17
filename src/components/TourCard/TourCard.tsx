@@ -11,6 +11,7 @@ export const TourCard: FC<ITourCardProps> = ({
   imageUrl,
   price,
   duration,
+  mode = 'public',
 }) => {
   return (
     <div className='relative flex flex-col rounded-xl bg-background-light dark:bg-background-dark shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-transform hover:scale-[1.02] hover:shadow-lg'>
@@ -34,12 +35,21 @@ export const TourCard: FC<ITourCardProps> = ({
         </p>
 
         <div className='mt-auto'>
-          <Link
-            to={`${ROUTES.TOURS}/${id}`}
-            className='w-full inline-flex justify-center rounded-md bg-primary-light dark:bg-primary-dark px-4 py-2 text-sm font-medium text-background-light hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-background-light focus-visible:ring-opacity-75 transition-colors'
-          >
-            View Tour
-          </Link>
+          {mode === 'public' ? (
+            <Link
+              to={`${ROUTES.TOURS}/${id}`}
+              className='w-full inline-flex justify-center rounded-md bg-primary-light dark:bg-primary-dark px-4 py-2 text-sm font-medium text-background-light hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-background-light focus-visible:ring-opacity-75 transition-colors'
+            >
+              View Tour
+            </Link>
+          ) : (
+            <Link
+              to={`${ROUTES.ADMIN_TOURS}/${id}`}
+              className='w-full inline-flex justify-center rounded-md bg-primary-light dark:bg-primary-dark px-4 py-2 text-sm font-medium text-background-light hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-background-light focus-visible:ring-opacity-75 transition-colors'
+            >
+              Edit Tour
+            </Link>
+          )}
         </div>
       </div>
     </div>

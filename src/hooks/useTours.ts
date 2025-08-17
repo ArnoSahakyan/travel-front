@@ -1,9 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
-import { ITourResponse, ITourFilters, TOURS_LIMIT, ISingleTour } from '../shared';
-import { fetchTour, fetchTours } from '../api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  ITourResponse,
+  ITourFilters,
+  TOURS_LIMIT,
+  ISingleTour,
+  TourCreatePayload,
+  TourUpdatePayload,
+  TourCreateImagePayload,
+  ROUTES,
+} from '../shared';
+import {
+  addTourImage,
+  createTour,
+  deleteTour,
+  deleteTourImage,
+  fetchTour,
+  fetchTours,
+  setCoverImage,
+  updateTour,
+} from '../api';
 import { tourKeys } from '../queries';
 import { useAuthStore } from '../store';
+import { useToast } from './useToast.ts';
+import { AxiosError } from 'axios';
 
 export const useTours = (externalFilters?: Partial<ITourFilters>) => {
   const [searchParams] = useSearchParams();
@@ -38,5 +58,134 @@ export const useTour = (id: number) => {
     queryFn: () => fetchTour(id, user?.user_id),
     enabled: !!id,
     staleTime: 1000 * 60 * 5,
+  });
+};
+
+/**
+ * Create tour
+ */
+export const useCreateTour = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { showSuccess, showError } = useToast();
+
+  return useMutation({
+    mutationFn: (payload: TourCreatePayload) => createTour(payload),
+    onSuccess: () => {
+      showSuccess('Tour created successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.all });
+      navigate(ROUTES.ADMIN_TOURS);
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to create tour');
+    },
+  });
+};
+
+/**
+ * Update tour details
+ */
+export const useUpdateTour = (id: number) => {
+  const queryClient = useQueryClient();
+  const { showSuccess, showError } = useToast();
+  const user = useAuthStore((state) => state.user);
+
+  return useMutation({
+    mutationFn: (payload: TourUpdatePayload) => updateTour(id, payload),
+    onSuccess: () => {
+      showSuccess('Tour updated successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.all });
+      queryClient.invalidateQueries({ queryKey: tourKeys.detail(id, user?.user_id) });
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to update tour');
+    },
+  });
+};
+
+/**
+ * Delete a tour
+ */
+export const useDeleteTour = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { showSuccess, showError } = useToast();
+
+  return useMutation({
+    mutationFn: (tourId: number) => deleteTour(tourId),
+    onSuccess: () => {
+      showSuccess('Tour deleted successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.all });
+      navigate(ROUTES.ADMIN_TOURS);
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to delete tour');
+    },
+  });
+};
+
+/**
+ * Add images to a tour
+ */
+export const useAddTourImage = (tourId: number) => {
+  const queryClient = useQueryClient();
+  const { showSuccess, showError } = useToast();
+  const user = useAuthStore((state) => state.user);
+
+  return useMutation({
+    mutationFn: (payload: TourCreateImagePayload) => addTourImage(tourId, payload),
+    onSuccess: () => {
+      showSuccess('Image(s) added successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to add image(s)');
+    },
+  });
+};
+
+/**
+ * Set tour cover image
+ */
+export const useSetTourCoverImage = (tourId: number) => {
+  const queryClient = useQueryClient();
+  const { showSuccess, showError } = useToast();
+  const user = useAuthStore((state) => state.user);
+
+  return useMutation({
+    mutationFn: (imageId: number) => setCoverImage({ tour_id: tourId, image_id: imageId }),
+    onSuccess: () => {
+      showSuccess('Image set as cover successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to set cover image');
+    },
+  });
+};
+
+/**
+ * Delete a tour image
+ */
+export const useDeleteTourImage = (tourId: number) => {
+  const queryClient = useQueryClient();
+  const { showSuccess, showError } = useToast();
+  const user = useAuthStore((state) => state.user);
+
+  return useMutation({
+    mutationFn: (imageId: number) => deleteTourImage(tourId, imageId),
+    onSuccess: () => {
+      showSuccess('Image deleted successfully');
+      queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to delete image');
+    },
   });
 };

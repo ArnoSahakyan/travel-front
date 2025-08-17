@@ -5,4 +5,5 @@ export interface ITourCardProps {
   imageUrl: string;
   price: number;
   duration: number;
+  mode?: 'public' | 'admin';
 }

@@ -6,3 +6,4 @@ export * from './newsletter.schema.ts';
 export * from './review.schema.ts';
 export * from './sign-in.schema.ts';
 export * from './sign-up.schema.ts';
+export * from './tour.schema.ts';

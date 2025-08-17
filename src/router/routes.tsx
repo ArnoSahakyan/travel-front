@@ -29,6 +29,7 @@ const ForgotPasswordPage = lazy(() => import('../pages/Auth/ForgotPasswordPage')
 const ResetPasswordPage = lazy(() => import('../pages/Auth/ResetPasswordPage.tsx'));
 const NotFoundPage = lazy(() => import('../pages/NotFound/NotFoundPage.tsx'));
 const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
+const ProfileHomePage = lazy(() => import('../pages/Profile/ProfileHomePage.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
 const FavoritesPage = lazy(() => import('../pages/Profile/FavoritesPage.tsx'));
 const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
@@ -47,6 +48,9 @@ const AdminDestinationCreatePage = lazy(
 const AdminDestinationUpdatePage = lazy(
   () => import('../admin/pages/Destinations/DestinationUpdatePage.tsx'),
 );
+const AdminToursPage = lazy(() => import('../admin/pages/Tours/ToursPage.tsx'));
+const AdminTourCreatePage = lazy(() => import('../admin/pages/Tours/ToursCreatePage.tsx'));
+const AdminTourUpdatePage = lazy(() => import('../admin/pages/Tours/ToursUpdatePage.tsx'));
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -85,6 +89,7 @@ const routes: RouteObject[] = [
         path: ROUTES.PROFILE,
         element: withSuspense(<ProfileLayout />),
         children: [
+          { path: '', element: withSuspense(<ProfileHomePage />) },
           { path: ROUTES.PROFILE_INFO, element: withSuspense(<Account />) },
           { path: ROUTES.PROFILE_BOOKINGS, element: withSuspense(<BookingsPage />) },
           {
@@ -113,10 +118,18 @@ const routes: RouteObject[] = [
             element: withSuspense(<AdminDestinationUpdatePage />),
           },
           {
-            path: `${ROUTES.ADMIN_DESTINATIONS}/new`,
+            path: ROUTES.ADMIN_DESTINATIONS_NEW,
             element: withSuspense(<AdminDestinationCreatePage />),
           },
-          { path: ROUTES.ADMIN_TOURS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_TOURS, element: withSuspense(<AdminToursPage />) },
+          {
+            path: `${ROUTES.ADMIN_TOURS}/:tourId`,
+            element: withSuspense(<AdminTourUpdatePage />),
+          },
+          {
+            path: ROUTES.ADMIN_TOURS_NEW,
+            element: withSuspense(<AdminTourCreatePage />),
+          },
           { path: ROUTES.ADMIN_NEWSLETTER, element: withSuspense(<AdminNewsletterPage />) },
           { path: ROUTES.ADMIN_BLOG, element: withSuspense(<AdminHomePage />) },
           { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<AdminHomePage />) },

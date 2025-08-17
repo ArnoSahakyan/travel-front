@@ -15,6 +15,8 @@ import {
   DestinationPayload,
 } from '../../../../shared';
 import { CameraIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import NotFoundPage from '../../../../pages/NotFound/NotFoundPage.tsx';
+import { LoadingState } from '../../../../components';
 
 interface DestinationFormProps {
   destinationId?: number;
@@ -73,6 +75,16 @@ export const DestinationForm = ({ destinationId }: DestinationFormProps) => {
     setImagePreview(null);
     setValue('images', [], { shouldDirty: true });
   };
+
+  if (destinationId && !destinationData) return <NotFoundPage />;
+
+  if (createMutation.isPending || updateMutation.isPending || deleteMutation.isPending) {
+    return (
+      <div className='space-y-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm'>
+        <LoadingState fullPage={true} />
+      </div>
+    );
+  }
 
   return (
     <form
