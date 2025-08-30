@@ -52,6 +52,10 @@ const AdminToursPage = lazy(() => import('../admin/pages/Tours/ToursPage.tsx'));
 const AdminTourCreatePage = lazy(() => import('../admin/pages/Tours/ToursCreatePage.tsx'));
 const AdminTourUpdatePage = lazy(() => import('../admin/pages/Tours/ToursUpdatePage.tsx'));
 
+const AdminBlogPage = lazy(() => import('../admin/pages/Blogs/BlogsPage.tsx'));
+const AdminBlogCreatePage = lazy(() => import('../admin/pages/Blogs/BlogCreatePage.tsx'));
+const AdminBlogUpdatePage = lazy(() => import('../admin/pages/Blogs/BlogUpdatePage.tsx'));
+
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
 );
@@ -131,7 +135,15 @@ const routes: RouteObject[] = [
             element: withSuspense(<AdminTourCreatePage />),
           },
           { path: ROUTES.ADMIN_NEWSLETTER, element: withSuspense(<AdminNewsletterPage />) },
-          { path: ROUTES.ADMIN_BLOG, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_BLOG, element: withSuspense(<AdminBlogPage />) },
+          {
+            path: ROUTES.ADMIN_BLOG_NEW,
+            element: withSuspense(<AdminBlogCreatePage />),
+          },
+          {
+            path: `${ROUTES.ADMIN_BLOG}/:slug`,
+            element: withSuspense(<AdminBlogUpdatePage />),
+          },
           { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<AdminHomePage />) },
           { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<AdminHomePage />) },
         ],

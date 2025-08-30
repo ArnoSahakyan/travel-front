@@ -12,6 +12,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["src/*"]
     }

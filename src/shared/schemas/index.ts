@@ -1,4 +1,5 @@
 export * from './account.schema.ts';
+export * from './blog.schema.ts';
 export * from './contact.schema.ts';
 export * from './destination.schema.ts';
 export * from './forgot-password.schema.ts';

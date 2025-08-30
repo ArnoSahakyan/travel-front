@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 * {
   margin: 0;
@@ -182,4 +183,29 @@ html {
   .dark .form-range::-moz-range-thumb {
     background-color: #DEB992;
   }
+}
+
+/* React Markdown Editor Styles */
+.rc-md-editor {
+    @apply bg-white text-secondary-light dark:bg-gray-900 dark:text-secondary-dark border dark:border-gray-700;
+}
+
+.rc-md-editor .rc-md-navigation {
+    @apply bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700;
+}
+
+.rc-md-editor .editor-container {
+    @apply bg-white dark:bg-gray-800 text-secondary-light dark:text-secondary-dark;
+}
+
+.rc-md-editor .editor-container .sec-md textarea {
+    @apply bg-white dark:bg-gray-800 text-secondary-light dark:text-background-light font-mono;
+}
+
+.rc-md-editor .custom-html-style {
+    @apply prose dark:prose-invert max-w-none;
+}
+
+.rc-md-editor .rc-md-navigation .button-wrap span {
+    @apply text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-400;
 }

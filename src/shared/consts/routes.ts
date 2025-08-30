@@ -29,6 +29,7 @@ export const ROUTES = {
   ADMIN_TOURS_NEW: '/admin/tours/new',
   ADMIN_NEWSLETTER: '/admin/newsletter',
   ADMIN_BLOG: '/admin/blog',
+  ADMIN_BLOG_NEW: '/admin/blog/new',
   ADMIN_BOOKINGS: '/admin/bookings',
   ADMIN_REVIEWS: '/admin/reviews',
 };
