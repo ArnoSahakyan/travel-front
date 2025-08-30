@@ -4,6 +4,7 @@ export * from './axios.ts';
 export * from './blogs.ts';
 export * from './bookings.ts';
 export * from './contact.ts';
+export * from './categories.ts';
 export * from './destinations.ts';
 export * from './favorites.ts';
 export * from './newsletter.ts';

@@ -1,9 +1,22 @@
 import { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  XMarkIcon,
+  UserCircleIcon,
+  HeartIcon,
+  TicketIcon,
+} from '@heroicons/react/24/outline';
 import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from './components';
+import { ROUTES } from '../../shared';
+
+const navigation = [
+  { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
+  { name: 'My Bookings', href: ROUTES.PROFILE_BOOKINGS, icon: TicketIcon },
+  { name: 'Favorites', href: ROUTES.PROFILE_FAVORITES, icon: HeartIcon },
+];
 
 const ProfileLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -34,14 +47,18 @@ const ProfileLayout = () => {
                 </button>
               </div>
             </TransitionChild>
-            <SidebarContent logout={logout} onLinkClick={() => setSidebarOpen(false)} />
+            <SidebarContent
+              navigation={navigation}
+              logout={logout}
+              onLinkClick={() => setSidebarOpen(false)}
+            />
           </DialogPanel>
         </div>
       </Dialog>
 
       {/* Desktop sidebar */}
       <div className='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
-        <SidebarContent logout={logout} />
+        <SidebarContent navigation={navigation} logout={logout} />
       </div>
 
       {/* Mobile top bar */}

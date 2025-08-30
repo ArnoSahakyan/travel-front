@@ -6,6 +6,7 @@ import { useMergedFilters } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
+import { AxiosError } from 'axios';
 
 export const useBookings = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, BOOKINGS_LIMIT);
@@ -39,8 +40,9 @@ export const useCreateBooking = () => {
       showSuccess('Booking successful!');
       queryClient.invalidateQueries({ queryKey: bookingKeys.all });
     },
-    onError: () => {
-      showError('Booking failed. Please try again.');
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Booking failed. Please try again.');
     },
   });
 
@@ -57,11 +59,17 @@ export const useCreateBooking = () => {
 
 export const useCancelBooking = () => {
   const queryClient = useQueryClient();
+  const { showSuccess, showError } = useToast();
 
   return useMutation({
     mutationFn: (booking_id: number) => cancelBooking(booking_id),
     onSuccess: () => {
+      showSuccess('Booking cancelled successfully!');
       queryClient.invalidateQueries({ queryKey: bookingKeys.all });
+    },
+    onError: (error: Error) => {
+      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      showError(message || 'Failed to cancel booking, please try again.');
     },
   });
 };

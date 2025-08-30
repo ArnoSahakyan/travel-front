@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../shared'; // Make sure to import your ROUTES
+import { ROUTES } from '../../shared';
 
 const NotFoundPage = () => {
   return (

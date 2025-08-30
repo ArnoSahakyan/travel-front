@@ -1,7 +1,13 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { refreshToken } from './auth';
 import { useAuthStore } from '../store';
-import { BACK_URL } from '../shared';
+import { BACK_URL, ROUTES } from '../shared';
+
+const navigateToHomeIfForbidden = () => {
+  if (typeof window !== 'undefined') {
+    window.location.href = ROUTES.HOME;
+  }
+};
 
 export const public_api = axios.create({
   baseURL: BACK_URL,
@@ -56,6 +62,10 @@ api.interceptors.response.use(
         console.error('Refresh token failed:', err);
         useAuthStore.getState().logout();
       }
+    }
+
+    if (error?.response?.status === 403) {
+      navigateToHomeIfForbidden();
     }
 
     return Promise.reject(error);

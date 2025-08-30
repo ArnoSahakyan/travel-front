@@ -6,6 +6,7 @@ export * from './error.ts';
 export * from './fetch.ts';
 export * from './legal.ts';
 export * from './navbar.ts';
+export * from './newsletter.ts';
 export * from './review.ts';
 export * from './search.ts';
 export * from './theme.ts';

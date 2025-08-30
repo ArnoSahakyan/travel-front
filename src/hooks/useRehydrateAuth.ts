@@ -2,26 +2,30 @@ import { useEffect } from 'react';
 import { useAuthStore } from '../store';
 import { fetchCurrentUser } from '../api';
 
-export const useRehydrateAuth = () => {
-  const { accessToken, user, login, logout } = useAuthStore();
+export const useRehydrateAuth = (force = false) => {
+  const { accessToken, login, logout } = useAuthStore();
+
   useEffect(() => {
     const initializeUser = async () => {
-      if (accessToken && !user) {
-        console.log('Rehydrating Auth');
+      if (accessToken) {
         try {
-          const user = await fetchCurrentUser();
+          const fetchedUser = await fetchCurrentUser();
           login({
-            user,
+            user: fetchedUser,
             token: accessToken,
             refreshToken: useAuthStore.getState().refreshToken!,
           });
         } catch (error) {
-          console.error('Fetching User Data Error:', error);
+          console.error('Rehydrate Error:', error);
           logout();
         }
       }
     };
 
-    initializeUser();
-  }, [accessToken, user, login, logout]);
+    if (force) {
+      initializeUser();
+    } else if (accessToken && !useAuthStore.getState().user) {
+      initializeUser();
+    }
+  }, [accessToken, force, login, logout]);
 };

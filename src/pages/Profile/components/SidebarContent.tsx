@@ -1,36 +1,40 @@
+import { ElementType, FC } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import {
-  UserCircleIcon,
-  HeartIcon,
-  TicketIcon,
-  ArrowLeftStartOnRectangleIcon,
-} from '@heroicons/react/24/outline';
+import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from '../../../components';
 import { ROUTES } from '../../../shared';
 
-const navigation = [
-  { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
-  { name: 'My Bookings', href: ROUTES.PROFILE_BOOKINGS, icon: TicketIcon },
-  { name: 'Favorites', href: ROUTES.PROFILE_FAVORITES, icon: HeartIcon },
-];
+interface NavigationItem {
+  name: string;
+  href: string;
+  icon: ElementType;
+}
+
+interface SideBarProps {
+  homePage?: string;
+  onLinkClick?: () => void;
+  logout: () => void;
+  navigation: NavigationItem[];
+  title?: string;
+}
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
-export const SidebarContent = ({
+export const SidebarContent: FC<SideBarProps> = ({
+  homePage = ROUTES.HOME,
   onLinkClick,
   logout,
-}: {
-  onLinkClick?: () => void;
-  logout: () => void;
+  navigation,
+  title = 'WanderLuxe',
 }) => (
   <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-primary-light dark:bg-background-dark px-6 pb-2'>
-    <div className='flex justify-between h-16 shrink-0 items-center'>
+    <div className='flex justify-between mt-4 h-16 shrink-0 items-start'>
       <Link
-        to={ROUTES.HOME}
+        to={homePage}
         onClick={onLinkClick}
         className='text-2xl font-bold text-background-light dark:text-text-dark'
       >
-        WanderLuxe
+        {title}
       </Link>
       <ThemeToggle />
     </div>

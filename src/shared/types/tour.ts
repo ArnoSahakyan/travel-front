@@ -26,6 +26,13 @@ export interface ITourFilters {
   sort?: string;
   search?: string;
 }
+
+export interface ITourImage {
+  image_id: number;
+  is_cover: boolean;
+  image_url: string;
+}
+
 export interface ISingleTour {
   tour_id: string;
   name: string;
@@ -34,12 +41,27 @@ export interface ISingleTour {
   start_date: string;
   end_date: string;
   available_spots: number;
+  category_id: number;
   category_name: string;
+  destination_id: number;
   destination_name: string;
   hasReviewed: boolean;
-  images: {
-    image_id: string;
-    is_cover: boolean;
-    image_url: string;
-  }[];
+  images: ITourImage[];
 }
+
+export interface TourUpdatePayload {
+  name: string;
+  description: string;
+  price: number;
+  available_spots: number;
+  start_date: string;
+  end_date: string;
+  category_id: number;
+  destination_id: number;
+}
+
+export interface TourCreateImagePayload {
+  images: File[];
+}
+
+export interface TourCreatePayload extends TourCreateImagePayload, TourUpdatePayload {}

@@ -2,6 +2,7 @@ export * from './useAccount.ts';
 export * from './useAuth.ts';
 export * from './useBlogs.ts';
 export * from './useBookings.ts';
+export * from './useCategories.ts';
 export * from './useDebounce.ts';
 export * from './useDestinations.ts';
 export * from './useFavorites.ts';
