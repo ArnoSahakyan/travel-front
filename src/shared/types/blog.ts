@@ -1,5 +1,5 @@
 export interface ISingleBlog {
-  post_id: string;
+  post_id: number;
   title: string;
   slug: string;
   excerpt: string;

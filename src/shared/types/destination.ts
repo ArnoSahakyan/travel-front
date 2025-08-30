@@ -15,3 +15,9 @@ export interface IDestinationResponse {
   totalPages: number;
   total: number;
 }
+
+export interface DestinationPayload {
+  name: string;
+  description: string;
+  images: File[];
+}

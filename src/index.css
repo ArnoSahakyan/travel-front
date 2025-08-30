@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 * {
   margin: 0;
@@ -98,4 +99,113 @@ html {
   .form-button-secondary:disabled {
     @apply bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500;
   }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* Beautiful Select Input */
+  .form-select {
+    @apply form-input;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4A96A'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    padding-right: 2.5rem;
+    appearance: none;
+  }
+  .dark .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23DEB992'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+  }
+
+  /* Styled Date Input */
+  .form-date {
+    @apply form-input;
+  }
+  .form-date::-webkit-calendar-picker-indicator {
+    filter: invert(72%) sepia(22%) saturate(925%) hue-rotate(348deg) brightness(89%) contrast(89%);
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  .dark .form-date::-webkit-calendar-picker-indicator {
+    filter: invert(80%) sepia(19%) saturate(1174%) hue-rotate(328deg) brightness(94%) contrast(89%);
+  }
+
+  /* File Input Styling */
+  .form-file {
+    @apply form-input py-1.5;
+  }
+  .form-file::file-selector-button {
+    @apply bg-primary-light dark:bg-primary-dark text-white border-0 py-1.5 px-4 mr-4 rounded-md cursor-pointer transition-colors;
+  }
+  .form-file::file-selector-button:hover {
+    @apply bg-opacity-90;
+  }
+
+  /* Radio Input Styling */
+  .form-radio {
+    @apply h-4 w-4 border-2 border-gray-300 dark:border-gray-600 cursor-pointer;
+    accent-color: #D4A96A;
+  }
+  .dark .form-radio {
+    accent-color: #DEB992;
+  }
+
+  /* Checkbox Styling */
+  .form-checkbox {
+    @apply h-4 w-4 border-2 border-gray-300 dark:border-gray-600 cursor-pointer;
+    accent-color: #D4A96A;
+  }
+  .dark .form-checkbox {
+    accent-color: #DEB992;
+  }
+
+  /* Range Input Styling */
+  .form-range {
+    @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer;
+  }
+  .form-range::-webkit-slider-thumb {
+    @apply h-4 w-4 rounded-full appearance-none cursor-pointer;
+    background-color: #D4A96A;
+  }
+  .dark .form-range::-webkit-slider-thumb {
+    background-color: #DEB992;
+  }
+  .form-range::-moz-range-thumb {
+    @apply h-4 w-4 rounded-full appearance-none cursor-pointer;
+    background-color: #D4A96A;
+    border: none;
+  }
+  .dark .form-range::-moz-range-thumb {
+    background-color: #DEB992;
+  }
+}
+
+/* React Markdown Editor Styles */
+.rc-md-editor {
+    @apply bg-white text-secondary-light dark:bg-gray-900 dark:text-secondary-dark border dark:border-gray-700;
+}
+
+.rc-md-editor .rc-md-navigation {
+    @apply bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-700;
+}
+
+.rc-md-editor .editor-container {
+    @apply bg-white dark:bg-gray-800 text-secondary-light dark:text-secondary-dark;
+}
+
+.rc-md-editor .editor-container .sec-md textarea {
+    @apply bg-white dark:bg-gray-800 text-secondary-light dark:text-background-light font-mono;
+}
+
+.rc-md-editor .custom-html-style {
+    @apply prose dark:prose-invert max-w-none;
+}
+
+.rc-md-editor .rc-md-navigation .button-wrap span {
+    @apply text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-400;
 }

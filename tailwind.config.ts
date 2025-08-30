@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+import * as defaultTheme from 'tailwindcss/defaultTheme';
+import typography from '@tailwindcss/typography';
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
       sans: ['Poppins', 'sans-serif'],
+      mono: [...defaultTheme.fontFamily.mono],
     },
     extend: {
       colors: {
@@ -31,5 +34,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };

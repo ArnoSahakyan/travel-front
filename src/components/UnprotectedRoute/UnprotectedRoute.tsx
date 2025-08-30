@@ -5,5 +5,5 @@ import { ROUTES } from '../../shared';
 export const UnprotectedRoute = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  return !isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.PROFILE_INFO} replace />;
+  return !isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.PROFILE} replace />;
 };

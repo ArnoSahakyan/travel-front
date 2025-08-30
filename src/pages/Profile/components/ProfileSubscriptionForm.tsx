@@ -34,7 +34,7 @@ export const ProfileSubscriptionForm = () => {
             You are subscribed to our newsletter.
           </p>
           <button
-            onClick={() => unsubscribe()}
+            onClick={() => unsubscribe(user?.email)}
             disabled={isUnsubscribing}
             className='form-button w-1/2 bg-red-500 text-white hover:bg-red-600 dark:bg-red-800 dark:text-white dark:hover:bg-red-700'
           >

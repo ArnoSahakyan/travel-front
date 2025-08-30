@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES, SignUpFormData, signUpSchema } from '../../shared';
-import { useSignUp } from '../../hooks';
-import { toast } from 'react-toastify';
+import { useSignUp, useToast } from '../../hooks';
 import { AxiosError } from 'axios';
 
 const SignUpPage = () => {
@@ -16,18 +15,18 @@ const SignUpPage = () => {
   });
 
   const navigate = useNavigate();
-
+  const { showSuccess, showError } = useToast();
   const { mutate: signUp, isPending } = useSignUp();
 
   const onSubmit = (data: SignUpFormData) => {
     signUp(data, {
       onSuccess: () => {
-        toast.success('Successfully signed in!');
+        showSuccess('Successfully signed in!');
         navigate(ROUTES.AUTH + ROUTES.SIGNIN);
       },
       onError: (error: Error) => {
         const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
-        toast.error(message);
+        showError(message);
       },
     });
   };
