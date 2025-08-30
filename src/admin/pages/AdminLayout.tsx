@@ -4,14 +4,10 @@ import {
   Bars3Icon,
   TagIcon,
   XMarkIcon,
-  Cog6ToothIcon,
-  UsersIcon,
   MapPinIcon,
   PaperAirplaneIcon,
   NewspaperIcon,
   ChatBubbleBottomCenterTextIcon,
-  CalendarDaysIcon,
-  StarIcon,
 } from '@heroicons/react/24/outline';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared';
@@ -20,15 +16,11 @@ import { SidebarContent } from '../../pages/Profile/components';
 import { useRehydrateAuth } from '../../hooks';
 
 const adminNavigation = [
-  { name: 'Dashboard', href: ROUTES.ADMIN_DASHBOARD, icon: Cog6ToothIcon },
-  { name: 'Users', href: ROUTES.ADMIN_USERS, icon: UsersIcon },
   { name: 'Categories', href: ROUTES.ADMIN_CATEGORIES, icon: TagIcon },
   { name: 'Destinations', href: ROUTES.ADMIN_DESTINATIONS, icon: MapPinIcon },
   { name: 'Tours', href: ROUTES.ADMIN_TOURS, icon: PaperAirplaneIcon },
   { name: 'Newsletter', href: ROUTES.ADMIN_NEWSLETTER, icon: NewspaperIcon },
   { name: 'Blog', href: ROUTES.ADMIN_BLOG, icon: ChatBubbleBottomCenterTextIcon },
-  { name: 'Bookings', href: ROUTES.ADMIN_BOOKINGS, icon: CalendarDaysIcon },
-  { name: 'Reviews', href: ROUTES.ADMIN_REVIEWS, icon: StarIcon },
 ];
 
 const AdminLayout = () => {

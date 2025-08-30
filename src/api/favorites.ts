@@ -1,8 +1,8 @@
 import { api } from './axios.ts';
 import { IFavoritesResponse, IFetchFilters } from '../shared';
 
-export const fetchFavoriteStatus = async (tourId: number, userId?: number) => {
-  const response = await api.get(`/favorite/check/${tourId}`, { params: userId });
+export const fetchFavoriteStatus = async (tourId: number) => {
+  const response = await api.get(`/favorite/check/${tourId}`);
   return response.data.inFavorites;
 };
 

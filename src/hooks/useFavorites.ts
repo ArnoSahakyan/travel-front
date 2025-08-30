@@ -19,7 +19,7 @@ export const useFavorite = (tourId: number): UseFavoritesResult => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { showSuccess, showError } = useToast();
-  const { user, isAuthenticated } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   const {
     data: inFavorites,
@@ -27,7 +27,7 @@ export const useFavorite = (tourId: number): UseFavoritesResult => {
     isError,
   } = useQuery<boolean, Error>({
     queryKey: favoritesKeys.status(tourId),
-    queryFn: () => fetchFavoriteStatus(tourId, user?.user_id),
+    queryFn: () => fetchFavoriteStatus(tourId),
     enabled: !!tourId,
   });
 
