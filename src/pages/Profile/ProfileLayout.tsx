@@ -1,12 +1,6 @@
 import { useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react';
-import {
-  Bars3Icon,
-  XMarkIcon,
-  UserCircleIcon,
-  HeartIcon,
-  TicketIcon,
-} from '@heroicons/react/24/outline';
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
+import { Bars3Icon, UserCircleIcon, HeartIcon, TicketIcon } from '@heroicons/react/24/outline';
 import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from './components';
@@ -35,18 +29,6 @@ const ProfileLayout = () => {
             transition
             className='relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full'
           >
-            <TransitionChild>
-              <div className='absolute left-full top-0 flex w-16 justify-center pt-5'>
-                <button
-                  type='button'
-                  onClick={() => setSidebarOpen(false)}
-                  className='-m-2.5 p-2.5'
-                >
-                  <span className='sr-only'>Close sidebar</span>
-                  <XMarkIcon className='size-6 text-white' />
-                </button>
-              </div>
-            </TransitionChild>
             <SidebarContent
               navigation={navigation}
               logout={logout}

@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react';
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import {
   Bars3Icon,
   TagIcon,
-  XMarkIcon,
   MapPinIcon,
   PaperAirplaneIcon,
   NewspaperIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from '../../pages/Profile/components';
@@ -41,17 +40,6 @@ const AdminLayout = () => {
         <DialogBackdrop className='fixed inset-0 bg-gray-900/80' />
         <div className='fixed inset-0 flex'>
           <DialogPanel className='relative mr-16 flex w-full max-w-xs flex-1'>
-            <TransitionChild>
-              <div className='absolute left-full top-0 flex w-16 justify-center pt-5'>
-                <button
-                  type='button'
-                  onClick={() => setSidebarOpen(false)}
-                  className='-m-2.5 p-2.5'
-                >
-                  <XMarkIcon className='size-6 text-white' />
-                </button>
-              </div>
-            </TransitionChild>
             <SidebarContent
               homePage={ROUTES.ADMIN}
               logout={logout}
@@ -75,9 +63,12 @@ const AdminLayout = () => {
 
       {/* Top bar */}
       <div className='sticky top-0 z-40 flex justify-between items-center gap-x-6 bg-primary-light dark:bg-background-dark px-4 py-4 shadow-sm sm:px-6 lg:hidden'>
-        <div className='text-sm/6 font-semibold text-background-light dark:text-text-dark'>
+        <Link
+          to={ROUTES.ADMIN}
+          className='text-sm/6 font-semibold text-background-light dark:text-text-dark'
+        >
           Admin Panel
-        </div>
+        </Link>
         <button onClick={() => setSidebarOpen(true)} className='-m-2.5 p-2.5'>
           <Bars3Icon className='size-6 text-white' />
         </button>
