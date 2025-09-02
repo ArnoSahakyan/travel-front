@@ -7,6 +7,7 @@ import {
   CreateTourFormData,
   UpdateTourFormData,
   ITourImage,
+  ROUTES,
 } from '../../../../shared';
 import {
   useTour,
@@ -23,10 +24,12 @@ import {
   TrashIcon,
   XMarkIcon,
   PhotoIcon,
+  ChevronLeftIcon,
 } from '@heroicons/react/24/outline';
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid';
 import NotFoundPage from '../../../../pages/NotFound/NotFoundPage.tsx';
 import { LoadingState } from '../../../../components';
+import { Link } from 'react-router-dom';
 
 interface TourFormProps {
   tourId?: number;
@@ -41,7 +44,7 @@ export const TourForm = ({ tourId }: TourFormProps) => {
   const deleteImageMutation = useDeleteTourImage(tourId || 0);
   const setCoverMutation = useSetTourCoverImage(tourId || 0);
   const uploadImageMutation = useAddTourImage(tourId || 0);
-  const { data: tourData } = useTour(tourId || 0);
+  const { data: tourData, isPending } = useTour(tourId || 0);
 
   const { data: categoriesData } = useCategories();
   const { data: destinationsData } = useDestinations({ limit: 100 });
@@ -133,9 +136,8 @@ export const TourForm = ({ tourId }: TourFormProps) => {
     setCoverMutation.mutate(imageId);
   };
 
-  if (tourId && !tourData) return <NotFoundPage />;
-
   if (
+    (tourId && isPending) ||
     createMutation.isPending ||
     updateMutation.isPending ||
     deleteMutation.isPending ||
@@ -149,23 +151,40 @@ export const TourForm = ({ tourId }: TourFormProps) => {
     );
   }
 
+  if (tourId && !tourData) return <NotFoundPage />;
+
   return (
     <div className='space-y-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm'>
       <form id='tour-form' onSubmit={handleSubmit(onSubmit)}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between items-center pb-4'>
-          <h3 className='text-xl font-bold text-primary-light dark:text-text-dark'>
-            {tourId ? 'Edit Tour' : 'Create Tour'}
-          </h3>
-          {tourId && (
-            <button
-              type='button'
-              onClick={() => deleteMutation.mutate(tourId)}
-              className='flex items-center gap-1 px-3 py-1.5 text-sm rounded-md bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-800/50 transition-colors'
+        <div className='flex flex-col sm:flex-row items-center sm:items-center sm:justify-between gap-4 sm:gap-0 border-b border-gray-200 dark:border-gray-700 pb-4'>
+          <div className='w-full sm:w-auto flex justify-start'>
+            <Link
+              to={ROUTES.ADMIN_TOURS}
+              className='inline-flex justify-center rounded-md border border-text-light dark:border-text-dark px-4 py-2 text-sm font-medium text-text-light dark:text-text-dark'
             >
-              <TrashIcon className='w-4 h-4' />
-              Delete Tour
-            </button>
-          )}
+              <ChevronLeftIcon className='w-5 h-5 mr-2' />
+              Back to Tours
+            </Link>
+          </div>
+
+          <div className='w-full sm:flex-1 flex justify-center'>
+            <h3 className='text-xl font-bold text-primary-light dark:text-text-dark text-center'>
+              {tourId ? 'Edit Tour' : 'Create Tour'}
+            </h3>
+          </div>
+
+          <div className='w-full sm:w-auto flex justify-center'>
+            {tourId && (
+              <button
+                type='button'
+                onClick={() => deleteMutation.mutate(tourId)}
+                className='flex items-center gap-1 px-3 py-1.5 text-sm rounded-md bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-800/50 transition-colors'
+              >
+                <TrashIcon className='w-4 h-4' />
+                Delete Tour
+              </button>
+            )}
+          </div>
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>

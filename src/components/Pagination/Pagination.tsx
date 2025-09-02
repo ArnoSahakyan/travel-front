@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 interface PaginationProps {
   page: number;
@@ -20,7 +21,7 @@ export const Pagination: FC<PaginationProps> = ({
         disabled={page === 1}
         className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
       >
-        Previous
+        <ChevronLeftIcon className='w-5 h-5' />
       </button>
       <span className='text-secondary-light dark:text-secondary-dark'>
         Page {page} of {totalPages}
@@ -30,7 +31,7 @@ export const Pagination: FC<PaginationProps> = ({
         disabled={page === totalPages}
         className='px-4 py-2 bg-primary-light text-white rounded-md disabled:opacity-50'
       >
-        Next
+        <ChevronRightIcon className='w-5 h-5' />
       </button>
     </div>
   );
