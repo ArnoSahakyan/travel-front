@@ -3,7 +3,6 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import {
   Bars3Icon,
   TagIcon,
-  XMarkIcon,
   MapPinIcon,
   PaperAirplaneIcon,
   NewspaperIcon,
