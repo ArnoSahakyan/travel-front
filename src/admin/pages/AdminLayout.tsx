@@ -9,7 +9,7 @@ import {
   NewspaperIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/outline';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from '../../pages/Profile/components';
