@@ -82,7 +82,7 @@ export const TourForm = ({ tourId }: TourFormProps) => {
 
   // Prefill form when editing
   useEffect(() => {
-    if (tourData) {
+    if (tourData && categoriesData?.length) {
       reset({
         name: tourData.name,
         description: tourData.description || '',
@@ -94,11 +94,12 @@ export const TourForm = ({ tourId }: TourFormProps) => {
         destination_id: tourData.destination_id,
         images: [],
       });
-      if (tourData.images && tourData.images.length > 0) {
+
+      if (tourData.images?.length) {
         setImagePreviews(tourData.images);
       }
     }
-  }, [tourData, reset]);
+  }, [tourData, categoriesData, reset]);
 
   const onSubmit = (data: CreateTourFormData | UpdateTourFormData) => {
     if (tourId) {
@@ -252,7 +253,9 @@ export const TourForm = ({ tourId }: TourFormProps) => {
           <div>
             <label className='form-label mb-2'>Category</label>
             <select {...register('category_id', { valueAsNumber: true })} className='form-select'>
-              <option value=''>Select a category</option>
+              <option value={0} disabled>
+                Select a category
+              </option>
               {categoriesData?.map((cat) => (
                 <option key={cat.category_id} value={cat.category_id}>
                   {cat.name}
