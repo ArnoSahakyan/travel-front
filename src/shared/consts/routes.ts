@@ -32,4 +32,5 @@ export const ROUTES = {
   ADMIN_BLOG_NEW: '/admin/blog/new',
   ADMIN_BOOKINGS: '/admin/bookings',
   ADMIN_REVIEWS: '/admin/reviews',
+  ADMIN_CONTACTS: '/admin/contacts',
 };

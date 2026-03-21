@@ -22,3 +22,13 @@ export const cancelBooking = async (booking_id: number) => {
   const response = await api.delete(`/booking/${booking_id}`);
   return response.data;
 };
+
+export const confirmBooking = async (booking_id: number) => {
+  const response = await api.patch(`/booking/${booking_id}/confirm`);
+  return response.data;
+};
+
+export const fetchAllBookings = async (page = 1, limit = 10) => {
+  const response = await api.get(`/booking?page=${page}&limit=${limit}`);
+  return response.data;
+};

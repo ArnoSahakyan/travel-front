@@ -37,6 +37,9 @@ const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const AdminLayout = lazy(() => import('../admin/pages/AdminLayout.tsx'));
 
 const AdminHomePage = lazy(() => import('../admin/pages/AdminHome/AdminHomePage.tsx'));
+const AdminUsersPage = lazy(() => import('../admin/pages/Users/UsersPage.tsx'));
+const AdminBookingsPage = lazy(() => import('../admin/pages/Bookings/AdminBookingsPage.tsx'));
+const AdminReviewsPage = lazy(() => import('../admin/pages/Reviews/AdminReviewsPage.tsx'));
 const AdminCategoriesPage = lazy(() => import('../admin/pages/Categories/CategoriesPage.tsx'));
 const AdminNewsletterPage = lazy(() => import('../admin/pages/Newsletter/NewsletterPage.tsx'));
 const AdminDestinationsPage = lazy(
@@ -55,6 +58,8 @@ const AdminTourUpdatePage = lazy(() => import('../admin/pages/Tours/ToursUpdateP
 const AdminBlogPage = lazy(() => import('../admin/pages/Blogs/BlogsPage.tsx'));
 const AdminBlogCreatePage = lazy(() => import('../admin/pages/Blogs/BlogCreatePage.tsx'));
 const AdminBlogUpdatePage = lazy(() => import('../admin/pages/Blogs/BlogUpdatePage.tsx'));
+
+const AdminContactsPage = lazy(() => import('../admin/pages/Contact/ContactsPage.tsx'));
 
 const withSuspense = (component: ReactNode) => (
   <Suspense fallback={<Loader />}>{component}</Suspense>
@@ -114,7 +119,7 @@ const routes: RouteObject[] = [
         children: [
           { path: '', element: withSuspense(<AdminHomePage />) },
           { path: ROUTES.ADMIN_DASHBOARD, element: withSuspense(<Account />) },
-          { path: ROUTES.ADMIN_USERS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_USERS, element: withSuspense(<AdminUsersPage />) },
           { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<AdminCategoriesPage />) },
           { path: ROUTES.ADMIN_DESTINATIONS, element: withSuspense(<AdminDestinationsPage />) },
           {
@@ -144,8 +149,9 @@ const routes: RouteObject[] = [
             path: `${ROUTES.ADMIN_BLOG}/:slug`,
             element: withSuspense(<AdminBlogUpdatePage />),
           },
-          { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<AdminHomePage />) },
-          { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<AdminHomePage />) },
+          { path: ROUTES.ADMIN_BOOKINGS, element: withSuspense(<AdminBookingsPage />) },
+          { path: ROUTES.ADMIN_REVIEWS, element: withSuspense(<AdminReviewsPage />) },
+          { path: ROUTES.ADMIN_CONTACTS, element: withSuspense(<AdminContactsPage />) },
         ],
       },
     ],

@@ -10,3 +10,5 @@ export * from './favorites.ts';
 export * from './newsletter.ts';
 export * from './reviews.ts';
 export * from './tours.ts';
+export * from './stats.ts';
+export * from './users.ts';
