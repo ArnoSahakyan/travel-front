@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { createBrowserRouter, RouteObject, Navigate } from 'react-router-dom';
 import { Loader, ProtectedRoute, UnprotectedRoute } from '../components';
 import { AdminRoute } from '../admin/components';
 import { ROUTES } from '../shared';
@@ -32,6 +32,8 @@ const ProfileLayout = lazy(() => import('../pages/Profile/ProfileLayout.tsx'));
 const ProfileHomePage = lazy(() => import('../pages/Profile/ProfileHomePage.tsx'));
 const Account = lazy(() => import('../pages/Profile/Account.tsx'));
 const FavoritesPage = lazy(() => import('../pages/Profile/FavoritesPage.tsx'));
+const MyReviewsPage = lazy(() => import('../pages/Profile/MyReviewsPage.tsx'));
+const SecurityPage = lazy(() => import('../pages/Profile/SecurityPage.tsx'));
 const Layout = lazy(() => import('../pages/Layout/Layout.tsx'));
 const AuthLayout = lazy(() => import('../pages/Auth/AuthLayout.tsx'));
 const AdminLayout = lazy(() => import('../admin/pages/AdminLayout.tsx'));
@@ -98,14 +100,35 @@ const routes: RouteObject[] = [
         path: ROUTES.PROFILE,
         element: withSuspense(<ProfileLayout />),
         children: [
-          { path: '', element: withSuspense(<ProfileHomePage />) },
-          { path: ROUTES.PROFILE_INFO, element: withSuspense(<Account />) },
-          { path: ROUTES.PROFILE_BOOKINGS, element: withSuspense(<BookingsPage />) },
+          { index: true, element: <Navigate to={ROUTES.PROFILE_DASHBOARD} replace /> },
           {
-            path: `${ROUTES.PROFILE_BOOKINGS}/:bookingId`,
+            path: ROUTES.PROFILE_DASHBOARD.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<ProfileHomePage />),
+          },
+          {
+            path: ROUTES.PROFILE_INFO.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<Account />),
+          },
+          {
+            path: ROUTES.PROFILE_BOOKINGS.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<BookingsPage />),
+          },
+          {
+            path: `${ROUTES.PROFILE_BOOKINGS.replace(ROUTES.PROFILE + '/', '')}/:bookingId`,
             element: withSuspense(<BookingDetailPage />),
           },
-          { path: ROUTES.PROFILE_FAVORITES, element: withSuspense(<FavoritesPage />) },
+          {
+            path: ROUTES.PROFILE_FAVORITES.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<FavoritesPage />),
+          },
+          {
+            path: ROUTES.PROFILE_REVIEWS.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<MyReviewsPage />),
+          },
+          {
+            path: ROUTES.PROFILE_SECURITY.replace(ROUTES.PROFILE + '/', ''),
+            element: withSuspense(<SecurityPage />),
+          },
         ],
       },
     ],
@@ -118,7 +141,10 @@ const routes: RouteObject[] = [
         element: withSuspense(<AdminLayout />),
         children: [
           { path: '', element: withSuspense(<AdminHomePage />) },
-          { path: ROUTES.ADMIN_DASHBOARD, element: withSuspense(<Account />) },
+          {
+            path: ROUTES.ADMIN_DASHBOARD.replace(ROUTES.ADMIN + '/', ''),
+            element: withSuspense(<AdminHomePage />),
+          },
           { path: ROUTES.ADMIN_USERS, element: withSuspense(<AdminUsersPage />) },
           { path: ROUTES.ADMIN_CATEGORIES, element: withSuspense(<AdminCategoriesPage />) },
           { path: ROUTES.ADMIN_DESTINATIONS, element: withSuspense(<AdminDestinationsPage />) },

@@ -11,6 +11,7 @@ import {
   UsersIcon,
   BriefcaseIcon,
   StarIcon,
+  Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared';
@@ -20,6 +21,7 @@ import { useRehydrateAuth } from '../../hooks';
 import { GlobalNavigateSetup } from '../../components';
 
 const adminNavigation = [
+  { name: 'Dashboard', href: ROUTES.ADMIN_DASHBOARD, icon: Squares2X2Icon },
   { name: 'Users', href: ROUTES.ADMIN_USERS, icon: UsersIcon },
   { name: 'Categories', href: ROUTES.ADMIN_CATEGORIES, icon: TagIcon },
   { name: 'Destinations', href: ROUTES.ADMIN_DESTINATIONS, icon: MapPinIcon },
