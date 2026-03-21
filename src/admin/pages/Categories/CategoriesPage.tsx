@@ -67,8 +67,16 @@ export default function CategoriesPage() {
           />
         </div>
         <div className='flex gap-3 w-full sm:w-auto'>
-          <button type='submit' className='form-button px-6 py-2 w-full sm:w-auto'>
-            {editId !== null ? 'Update' : 'Create'}
+          <button
+            type='submit'
+            disabled={createCategory.isPending || updateCategory.isPending || !formName.trim()}
+            className='form-button px-6 py-2 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed'
+          >
+            {createCategory.isPending || updateCategory.isPending
+              ? 'Saving...'
+              : editId !== null
+                ? 'Update'
+                : 'Create'}
           </button>
           {editId !== null && (
             <button
