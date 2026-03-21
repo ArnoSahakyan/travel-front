@@ -4,7 +4,7 @@ import { reviewKeys } from '../queries/reviews.ts';
 import { IFetchFilters, IReviewResponse, ReviewFormData, REVIEWS_LIMIT, ROUTES } from '../shared';
 import { useMergedFilters } from '../utils';
 import { useToast } from './useToast.ts';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store';
 
@@ -49,8 +49,7 @@ export const useCreateReview = (options?: { onSuccess?: () => void }) => {
       options?.onSuccess?.();
     },
     onError: (error: unknown) => {
-      const message =
-        error instanceof AxiosError ? error.response?.data?.message : (error as Error).message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to submit review. Please try again.');
     },
   });

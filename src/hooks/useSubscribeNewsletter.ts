@@ -7,7 +7,7 @@ import {
   unsubscribeNewsletter,
 } from '../api';
 import { useToast } from './useToast.ts';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 import { newsletterKeys } from '../queries';
 import { useMergedFilters } from '../utils';
 import { IFetchFilters } from '../shared';
@@ -34,7 +34,7 @@ export const useSubscribeNewsletter = () => {
     },
 
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Subscription failed. Please try again.');
     },
   });
@@ -49,7 +49,7 @@ export const useConfirmNewsletter = () => {
       showSuccess('Your subscription has been confirmed!');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message);
     },
   });

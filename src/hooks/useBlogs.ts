@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from './useToast.ts';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 import { BLOGS_LIMIT, IBlogResponse, IFetchFilters, ISingleBlog, ROUTES } from '../shared';
 import {
   BlogPayload,
@@ -48,7 +48,7 @@ export const useCreateBlog = () => {
       navigate(ROUTES.ADMIN_BLOG);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to create blog');
     },
   });
@@ -71,7 +71,7 @@ export const useUpdateBlog = (slug: string) => {
       }
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to update blog');
     },
   });
@@ -90,7 +90,7 @@ export const useDeleteBlog = () => {
       navigate(ROUTES.ADMIN_BLOG);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to delete blog');
     },
   });

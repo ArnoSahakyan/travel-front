@@ -6,7 +6,7 @@ import { useMergedFilters } from '../utils';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 
 export const useBookings = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, BOOKINGS_LIMIT);
@@ -41,7 +41,7 @@ export const useCreateBooking = () => {
       queryClient.invalidateQueries({ queryKey: bookingKeys.all });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Booking failed. Please try again.');
     },
   });
@@ -68,7 +68,7 @@ export const useCancelBooking = () => {
       queryClient.invalidateQueries({ queryKey: bookingKeys.all });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to cancel booking, please try again.');
     },
   });

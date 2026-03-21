@@ -2,6 +2,7 @@ export * from './BlogCard';
 export * from './BookingCard';
 export * from './DestinationCard';
 export * from './Footer';
+export * from './GlobalNavigateSetup';
 export * from './Loader';
 export * from './Navbar';
 export * from './Newsletter';

@@ -23,7 +23,7 @@ import {
 import { tourKeys } from '../queries';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 
 export const useTours = (externalFilters?: Partial<ITourFilters>) => {
   const [searchParams] = useSearchParams();
@@ -77,7 +77,7 @@ export const useCreateTour = () => {
       navigate(ROUTES.ADMIN_TOURS);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to create tour');
     },
   });
@@ -99,7 +99,7 @@ export const useUpdateTour = (id: number) => {
       queryClient.invalidateQueries({ queryKey: tourKeys.detail(id, user?.user_id) });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to update tour');
     },
   });
@@ -121,7 +121,7 @@ export const useDeleteTour = () => {
       navigate(ROUTES.ADMIN_TOURS);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to delete tour');
     },
   });
@@ -142,7 +142,7 @@ export const useAddTourImage = (tourId: number) => {
       queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to add image(s)');
     },
   });
@@ -163,7 +163,7 @@ export const useSetTourCoverImage = (tourId: number) => {
       queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to set cover image');
     },
   });
@@ -184,7 +184,7 @@ export const useDeleteTourImage = (tourId: number) => {
       queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId, user?.user_id) });
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to delete image');
     },
   });

@@ -13,6 +13,7 @@ import { ROUTES } from '../../shared';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from '../../pages/Profile/components';
 import { useRehydrateAuth } from '../../hooks';
+import { GlobalNavigateSetup } from '../../components';
 
 const adminNavigation = [
   { name: 'Categories', href: ROUTES.ADMIN_CATEGORIES, icon: TagIcon },
@@ -36,6 +37,7 @@ const AdminLayout = () => {
 
   return (
     <div className='min-h-full'>
+      <GlobalNavigateSetup />
       <Dialog open={sidebarOpen} onClose={setSidebarOpen} className='relative z-50 lg:hidden'>
         <DialogBackdrop className='fixed inset-0 bg-gray-900/80' />
         <div className='fixed inset-0 flex'>

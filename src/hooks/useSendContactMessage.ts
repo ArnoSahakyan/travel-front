@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 import { ContactFormData } from '../shared';
 import { sendContactMessage } from '../api';
 import { useMutation } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ export const useSendContactMessage = () => {
     },
 
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to send message. Please try again.');
     },
   });

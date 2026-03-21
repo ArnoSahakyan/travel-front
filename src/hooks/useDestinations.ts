@@ -18,7 +18,7 @@ import {
 } from '../api';
 import { destinationKeys } from '../queries';
 import { useMergedFilters } from '../utils';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 
 export const useDestinations = (externalFilters?: Partial<IFetchFilters>) => {
   const filters = useMergedFilters(externalFilters, DESTINATIONS_LIMIT);
@@ -52,7 +52,7 @@ export const useCreateDestination = () => {
       navigate(ROUTES.ADMIN_DESTINATIONS);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to create destination');
     },
   });
@@ -70,7 +70,7 @@ export const useUpdateDestination = (id: number) => {
       showSuccess('Destination updated');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to update destination');
     },
   });
@@ -89,7 +89,7 @@ export const useDeleteDestination = () => {
       navigate(ROUTES.ADMIN_DESTINATIONS);
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to delete destination');
     },
   });

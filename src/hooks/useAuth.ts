@@ -3,7 +3,7 @@ import { requestPasswordReset, resetPassword, signIn, signUp } from '../api';
 import { useAuthStore } from '../store';
 import { useToast } from './useToast.ts';
 import { ForgotPasswordFormData, ROUTES } from '../shared';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 export const useSignIn = () => {
@@ -38,7 +38,7 @@ export const useRequestPasswordReset = () => {
     },
 
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to send reset link. Please try again.');
     },
   });
@@ -57,7 +57,7 @@ export const useResetPassword = () => {
     },
 
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to reset password.');
     },
   });

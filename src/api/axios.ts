@@ -2,9 +2,12 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { refreshToken } from './auth';
 import { useAuthStore } from '../store';
 import { BACK_URL, ROUTES } from '../shared';
+import { globalNavigate } from './navigationRegistry';
 
 const navigateToHomeIfForbidden = () => {
-  if (typeof window !== 'undefined') {
+  if (globalNavigate) {
+    globalNavigate(ROUTES.HOME);
+  } else if (typeof window !== 'undefined') {
     window.location.href = ROUTES.HOME;
   }
 };

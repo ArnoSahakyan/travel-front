@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { updatePersonalInfo, changePassword } from '../api';
 import { useToast } from './useToast';
 import { useAuthStore } from '../store';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 
 export const useAccount = () => {
   const { showSuccess, showError } = useToast();
@@ -21,7 +21,7 @@ export const useAccount = () => {
     },
 
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to update personal info');
     },
   });
@@ -32,7 +32,7 @@ export const useAccount = () => {
       showSuccess('Password changed successfully');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to change password');
     },
   });

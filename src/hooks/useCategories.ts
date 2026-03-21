@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchAllCategories, createCategory, updateCategory, deleteCategoryById } from '../api';
 import { useToast } from './useToast';
 import { categoryKeys } from '../queries';
-import { AxiosError } from 'axios';
+import { formatAxiosError } from '../utils';
 
 export const useCategories = () => {
   return useQuery<{ category_id: number; name: string }[]>({
@@ -24,7 +24,7 @@ export const useCreateCategory = () => {
       showSuccess('Category created');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to create category');
     },
   });
@@ -41,7 +41,7 @@ export const useUpdateCategory = () => {
       showSuccess('Category updated');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to update category');
     },
   });
@@ -58,7 +58,7 @@ export const useDeleteCategory = () => {
       showSuccess('Category deleted');
     },
     onError: (error: Error) => {
-      const message = error instanceof AxiosError ? error.response?.data?.message : error.message;
+      const message = formatAxiosError(error);
       showError(message || 'Failed to delete category');
     },
   });

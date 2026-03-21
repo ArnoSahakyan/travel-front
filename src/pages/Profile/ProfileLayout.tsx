@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from './components';
 import { ROUTES } from '../../shared';
+import { GlobalNavigateSetup } from '../../components';
 
 const navigation = [
   { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
@@ -18,6 +19,7 @@ const ProfileLayout = () => {
 
   return (
     <div className='min-h-full'>
+      <GlobalNavigateSetup />
       {/* Mobile sidebar */}
       <Dialog open={sidebarOpen} onClose={setSidebarOpen} className='relative z-50 lg:hidden'>
         <DialogBackdrop
