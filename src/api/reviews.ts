@@ -8,6 +8,13 @@ export const fetchReviewsByTour = async (tour_id: number, filters: Partial<IFetc
   return response.data;
 };
 
+export const fetchUserReviews = async (filters: Partial<IFetchFilters>) => {
+  const response = await api.get(`/review/my`, {
+    params: filters,
+  });
+  return response.data;
+};
+
 export const fetchAllReviews = async (filters: Partial<IFetchFilters>) => {
   const response = await public_api.get(`/review`, {
     params: filters,

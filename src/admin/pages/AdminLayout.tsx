@@ -7,6 +7,11 @@ import {
   PaperAirplaneIcon,
   NewspaperIcon,
   ChatBubbleBottomCenterTextIcon,
+  EnvelopeIcon,
+  UsersIcon,
+  BriefcaseIcon,
+  StarIcon,
+  Squares2X2Icon,
 } from '@heroicons/react/24/outline';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared';
@@ -16,11 +21,16 @@ import { useRehydrateAuth } from '../../hooks';
 import { GlobalNavigateSetup } from '../../components';
 
 const adminNavigation = [
+  { name: 'Dashboard', href: ROUTES.ADMIN_DASHBOARD, icon: Squares2X2Icon },
+  { name: 'Users', href: ROUTES.ADMIN_USERS, icon: UsersIcon },
   { name: 'Categories', href: ROUTES.ADMIN_CATEGORIES, icon: TagIcon },
   { name: 'Destinations', href: ROUTES.ADMIN_DESTINATIONS, icon: MapPinIcon },
   { name: 'Tours', href: ROUTES.ADMIN_TOURS, icon: PaperAirplaneIcon },
+  { name: 'Bookings', href: ROUTES.ADMIN_BOOKINGS, icon: BriefcaseIcon },
+  { name: 'Reviews', href: ROUTES.ADMIN_REVIEWS, icon: StarIcon },
   { name: 'Newsletter', href: ROUTES.ADMIN_NEWSLETTER, icon: NewspaperIcon },
   { name: 'Blog', href: ROUTES.ADMIN_BLOG, icon: ChatBubbleBottomCenterTextIcon },
+  { name: 'Messages', href: ROUTES.ADMIN_CONTACTS, icon: EnvelopeIcon },
 ];
 
 const AdminLayout = () => {

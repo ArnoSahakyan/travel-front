@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { formatDate } from '../../utils';
+import { CheckCircleIcon, ClockIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
 interface BookingCardProps {
   booking: {
@@ -20,11 +21,42 @@ interface BookingCardProps {
 }
 
 export const BookingCard: FC<BookingCardProps> = ({ booking }) => {
-  const statusColors = {
-    confirmed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-    pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-    cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+  const statusConfig = {
+    confirmed: {
+      color:
+        'bg-green-50 text-green-700 ring-green-600/20 dark:bg-green-900/40 dark:text-green-300 dark:ring-green-900/50',
+      icon: CheckCircleIcon,
+      label: 'Confirmed',
+    },
+    pending: {
+      color:
+        'bg-yellow-50 text-yellow-800 ring-yellow-600/20 dark:bg-yellow-900/40 dark:text-yellow-300 dark:ring-yellow-900/50',
+      icon: ClockIcon,
+      label: 'Pending',
+    },
+    cancelled: {
+      color:
+        'bg-red-50 text-red-700 ring-red-600/20 dark:bg-red-900/40 dark:text-red-300 dark:ring-red-900/50',
+      icon: XCircleIcon,
+      label: 'Cancelled',
+    },
+    completed: {
+      color:
+        'bg-blue-50 text-blue-700 ring-blue-600/20 dark:bg-blue-900/40 dark:text-blue-300 dark:ring-blue-900/50',
+      icon: CheckCircleIcon,
+      label: 'Completed',
+    },
   };
+
+  const status = booking.status as keyof typeof statusConfig;
+  const config = statusConfig[status] || {
+    color: 'bg-gray-50 text-gray-600 ring-gray-500/10 dark:bg-gray-800 dark:text-gray-300',
+    icon: ClockIcon,
+    label: booking.status
+      ? booking.status.charAt(0).toUpperCase() + booking.status.slice(1)
+      : 'Unknown',
+  };
+  const StatusIcon = config.icon;
 
   return (
     <div className='flex h-40 w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm transition-all hover:shadow-md'>
@@ -40,9 +72,10 @@ export const BookingCard: FC<BookingCardProps> = ({ booking }) => {
           }}
         />
         <span
-          className={`absolute top-2 right-2 rounded-full px-2 py-0.5 text-xs font-medium ${statusColors[booking.status as keyof typeof statusColors] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}
+          className={`absolute top-2 right-2 inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-semibold ring-1 ring-inset shadow-sm backdrop-blur-md bg-opacity-95 ${config.color}`}
         >
-          {booking.status}
+          <StatusIcon className='h-4 w-4' aria-hidden='true' />
+          {config.label}
         </span>
       </div>
 

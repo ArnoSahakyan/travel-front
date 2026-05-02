@@ -1,5 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { createReview, deleteReview, fetchAllReviews, fetchReviewsByTour } from '../api';
+import {
+  createReview,
+  deleteReview,
+  fetchAllReviews,
+  fetchReviewsByTour,
+  fetchUserReviews,
+} from '../api';
 import { reviewKeys } from '../queries/reviews.ts';
 import { IFetchFilters, IReviewResponse, ReviewFormData, REVIEWS_LIMIT, ROUTES } from '../shared';
 import { useMergedFilters } from '../utils';
@@ -30,6 +36,17 @@ export const useAllReviews = (externalFilters?: Partial<IFetchFilters>) => {
   return useQuery<IReviewResponse>({
     queryKey: reviewKeys.list(filters),
     queryFn: () => fetchAllReviews(filters),
+    staleTime: 1000 * 60 * 5,
+    placeholderData: (prev) => prev,
+  });
+};
+
+export const useUserReviews = (externalFilters?: Partial<IFetchFilters>) => {
+  const filters = useMergedFilters(externalFilters, REVIEWS_LIMIT);
+
+  return useQuery<IReviewResponse>({
+    queryKey: ['reviews', 'user', filters],
+    queryFn: () => fetchUserReviews(filters),
     staleTime: 1000 * 60 * 5,
     placeholderData: (prev) => prev,
   });

@@ -1,4 +1,4 @@
-import { ProfileSubscriptionForm, InfoForm, PasswordChangeForm } from './components';
+import { InfoForm } from './components';
 
 const Account = () => {
   return (
@@ -8,10 +8,6 @@ const Account = () => {
       </h2>
 
       <InfoForm />
-
-      <ProfileSubscriptionForm />
-
-      <PasswordChangeForm />
     </div>
   );
 };

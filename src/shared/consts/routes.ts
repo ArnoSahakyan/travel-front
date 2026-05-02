@@ -15,9 +15,12 @@ export const ROUTES = {
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   PROFILE: '/profile',
+  PROFILE_DASHBOARD: '/profile/dashboard',
   PROFILE_FAVORITES: '/profile/favorites',
   PROFILE_BOOKINGS: '/profile/bookings',
   PROFILE_INFO: '/profile/info',
+  PROFILE_REVIEWS: '/profile/reviews',
+  PROFILE_SECURITY: '/profile/security',
   NOT_FOUND: '*',
   ADMIN: '/admin',
   ADMIN_DASHBOARD: '/admin/dashboard',
@@ -32,4 +35,5 @@ export const ROUTES = {
   ADMIN_BLOG_NEW: '/admin/blog/new',
   ADMIN_BOOKINGS: '/admin/bookings',
   ADMIN_REVIEWS: '/admin/reviews',
+  ADMIN_CONTACTS: '/admin/contacts',
 };

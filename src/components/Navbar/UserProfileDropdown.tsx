@@ -1,11 +1,12 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { UserIcon } from '@heroicons/react/24/outline';
+import { UserIcon, Squares2X2Icon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../shared';
 import { useAuthStore } from '../../store';
 
 export const UserProfileDropdown = () => {
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
+  const isAdmin = user?.role === 'admin';
 
   return (
     <Menu as='div' className='relative shrink-0'>
@@ -21,12 +22,33 @@ export const UserProfileDropdown = () => {
       >
         <MenuItem>
           <Link
-            to={ROUTES.PROFILE_INFO}
-            className='block px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light dark:text-primary-dark'
+            to={ROUTES.PROFILE}
+            className='flex items-center gap-2 px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light dark:text-primary-dark'
           >
-            Your Profile
+            <Squares2X2Icon className='size-4' />
+            Dashboard
           </Link>
         </MenuItem>
+        <MenuItem>
+          <Link
+            to={ROUTES.PROFILE_INFO}
+            className='flex items-center gap-2 px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light text-background-light dark:text-primary-dark'
+          >
+            <UserIcon className='size-4' />
+            Account Settings
+          </Link>
+        </MenuItem>
+        {isAdmin && (
+          <MenuItem>
+            <Link
+              to={ROUTES.ADMIN_DASHBOARD}
+              className='flex items-center gap-2 px-4 py-2 text-sm hover:bg-background-light hover:text-primary-light dark:hover:bg-secondary-light font-bold text-accent-light dark:text-accent-dark'
+            >
+              <ShieldCheckIcon className='size-4' />
+              Admin Panel
+            </Link>
+          </MenuItem>
+        )}
         <MenuItem>
           <button
             onClick={logout}

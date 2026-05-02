@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, UserCircleIcon, HeartIcon, TicketIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  UserCircleIcon,
+  HeartIcon,
+  TicketIcon,
+  StarIcon,
+  ShieldCheckIcon,
+  Squares2X2Icon,
+} from '@heroicons/react/24/outline';
 import { Outlet } from 'react-router-dom';
 import { useAuthStore } from '../../store';
 import { SidebarContent } from './components';
@@ -8,9 +16,12 @@ import { ROUTES } from '../../shared';
 import { GlobalNavigateSetup } from '../../components';
 
 const navigation = [
+  { name: 'Dashboard', href: ROUTES.PROFILE_DASHBOARD, icon: Squares2X2Icon },
   { name: 'Account Info', href: ROUTES.PROFILE_INFO, icon: UserCircleIcon },
   { name: 'My Bookings', href: ROUTES.PROFILE_BOOKINGS, icon: TicketIcon },
   { name: 'Favorites', href: ROUTES.PROFILE_FAVORITES, icon: HeartIcon },
+  { name: 'My Reviews', href: ROUTES.PROFILE_REVIEWS, icon: StarIcon },
+  { name: 'Security & Privacy', href: ROUTES.PROFILE_SECURITY, icon: ShieldCheckIcon },
 ];
 
 const ProfileLayout = () => {
